@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html lang="es">
+<!-- <!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>ESP32 SD Tool</title>
+    <title>LineMaster 2.4GHz Companion</title>
     <style>
       body {
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
           sans-serif;
         margin: 0;
         padding: 16px;
-        background: #0f172a;
-        color: #e5e7eb;
+        background: #f9fafb;
+        color: #111827;
       }
       h1 {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         margin-bottom: 12px;
       }
       .toolbar {
@@ -23,50 +23,52 @@
         margin-bottom: 12px;
       }
       button {
-        padding: 6px 12px;
+        padding: 8px 14px;
         border-radius: 6px;
-        border: none;
+        border: 1px solid #d1d5db;
         cursor: pointer;
-        font-size: 0.9rem;
+        font-size: 0.95rem;
       }
       button.primary {
-        background: #22c55e;
-        color: #022c22;
+        background: #2563eb;
+        color: #ffffff;
         font-weight: 600;
+        border-color: #1d4ed8;
       }
       button.secondary {
-        background: #1f2937;
-        color: #e5e7eb;
+        background: #ffffff;
+        color: #111827;
       }
       button.danger {
         background: #ef4444;
-        color: #fee2e2;
+        color: #ffffff;
+        border-color: #dc2626;
       }
       button:disabled {
-        opacity: 0.5;
+        opacity: 0.55;
         cursor: default;
       }
       #status {
         margin-top: 4px;
-        font-size: 0.8rem;
-        color: #9ca3af;
+        font-size: 0.9rem;
+        color: #4b5563;
       }
       #files {
-        margin-top: 12px;
-        padding: 8px;
-        border-radius: 6px;
-        background: #020617;
-        max-height: 200px;
+        margin-top: 16px;
+        padding: 12px;
+        border-radius: 8px;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        max-height: 220px;
         overflow-y: auto;
-        font-size: 0.85rem;
+        font-size: 0.9rem;
       }
       .file-row {
         display: flex;
         align-items: center;
-        justify-content: space-between;
         gap: 8px;
-        padding: 4px 0;
-        border-bottom: 1px solid #111827;
+        padding: 6px 0;
+        border-bottom: 1px solid #e5e7eb;
       }
       .file-row:last-child {
         border-bottom: none;
@@ -75,61 +77,106 @@
         flex: 1;
         word-break: break-all;
       }
-      #output {
-        margin-top: 12px;
-        padding: 8px;
-        border-radius: 6px;
-        background: #020617;
-        min-height: 120px;
-        max-height: 320px;
+      #fileContent {
+        margin-top: 16px;
+        padding: 12px;
+        border-radius: 8px;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        min-height: 140px;
+        max-height: 360px;
         overflow-y: auto;
         white-space: pre-wrap;
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
           Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+      #fileContentTitle {
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      /* Log panel (hidden by default) */
+      #output {
+        margin-top: 16px;
+        padding: 10px;
+        border-radius: 8px;
+        background: #f3f4f6;
+        border: 1px solid #e5e7eb;
+        min-height: 80px;
+        max-height: 240px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+        font-size: 0.85rem;
+        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+          Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        display: none; /* hidden by default */
+      }
+      .section-title {
+        margin-top: 16px;
+        margin-bottom: 4px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: #374151;
       }
     </style>
   </head>
   <body>
-    <h1>ESP32 SD Browser (Web Serial)</h1>
+    <h1>LineMaster 2.4GHz Companion</h1>
 
     <div class="toolbar">
-      <button id="btnConnect" class="primary">Conectar</button>
-      <button id="btnDisconnect" class="secondary" disabled>Desconectar</button>
-      <button id="btnList" class="secondary" disabled>LIST (SD)</button>
+      <button id="btnConnect" class="primary">Connect</button>
+      <button id="btnDisconnect" class="secondary" disabled>Disconnect</button>
+      <button id="btnList" class="secondary" disabled>Sync SD</button>
       <button id="btnDump" class="secondary" disabled>Dump SD → Folder</button>
+      <button id="btnToggleLog" class="secondary">Show log</button>
     </div>
 
-    <div id="status">Estado: desconectado</div>
+    <div id="status">Status: disconnected</div>
 
-    <div id="files"></div>
+    <div class="section-title">Files on SD card</div>
+    <div id="files">No files yet. Click “Sync SD”.</div>
 
+    <div class="section-title">File content</div>
+    <div id="fileContent">
+      <div id="fileContentTitle">No file selected.</div>
+      <div id="fileContentBody"></div>
+    </div>
+
+    <div class="section-title">Log</div>
     <div id="output"></div>
 
     <script>
-      // --- Estado global ---
+      // --- Global state ---
       let port = null;
       let reader = null;
       let writer = null;
-      let readLoopPromise = null;
       let buffer = "";
 
       let fileList = [];
 
-      // Promesas para coordinar LIST y READ
+      // Promises for LIST / READ
       let waitForListResolve = null;
       let waitForFileResolve = null;
+
+      // State for current file transfer (line-based)
       let currentFileName = null;
       let currentFileContent = "";
+      let listActive = false;
 
+      const textDecoder = new TextDecoder();
       const statusEl = document.getElementById("status");
       const filesEl = document.getElementById("files");
       const outputEl = document.getElementById("output");
+      const fileContentTitleEl = document.getElementById("fileContentTitle");
+      const fileContentBodyEl = document.getElementById("fileContentBody");
 
       const btnConnect = document.getElementById("btnConnect");
       const btnDisconnect = document.getElementById("btnDisconnect");
       const btnList = document.getElementById("btnList");
       const btnDump = document.getElementById("btnDump");
+      const btnToggleLog = document.getElementById("btnToggleLog");
+
+      let logVisible = false;
 
       function log(msg) {
         console.log(msg);
@@ -138,7 +185,7 @@
       }
 
       function setStatus(text) {
-        statusEl.textContent = "Estado: " + text;
+        statusEl.textContent = "Status: " + text;
       }
 
       function setConnectedUI(connected) {
@@ -151,33 +198,30 @@
       async function connect() {
         try {
           if (!("serial" in navigator)) {
-            alert("Este navegador no soporta Web Serial. Usa Chrome / Edge.");
+            alert(
+              "This browser does not support Web Serial.\nUse Chrome or Edge on desktop."
+            );
             return;
           }
 
           port = await navigator.serial.requestPort();
           await port.open({ baudRate: 115200 });
 
-          setStatus("conectado");
+          setStatus("connected");
           setConnectedUI(true);
-          log("Conectado al puerto serie.");
+          log("Connected to serial port.");
 
-          const textDecoder = new TextDecoderStream();
-          const readableStreamClosed = port.readable.pipeTo(
-            textDecoder.writable
-          );
-          const inputStream = textDecoder.readable;
-          reader = inputStream.getReader();
+          reader = port.readable.getReader();
 
           const textEncoder = new TextEncoderStream();
           textEncoder.readable.pipeTo(port.writable);
           writer = textEncoder.writable.getWriter();
 
-          readLoopPromise = readLoop();
+          readLoop(); // no await
         } catch (err) {
           console.error(err);
-          setStatus("error al conectar");
-          log("Error al conectar: " + err);
+          setStatus("error while connecting");
+          log("Error while connecting: " + err);
           port = null;
           reader = null;
           writer = null;
@@ -199,18 +243,18 @@
             await port.close().catch(() => {});
             port = null;
           }
-          setStatus("desconectado");
+          setStatus("disconnected");
           setConnectedUI(false);
-          log("Desconectado.");
+          log("Disconnected.");
         } catch (err) {
           console.error(err);
-          log("Error al desconectar: " + err);
+          log("Error while disconnecting: " + err);
         }
       }
 
       async function sendCommand(cmd) {
         if (!writer) {
-          throw new Error("No hay writer activo.");
+          throw new Error("No active writer.");
         }
         const line = cmd.trim() + "\n";
         await writer.write(line);
@@ -219,41 +263,50 @@
 
       async function readLoop() {
         buffer = "";
+        currentFileName = null;
+        currentFileContent = "";
+        listActive = false;
+
         while (port && reader) {
           try {
             const { value, done } = await reader.read();
-            if (done) {
-              break;
-            }
-            if (value) {
-              buffer += value;
-              let lines = buffer.split("\n");
-              buffer = lines.pop(); // lo último puede ser parcial
-              for (const l of lines) {
-                handleIncomingLine(l.replace(/\r$/, ""));
-              }
+            if (done) break;
+            if (!value) continue;
+
+            // Convert chunk to string and split into lines
+            const chunk = textDecoder.decode(value, { stream: true });
+            buffer += chunk;
+            let lines = buffer.split("\n");
+            buffer = lines.pop(); // possible partial line
+
+            for (const rawLine of lines) {
+              const line = rawLine.replace(/\r$/, "");
+              handleIncomingLine(line);
             }
           } catch (err) {
-            console.error("Error en readLoop:", err);
+            console.error("Error in readLoop:", err);
             break;
           }
         }
-        setStatus("desconectado (read loop terminado)");
+
+        setStatus("disconnected (read loop ended)");
         setConnectedUI(false);
       }
 
       function handleIncomingLine(line) {
         if (!line) return;
 
-        // Manejo de protocolo
+        // Control markers
         if (line === "LIST_BEGIN") {
-          fileList = [];
           log("<< LIST_BEGIN");
+          listActive = true;
+          fileList = [];
           return;
         }
 
         if (line === "LIST_END") {
           log("<< LIST_END");
+          listActive = false;
           renderFileList();
           if (waitForListResolve) {
             waitForListResolve(fileList);
@@ -272,55 +325,60 @@
         if (line.startsWith("FILE_END:")) {
           const endName = line.substring("FILE_END:".length).trim();
           log("<< FILE_END: " + endName);
+
           if (waitForFileResolve && currentFileName === endName) {
-            // Resolver promesa de lectura de archivo
-            waitForFileResolve({
+            const result = {
               name: currentFileName,
               content: currentFileContent,
-            });
+            };
+            waitForFileResolve(result);
             waitForFileResolve = null;
-          } else {
-            // Si no había promesa, mostramos contenido en output
-            log("Contenido de " + endName + ":\n" + currentFileContent);
+          } else if (currentFileName === endName) {
+            // No promise: just log content
+            log(
+              "Content of " +
+                endName +
+                ":\n" +
+                (currentFileContent || "(empty file)")
+            );
           }
+
           currentFileName = null;
           currentFileContent = "";
           return;
         }
 
-        // Si estamos dentro de FILE_BEGIN / FILE_END, es contenido de archivo
+        // If we are currently inside a file transfer, treat everything as content
         if (currentFileName !== null) {
-          currentFileContent += line + "\n";
+          if (currentFileContent.length > 0) {
+            currentFileContent += "\n";
+          }
+          currentFileContent += line;
           return;
         }
 
-        // Si no es nada especial, tratamos normal
+        // Normal line (not inside file)
         log("<< " + line);
 
-        // Si estamos en modo LIST, las líneas entre BEGIN y END son nombres de archivo
-        // pero ya lo controlamos al ver LIST_BEGIN / LIST_END arriba.
-        // Aquí añadimos nombre de archivo si detectamos que estamos en un LIST activo.
-        if (fileList !== null && waitForListResolve !== null) {
-          // Heurística: durante LIST, las líneas normales se interpretan como nombres de archivo.
-          // El ESP32 ya filtra directorios, así que asumimos que todo aquí son nombres válidos.
-          fileList.push(line.trim());
+        // During LIST, other lines are file names
+        if (listActive) {
+          const name = line.trim();
+          if (name.length > 0) {
+            fileList.push(name);
+          }
         }
       }
 
       function renderFileList() {
         filesEl.innerHTML = "";
         if (!fileList || fileList.length === 0) {
-          filesEl.textContent = "Sin archivos o LIST aún no ejecutado.";
+          filesEl.textContent = "No files on SD card or Sync SD not run yet.";
           return;
         }
 
         for (const fname of fileList) {
           const row = document.createElement("div");
           row.className = "file-row";
-
-          const nameEl = document.createElement("div");
-          nameEl.className = "file-name";
-          nameEl.textContent = fname;
 
           const btnRead = document.createElement("button");
           btnRead.textContent = "READ";
@@ -329,22 +387,26 @@
             try {
               await readSingleFileAndShow(fname);
             } catch (err) {
-              log("Error leyendo " + fname + ": " + err);
+              log("Error reading " + fname + ": " + err);
             }
           };
 
-          row.appendChild(nameEl);
+          const nameEl = document.createElement("div");
+          nameEl.className = "file-name";
+          nameEl.textContent = fname;
+
           row.appendChild(btnRead);
+          row.appendChild(nameEl);
           filesEl.appendChild(row);
         }
       }
 
-      // --- Helpers de alto nivel ---
+      // --- High level helpers ---
 
       function listFiles() {
         return new Promise(async (resolve, reject) => {
           if (!port || !writer) {
-            return reject(new Error("No conectado."));
+            return reject(new Error("Not connected."));
           }
           waitForListResolve = resolve;
           try {
@@ -359,7 +421,7 @@
       function readFile(name) {
         return new Promise(async (resolve, reject) => {
           if (!port || !writer) {
-            return reject(new Error("No conectado."));
+            return reject(new Error("Not connected."));
           }
           waitForFileResolve = resolve;
           try {
@@ -373,57 +435,91 @@
 
       async function readSingleFileAndShow(name) {
         const result = await readFile(name);
-        log("===== Contenido de " + result.name + " =====");
-        log(result.content);
+        let text = result.content || "";
+
+        // Intentar parsear como JSON y formatear
+        let formatted = text;
+        try {
+          const obj = JSON.parse(text);
+          formatted = JSON.stringify(obj, null, 2);
+        } catch (e) {
+          // No es JSON válido; dejamos el texto tal cual.
+        }
+
+        fileContentTitleEl.textContent = "File: " + result.name;
+        fileContentBodyEl.textContent = formatted || "(empty file)";
       }
 
       async function dumpSdToFolder() {
         if (!("showDirectoryPicker" in window)) {
           alert(
-            "Tu navegador no soporta File System Access API.\nUsa Chrome / Edge en escritorio."
+            "Your browser does not support the File System Access API.\nUse Chrome or Edge on desktop."
           );
           return;
         }
         if (!port || !writer) {
-          alert("Primero conecta al ESP32.");
+          alert("Connect to the ESP32 first.");
           return;
         }
 
         try {
           const dirHandle = await window.showDirectoryPicker();
-          log("Carpeta seleccionada para volcado de SD.");
+          log("Folder selected for SD dump.");
 
-          // 1) Obtener lista de archivos desde el ESP32
-          log("Solicitando LIST a la SD...");
+          log("Requesting LIST from SD...");
           const files = await listFiles();
           if (!files || files.length === 0) {
-            log("No hay archivos en la SD.");
+            log("No files on SD card.");
             return;
           }
-          log("Archivos encontrados: " + files.join(", "));
+          log("Files found: " + files.join(", "));
 
-          // 2) Leer cada archivo y grabarlo en la carpeta
+          let saved = 0;
+          let failed = 0;
+
           for (const fname of files) {
-            log("Leyendo archivo: " + fname);
-            const result = await readFile(fname);
-            log("Escribiendo en el disco local: " + fname);
-            const fileHandle = await dirHandle.getFileHandle(fname, {
-              create: true,
-            });
-            const writable = await fileHandle.createWritable();
-            await writable.write(result.content);
-            await writable.close();
+            try {
+              log("Reading file: " + fname);
+              const result = await readFile(fname);
+
+              // Sanitize name for local file system
+              let safeName = fname.replace(/[<>:"/\\|?*]/g, "_");
+              if (!safeName) safeName = "file.txt";
+
+              log("Writing file on local disk: " + safeName);
+              const fileHandle = await dirHandle.getFileHandle(safeName, {
+                create: true,
+              });
+              const writable = await fileHandle.createWritable();
+              await writable.write(result.content || "");
+              await writable.close();
+              saved++;
+            } catch (err) {
+              failed++;
+              log("Error saving " + fname + ": " + err);
+            }
           }
 
-          log("Volcado completado.");
-          alert("Volcado completado. Revisa la carpeta que seleccionaste.");
+          const msg =
+            "SD dump completed.\nSaved: " +
+            saved +
+            " file(s)\nFailed: " +
+            failed +
+            " file(s)";
+          alert(msg);
         } catch (err) {
           console.error(err);
-          log("Error en Dump SD → Folder: " + err);
+          log("Error in Dump SD → Folder: " + err);
         }
       }
 
-      // --- Eventos UI ---
+      function toggleLogVisibility() {
+        logVisible = !logVisible;
+        outputEl.style.display = logVisible ? "block" : "none";
+        btnToggleLog.textContent = logVisible ? "Hide log" : "Show log";
+      }
+
+      // --- UI events ---
       btnConnect.onclick = () => connect();
       btnDisconnect.onclick = () => disconnect();
 
@@ -431,12 +527,564 @@
         try {
           await listFiles();
         } catch (err) {
-          log("Error ejecutando LIST: " + err);
+          log("Error running LIST: " + err);
         }
       };
 
       btnDump.onclick = () => {
         dumpSdToFolder();
+      };
+
+      btnToggleLog.onclick = () => {
+        toggleLogVisibility();
+      };
+    </script>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>LineMaster 2.4GHz Companion</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        margin: 0;
+        padding: 16px;
+        background: #f9fafb;
+        color: #111827;
+      }
+      h1 {
+        font-size: 1.6rem;
+        margin-bottom: 12px;
+      }
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      button {
+        padding: 8px 14px;
+        border-radius: 6px;
+        border: 1px solid #d1d5db;
+        cursor: pointer;
+        font-size: 0.95rem;
+      }
+      button.primary {
+        background: #2563eb;
+        color: #ffffff;
+        font-weight: 600;
+        border-color: #1d4ed8;
+      }
+      button.secondary {
+        background: #ffffff;
+        color: #111827;
+      }
+      button.danger {
+        background: #ef4444;
+        color: #ffffff;
+        border-color: #dc2626;
+      }
+      button:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      #status {
+        margin-top: 4px;
+        font-size: 0.9rem;
+        color: #4b5563;
+      }
+      #files {
+        margin-top: 16px;
+        padding: 12px;
+        border-radius: 8px;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        max-height: 220px;
+        overflow-y: auto;
+        font-size: 0.9rem;
+      }
+      .file-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 0;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .file-row:last-child {
+        border-bottom: none;
+      }
+      .file-name {
+        flex: 1;
+        word-break: break-all;
+      }
+      #fileContent {
+        margin-top: 16px;
+        padding: 12px;
+        border-radius: 8px;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        min-height: 140px;
+        max-height: 360px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+        font-size: 0.9rem;
+        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+          Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+      #fileContentTitle {
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      /* Log panel (hidden by default) */
+      #output {
+        margin-top: 16px;
+        padding: 10px;
+        border-radius: 8px;
+        background: #f3f4f6;
+        border: 1px solid #e5e7eb;
+        min-height: 80px;
+        max-height: 240px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+        font-size: 0.85rem;
+        font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+          Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        display: none; /* hidden by default */
+      }
+      .section-title {
+        margin-top: 16px;
+        margin-bottom: 4px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: #374151;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>LineMaster 2.4GHz Companion</h1>
+
+    <div class="toolbar">
+      <button id="btnConnect" class="primary">Connect</button>
+      <button id="btnDisconnect" class="secondary" disabled>Disconnect</button>
+      <button id="btnList" class="secondary" disabled>Sync SD</button>
+      <button id="btnDump" class="secondary" disabled>Dump SD → Folder</button>
+      <button id="btnToggleLog" class="secondary">Show log</button>
+    </div>
+
+    <div id="status">Status: disconnected</div>
+
+    <div class="section-title">Files on SD card</div>
+    <div id="files">No files yet. Click “Sync SD”.</div>
+
+    <div class="section-title">File content</div>
+    <div id="fileContent">
+      <div id="fileContentTitle">No file selected.</div>
+      <div id="fileContentBody"></div>
+    </div>
+
+    <div class="section-title">Log</div>
+    <div id="output"></div>
+
+    <script>
+      // --- Global state ---
+      let port = null;
+      let reader = null;
+      let writer = null;
+      let buffer = "";
+
+      let fileList = [];
+
+      // Promises for LIST / READ
+      let waitForListResolve = null;
+      let waitForFileResolve = null;
+
+      // State for current file transfer (line-based)
+      let currentFileName = null;
+      let currentFileContent = "";
+      let listActive = false;
+
+      const textDecoder = new TextDecoder();
+      const statusEl = document.getElementById("status");
+      const filesEl = document.getElementById("files");
+      const outputEl = document.getElementById("output");
+      const fileContentTitleEl = document.getElementById("fileContentTitle");
+      const fileContentBodyEl = document.getElementById("fileContentBody");
+
+      const btnConnect = document.getElementById("btnConnect");
+      const btnDisconnect = document.getElementById("btnDisconnect");
+      const btnList = document.getElementById("btnList");
+      const btnDump = document.getElementById("btnDump");
+      const btnToggleLog = document.getElementById("btnToggleLog");
+
+      let logVisible = false;
+
+      function log(msg) {
+        console.log(msg);
+        outputEl.textContent += msg + "\n";
+        outputEl.scrollTop = outputEl.scrollHeight;
+      }
+
+      function setStatus(text) {
+        statusEl.textContent = "Status: " + text;
+      }
+
+      function setConnectedUI(connected) {
+        btnConnect.disabled = connected;
+        btnDisconnect.disabled = !connected;
+        btnList.disabled = !connected;
+        btnDump.disabled = !connected;
+      }
+
+      async function connect() {
+        try {
+          if (!("serial" in navigator)) {
+            alert(
+              "This browser does not support Web Serial.\nUse Chrome or Edge on desktop."
+            );
+            return;
+          }
+
+          port = await navigator.serial.requestPort();
+          await port.open({ baudRate: 115200 });
+
+          setStatus("connected");
+          setConnectedUI(true);
+          log("Connected to serial port.");
+
+          reader = port.readable.getReader();
+
+          const textEncoder = new TextEncoderStream();
+          textEncoder.readable.pipeTo(port.writable);
+          writer = textEncoder.writable.getWriter();
+
+          readLoop(); // no await
+        } catch (err) {
+          console.error(err);
+          setStatus("error while connecting");
+          log("Error while connecting: " + err);
+          port = null;
+          reader = null;
+          writer = null;
+          setConnectedUI(false);
+        }
+      }
+
+      async function disconnect() {
+        try {
+          if (reader) {
+            await reader.cancel().catch(() => {});
+            reader = null;
+          }
+          if (writer) {
+            await writer.close().catch(() => {});
+            writer = null;
+          }
+          if (port) {
+            await port.close().catch(() => {});
+            port = null;
+          }
+          setStatus("disconnected");
+          setConnectedUI(false);
+          log("Disconnected.");
+        } catch (err) {
+          console.error(err);
+          log("Error while disconnecting: " + err);
+        }
+      }
+
+      async function sendCommand(cmd) {
+        if (!writer) {
+          throw new Error("No active writer.");
+        }
+        const line = cmd.trim() + "\n";
+        await writer.write(line);
+        log(">> " + cmd);
+      }
+
+      async function readLoop() {
+        buffer = "";
+        currentFileName = null;
+        currentFileContent = "";
+        listActive = false;
+
+        while (port && reader) {
+          try {
+            const { value, done } = await reader.read();
+            if (done) break;
+            if (!value) continue;
+
+            const chunk = textDecoder.decode(value, { stream: true });
+            buffer += chunk;
+            let lines = buffer.split("\n");
+            buffer = lines.pop(); // possible partial line
+
+            for (const rawLine of lines) {
+              const line = rawLine.replace(/\r$/, "");
+              handleIncomingLine(line);
+            }
+          } catch (err) {
+            console.error("Error in readLoop:", err);
+            break;
+          }
+        }
+
+        setStatus("disconnected (read loop ended)");
+        setConnectedUI(false);
+      }
+
+      function handleIncomingLine(line) {
+        if (!line) return;
+
+        if (line === "LIST_BEGIN") {
+          log("<< LIST_BEGIN");
+          listActive = true;
+          fileList = [];
+          return;
+        }
+
+        if (line === "LIST_END") {
+          log("<< LIST_END");
+          listActive = false;
+          renderFileList();
+          if (waitForListResolve) {
+            waitForListResolve(fileList);
+            waitForListResolve = null;
+          }
+          return;
+        }
+
+        if (line.startsWith("FILE_BEGIN:")) {
+          currentFileName = line.substring("FILE_BEGIN:".length).trim();
+          currentFileContent = "";
+          log("<< FILE_BEGIN: " + currentFileName);
+          return;
+        }
+
+        if (line.startsWith("FILE_END:")) {
+          const endName = line.substring("FILE_END:".length).trim();
+          log("<< FILE_END: " + endName);
+
+          if (waitForFileResolve && currentFileName === endName) {
+            const result = {
+              name: currentFileName,
+              content: currentFileContent,
+            };
+            waitForFileResolve(result);
+            waitForFileResolve = null;
+          } else if (currentFileName === endName) {
+            log(
+              "Content of " +
+                endName +
+                ":\n" +
+                (currentFileContent || "(empty file)")
+            );
+          }
+
+          currentFileName = null;
+          currentFileContent = "";
+          return;
+        }
+
+        // Inside file transfer → content
+        if (currentFileName !== null) {
+          if (currentFileContent.length > 0) {
+            currentFileContent += "\n";
+          }
+          currentFileContent += line;
+          return;
+        }
+
+        // Normal line
+        log("<< " + line);
+
+        // During LIST, treat as file name
+        if (listActive) {
+          const name = line.trim();
+          if (name.length > 0) {
+            fileList.push(name);
+          }
+        }
+      }
+
+      function renderFileList() {
+        filesEl.innerHTML = "";
+        if (!fileList || fileList.length === 0) {
+          filesEl.textContent = "No files on SD card or Sync SD not run yet.";
+          return;
+        }
+
+        for (const fname of fileList) {
+          const row = document.createElement("div");
+          row.className = "file-row";
+
+          const btnRead = document.createElement("button");
+          btnRead.textContent = "READ";
+          btnRead.className = "secondary";
+          btnRead.onclick = async () => {
+            try {
+              await readSingleFileAndShow(fname);
+            } catch (err) {
+              log("Error reading " + fname + ": " + err);
+            }
+          };
+
+          const nameEl = document.createElement("div");
+          nameEl.className = "file-name";
+          nameEl.textContent = fname;
+
+          row.appendChild(btnRead);
+          row.appendChild(nameEl);
+          filesEl.appendChild(row);
+        }
+      }
+
+      // --- High level helpers ---
+
+      function listFiles() {
+        return new Promise(async (resolve, reject) => {
+          if (!port || !writer) {
+            return reject(new Error("Not connected."));
+          }
+          waitForListResolve = resolve;
+          try {
+            await sendCommand("LIST");
+          } catch (err) {
+            waitForListResolve = null;
+            reject(err);
+          }
+        });
+      }
+
+      function readFile(name) {
+        return new Promise(async (resolve, reject) => {
+          if (!port || !writer) {
+            return reject(new Error("Not connected."));
+          }
+          waitForFileResolve = resolve;
+          try {
+            await sendCommand("READ " + name);
+          } catch (err) {
+            waitForFileResolve = null;
+            reject(err);
+          }
+        });
+      }
+
+      async function readSingleFileAndShow(name) {
+        const result = await readFile(name);
+        let text = result.content || "";
+
+        // Intentar parsear como JSON y formatear con indentación genérica
+        let formatted = text;
+        try {
+          const obj = JSON.parse(text);
+          formatted = JSON.stringify(obj, null, 2);
+        } catch (e) {
+          // No es JSON válido; se deja el texto tal cual.
+        }
+
+        fileContentTitleEl.textContent = "File: " + result.name;
+        fileContentBodyEl.textContent = formatted || "(empty file)";
+      }
+
+      async function dumpSdToFolder() {
+        if (!("showDirectoryPicker" in window)) {
+          alert(
+            "Your browser does not support the File System Access API.\nUse Chrome or Edge on desktop."
+          );
+          return;
+        }
+        if (!port || !writer) {
+          alert("Connect to the ESP32 first.");
+          return;
+        }
+
+        try {
+          const dirHandle = await window.showDirectoryPicker();
+          log("Folder selected for SD dump.");
+
+          log("Requesting LIST from SD...");
+          const files = await listFiles();
+          if (!files || files.length === 0) {
+            log("No files on SD card.");
+            return;
+          }
+          log("Files found: " + files.join(", "));
+
+          let saved = 0;
+          let failed = 0;
+
+          for (const fname of files) {
+            try {
+              log("Reading file: " + fname);
+              const result = await readFile(fname);
+
+              // Contenido original
+              const contentToWrite = result.content || "";
+
+              // Nombre base seguro
+              let safeName = fname.replace(/[<>:"/\\|?*]/g, "_");
+              if (!safeName) safeName = "file.txt";
+
+              if (fname === "preferences.cfg") {
+                safeName = "preferences.txt";
+              }
+
+              log("Writing file on local disk: " + safeName);
+              const fileHandle = await dirHandle.getFileHandle(safeName, {
+                create: true,
+              });
+              const writable = await fileHandle.createWritable();
+              await writable.write(contentToWrite);
+              await writable.close();
+              saved++;
+            } catch (err) {
+              failed++;
+              log("Error saving " + fname + ": " + err);
+            }
+          }
+
+          const msg =
+            "SD dump completed.\nSaved: " +
+            saved +
+            " file(s)\nFailed: " +
+            failed +
+            " file(s)";
+          alert(msg);
+        } catch (err) {
+          console.error(err);
+          log("Error in Dump SD → Folder: " + err);
+        }
+      }
+
+      function toggleLogVisibility() {
+        logVisible = !logVisible;
+        outputEl.style.display = logVisible ? "block" : "none";
+        btnToggleLog.textContent = logVisible ? "Hide log" : "Show log";
+      }
+
+      // --- UI events ---
+      btnConnect.onclick = () => connect();
+      btnDisconnect.onclick = () => disconnect();
+
+      btnList.onclick = async () => {
+        try {
+          await listFiles();
+        } catch (err) {
+          log("Error running LIST: " + err);
+        }
+      };
+
+      btnDump.onclick = () => {
+        dumpSdToFolder();
+      };
+
+      btnToggleLog.onclick = () => {
+        toggleLogVisibility();
       };
     </script>
   </body>
