@@ -11,8 +11,8 @@
         --lm-card-bg: #ffffff;
         --lm-primary: #f11313;
         --lm-primary-dark: #c20b0b;
-        --lm-text-main: #111827;
-        --lm-text-muted: #75696e;
+        --lm-text-main: #212121;
+        --lm-text-muted: #454545;
         --lm-border: #e5e7eb;
         --lm-radius-lg: 18px;
       }
@@ -35,16 +35,44 @@
       }
 
       /* NAV + HERO */
-      .hero {
+      /* .hero {
         background: var(--lm-hero-bg);
         color: #ffffff;
         padding: 20px 24px 60px;
         border-radius: 0 0 var(--lm-radius-lg) var(--lm-radius-lg);
+      } */
+
+      .hero {
+        position: relative;
+        color: #ffffff;
+        padding: 20px 24px 60px;
+        border-radius: 0 0 var(--lm-radius-lg) var(--lm-radius-lg);
+        overflow: hidden;
+        background: url("./assets/img/hero-handle.jpeg") top / cover no-repeat;
       }
 
-      .hero-inner {
+      /* .hero-inner {
         max-width: 1120px;
         margin: 0 auto;
+      } */
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        /* oscurece la foto para que el texto se lea */
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.78),
+          rgba(0, 0, 0, 0.4)
+        );
+      }
+
+      /* Asegura que el contenido quede encima del overlay */
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        padding: 0 11%;
       }
 
       .nav {
@@ -220,7 +248,7 @@
         right: 0;
         top: 28%;
         background: #ffffff;
-        color: #111827;
+        color: #212121;
         padding: 12px 16px;
         border-radius: 14px;
         font-size: 0.8rem;
@@ -268,7 +296,7 @@
 
       .news-label {
         font-weight: 600;
-        color: #111827;
+        color: #212121;
       }
 
       .news-dot {
@@ -419,7 +447,7 @@
 
       /* STORE */
       .store-section {
-        background: #111827;
+        background: #212121;
         color: #f9fafb;
         border-radius: 18px;
         padding: 22px 20px;
@@ -500,13 +528,19 @@
 
       /* CONTACT */
       .contact-section {
-        background: #111827;
+        background: #212121;
         color: #f9fafb;
         border-radius: 18px;
         padding: 22px 20px;
         display: grid;
         grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
         gap: 22px;
+      }
+
+      .social-title {
+        font-size: 1.2rem;
+        margin-bottom: 0px;
+        margin-top: 19px;
       }
 
       .contact-title {
@@ -539,7 +573,7 @@
         padding: 8px 10px;
         font-size: 0.9rem;
         font-family: inherit;
-        background: #111827;
+        background: #212121;
         color: #f9fafb;
       }
 
@@ -609,6 +643,20 @@
         }
       }
 
+      .about-balanced {
+        align-items: start;
+      }
+
+      .about-image {
+        margin-top: 16px;
+      }
+
+      .about-image img {
+        width: 100%;
+        border-radius: 14px;
+        display: block;
+      }
+
       @media (max-width: 640px) {
         body {
           padding: 0;
@@ -676,10 +724,15 @@
           </div>
 
           <div class="hero-product">
-            <div class="hero-product-blob">
-              <!-- Reemplaza este placeholder por una foto del handle -->
+            <!-- <div class="hero-product-blob">
+              <img
+                class="hero-product-image"
+                src="./assets/img/hero-handle.jpeg"
+                alt="LineMaster handle"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+              />
               <div class="hero-product-placeholder"></div>
-            </div>
+            </div> -->
             <div class="hero-product-tag">
               <div class="hero-product-tag-title">
                 Designed for control-line pilots
@@ -744,7 +797,7 @@
               </p>
             </div>
             <div class="tool-card-footer">
-              <span>Firmware v1.1.1 · Coming soon</span>
+              <span></span>
               <a class="tool-link disabled">Coming soon</a>
             </div>
           </div>
@@ -759,57 +812,83 @@
               </p>
             </div>
             <div class="tool-card-footer">
-              <span>Web Serial · Desktop Chrome/Edge</span>
-              <a href="./lm-companion/" class="tool-link primary">
-                Beta coming soon
-              </a>
+              <span>Under construction</span>
+              <a href="./lm-companion/" class="tool-link default"> Beta </a>
             </div>
           </div>
         </div>
       </section>
 
       <!-- ABOUT SECTION -->
-      <section id="about" class="about-section">
-        <div>
+      <section id="about" class="about-section about-balanced">
+        <div class="about-col">
           <h2 class="section-title">What is LineMaster 2.4GHz?</h2>
-          <div class="about-block">
-            LineMaster 2.4GHz is a control system specifically designed for
-            control line flying, combining the ergonomics of classic handles
-            with modern 2.4GHz radio technology. More than just a transmitter
-            and receiver, it is a modular and evolving platform capable of
-            remotely controlling throttle, flaps, retractable landing gear and
-            many other functions.
-          </div>
-          <div class="about-block">
-            Aimed at pilots who enjoy sport flying as well as Scale and Carrier
-            categories, LineMaster 2.4GHz is ready to use straight out of the
-            box. The goal is to expand the possibilities of the hobby—making it
-            more accessible, safe and versatile—while staying true to its roots
-            and building a bridge between radio control and control-line flying.
-          </div>
+
+          <p>
+            <strong>LineMaster 2.4GHz</strong> is a control system designed
+            specifically for control-line flying, combining the ergonomics of
+            classic handles with modern 2.4 GHz radio technology.
+          </p>
+
+          <ul class="about-highlights">
+            <li>
+              Designed for <strong>Carrier, Scale and Sport</strong> flying
+            </li>
+            <li>Ready to use <strong>out of the box</strong></li>
+            <li>Modular platform: throttle, flaps, retracts and more</li>
+            <li>Built to improve <strong>safety and versatility</strong></li>
+          </ul>
+
+          <p>
+            More than just a transmitter and receiver, LineMaster is an evolving
+            platform created to expand the possibilities of the hobby while
+            staying true to its roots.
+          </p>
+
+          <h3 class="about-block-title">Built with pilots in mind</h3>
+          <p>
+            LineMaster 2.4GHz was designed around how control-line pilots
+            actually fly. From the handle ergonomics to the firmware logic,
+            every decision prioritizes predictability, safety and confidence in
+            the circle.
+          </p>
+          <p>
+            LineMaster integrates naturally while quietly adding modern
+            capabilities. This is not about changing the hobby — it is about
+            supporting it, respecting decades of tradition while giving pilots
+            reliable tools that simply work.
+          </p>
         </div>
-        <div>
-          <div class="about-block-title">The story behind</div>
-          <div class="about-block">
-            It started after reading an article in <em>Model Aviation</em>
-            magazine, where many C/L pilots relied on modified transmitters and
-            improvised DIY solutions. As a software developer and aeromodeling
-            enthusiast, Carlos saw a clear opportunity: create something built
-            from the ground up specifically for control line, ready to use
-            without extra work.
-          </div>
-          <div class="about-block">
-            With the support of his long-time friend Eduardo de las Casas and
-            the experience of Bob Whitney, the project evolved through countless
-            test flights, 3D-printed prototypes and hours of tuning. An early
-            prototype even appeared in the December 2024 issue of
-            <em>Model Aviation</em>, giving the project a strong push forward.
-          </div>
-          <div class="about-block">
-            Today, LineMaster 2.4GHz is moving from prototype to a robust,
-            ready-to-use platform that we plan to keep improving together—with a
-            shared goal: enjoy and grow this amazing hobby.
-          </div>
+
+        <div class="about-col">
+          <h3 class="about-block-title">Why it exists</h3>
+          <p>
+            For years, control-line pilots have relied on modified transmitters,
+            DIY setups and improvised solutions. While functional, these
+            approaches require time, tools and experience.
+          </p>
+
+          <p>
+            LineMaster was created to offer a
+            <strong>purpose-built solution</strong>, designed from the ground up
+            for C/L pilots who want modern capabilities without unnecessary
+            complexity.
+          </p>
+
+          <h3 class="about-block-title">From idea to reality</h3>
+          <p>
+            Developed through countless test flights and 3D-printed prototypes,
+            refined with the support of
+            <strong>Eduardo de las Casas</strong> and
+            <strong>Bob Whitney</strong>.
+          </p>
+
+          <p>
+            An early prototype was featured in
+            <em>Model Aviation – December 2024</em>. Today, LineMaster 2.4GHz is
+            moving toward a robust, ready-to-use platform with one clear goal:
+            <strong>enjoy and grow this amazing hobby</strong>.
+          </p>
         </div>
       </section>
 
@@ -880,7 +959,7 @@
       <section id="manuals">
         <h2 class="section-title">Manuals & Documentation</h2>
         <p class="section-subtitle">
-          Read the full GitBook guides with safety notes, setup instructions and
+          Read the full guides with safety notes, setup instructions and
           advanced configuration tips for each device.
         </p>
 
@@ -960,6 +1039,34 @@
             compatibility, or if you want to suggest a feature, send us a brief
             message and we’ll get back to you.
           </p>
+
+          <div class="social-list" aria-label="Contact and social links">
+            <h4 class="social-title">Direct contact</h4>
+            <div class="social-item">
+              Email:
+              <a href="mailto:linemaster2.4ghz@gmail.com"
+                >linemaster2.4ghz@gmail.com</a
+              >
+            </div>
+            <div class="social-item">
+              Facebook:
+              <a
+                href="https://www.facebook.com/profile.php?id=61560480371015"
+                target="_blank"
+                rel="noopener"
+                >LineMaster 2.4GHz</a
+              >
+            </div>
+            <div class="social-item">
+              YouTube:
+              <a
+                href="https://www.youtube.com/@LineMaster2.4"
+                target="_blank"
+                rel="noopener"
+                >@LineMaster2.4</a
+              >
+            </div>
+          </div>
         </div>
         <form class="contact-form" onsubmit="handleContactSubmit(event)">
           <div>
@@ -967,14 +1074,10 @@
             <input id="name" name="name" type="text" required />
           </div>
           <div>
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" required />
-          </div>
-          <div>
             <label for="message">Message</label>
             <textarea id="message" name="message" required></textarea>
           </div>
-          <button type="submit" class="btn-primary">Open email draft</button>
+          <button type="submit" class="btn-primary">Send</button>
           <div
             id="contact-status"
             style="font-size: 0.8rem; margin-top: 4px"
@@ -991,6 +1094,13 @@
         <a href="#store">Store</a>
         <a href="#manuals">Manuals</a>
         <a href="#contact">Contact</a>
+        <a
+          href="https://linemasters-organization.gitbook.io/warranty-and-return-policy/#warranty-claim-procedure"
+          target="_blank"
+          rel="noopener"
+        >
+          Warranty &amp; Return Policy
+        </a>
       </div>
     </footer>
 
@@ -1004,18 +1114,15 @@
       function handleContactSubmit(e) {
         e.preventDefault();
         const name = document.getElementById("name").value.trim();
-        const email = document.getElementById("email").value.trim();
         const message = document.getElementById("message").value.trim();
         const status = document.getElementById("contact-status");
 
-        const to = "support@linemaster24ghz.com";
+        const to = "linemaster2.4ghz@gmail.com";
         const subject = encodeURIComponent(
           "LineMaster 2.4GHz Support – " + (name || "Pilot")
         );
         const bodyLines = [
           "Name: " + (name || "-"),
-          "Email: " + (email || "-"),
-          "",
           "Message:",
           message || "-",
           "",
