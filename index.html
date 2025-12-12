@@ -7,12 +7,12 @@
     <style>
       :root {
         --lm-bg: #f3f4f6;
-        --lm-hero-bg: linear-gradient(135deg, #3b4253, #181b25);
+        --lm-hero-bg: linear-gradient(135deg, #222222, #363636);
         --lm-card-bg: #ffffff;
-        --lm-primary: #ff7a30;
-        --lm-primary-dark: #e5671e;
+        --lm-primary: #f11313;
+        --lm-primary-dark: #c20b0b;
         --lm-text-main: #111827;
-        --lm-text-muted: #6b7280;
+        --lm-text-muted: #75696e;
         --lm-border: #e5e7eb;
         --lm-radius-lg: 18px;
       }
@@ -64,14 +64,17 @@
       }
 
       .logo-mark {
-        width: 26px;
-        height: 26px;
-        border-radius: 999px;
-        background: #ffffff22;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.8rem;
+        background: transparent;
+        width: 34px;
+        height: 34px;
+        overflow: hidden;
+      }
+
+      .logo-mark img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
       }
 
       .nav-links {
@@ -116,17 +119,16 @@
         text-transform: uppercase;
         letter-spacing: 0.15em;
         opacity: 0.8;
-        margin-bottom: 10px;
       }
 
       .hero-title {
-        font-size: 2.4rem;
+        font-size: 3rem;
         line-height: 1.1;
         margin-bottom: 6px;
       }
 
       .hero-slogan {
-        font-size: 1rem;
+        font-size: 1.5rem;
         font-weight: 500;
         opacity: 0.95;
         margin-bottom: 12px;
@@ -405,6 +407,7 @@
         width: 100%;
         border-radius: 10px;
         object-fit: cover;
+        object-position: top;
         max-height: 260px;
       }
 
@@ -483,12 +486,16 @@
       .manual-meta {
         font-size: 0.8rem;
         color: var(--lm-text-muted);
-        margin-bottom: 10px;
+        margin-bottom: 18px;
       }
 
-      .manual-link {
-        font-size: 0.85rem;
-        color: #2563eb;
+      .manual-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.8rem;
+        color: var(--lm-text-muted);
+        flex-direction: row-reverse;
       }
 
       /* CONTACT */
@@ -500,7 +507,6 @@
         display: grid;
         grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
         gap: 22px;
-        align-items: center;
       }
 
       .contact-title {
@@ -626,8 +632,13 @@
       <div class="hero-inner">
         <nav class="nav">
           <div class="logo">
-            <div class="logo-mark">LM</div>
-            <span>LineMaster 2.4GHz</span>
+            <div class="logo-mark">
+              <img
+                src="./assets/img/logo-small.png"
+                alt="LineMaster 2.4GHz logo"
+              />
+            </div>
+            <div class="hero-tag">Control-Line Radio Ecosystem</div>
           </div>
           <div class="nav-links">
             <a href="#tools">Tools</a>
@@ -635,15 +646,11 @@
             <a href="#store">Store</a>
             <a href="#manuals">Manuals</a>
             <a href="#contact">Contact</a>
-            <button class="nav-cta" onclick="scrollToSection('tools')">
-              Open ToolBox
-            </button>
           </div>
         </nav>
 
         <div class="hero-content">
           <div>
-            <div class="hero-tag">Control-Line Radio Ecosystem</div>
             <h1 class="hero-title">LineMaster 2.4GHz</h1>
             <div class="hero-slogan">Where innovation meets tradition.</div>
             <p class="hero-subtitle">
@@ -703,7 +710,7 @@
       <section id="tools">
         <h2 class="section-title">Tools & Updaters</h2>
         <p class="section-subtitle">
-          Official LineMaster utilities to update firmware, sync data and
+          Official LineMaster 2.4GHz utilities to update firmware, sync data and
           configure your models from a single place.
         </p>
 
@@ -745,7 +752,7 @@
           <div class="tool-card">
             <div>
               <div class="tool-card-tag">Companion · Beta</div>
-              <div class="tool-card-header">LineMaster Companion</div>
+              <div class="tool-card-header">LineMaster 2.4GHz Companion</div>
               <p class="tool-card-desc">
                 Emulate your handle on screen, edit model profiles and sync SD
                 card configuration for Typhoon and Zephyr.
@@ -775,10 +782,10 @@
           </div>
           <div class="about-block">
             Aimed at pilots who enjoy sport flying as well as Scale and Carrier
-            categories, LineMaster is ready to use straight out of the box. The
-            goal is to expand the possibilities of the hobby—making it more
-            accessible, safe and versatile—while staying true to its roots and
-            building a bridge between radio control and control-line flying.
+            categories, LineMaster 2.4GHz is ready to use straight out of the
+            box. The goal is to expand the possibilities of the hobby—making it
+            more accessible, safe and versatile—while staying true to its roots
+            and building a bridge between radio control and control-line flying.
           </div>
         </div>
         <div>
@@ -816,20 +823,23 @@
         </p>
         <div class="team-grid">
           <div class="team-card">
-            <img src="team-carlos.jpg" alt="Carlos Díaz holding a model" />
+            <img
+              src="./assets/img/carlos.jpeg"
+              alt="Carlos Díaz holding a model"
+            />
             <div class="team-name">Carlos Díaz</div>
             <div>
               Founder · Software developer &amp; aeromodeling enthusiast
             </div>
           </div>
           <div class="team-card">
-            <img src="team-eduardo.jpg" alt="Eduardo de las Casas" />
+            <img src="./assets/img/eduardo.jpeg" alt="Eduardo de las Casas" />
             <div class="team-name">Eduardo de las Casas</div>
             <div>Co-developer · Design, testing and validation</div>
           </div>
           <div class="team-card">
             <img
-              src="team-bob.jpg"
+              src="./assets/img/bob.jpeg"
               alt="Bob Whitney with a control-line model"
             />
             <div class="team-name">Bob Whitney</div>
@@ -841,7 +851,7 @@
       <!-- STORE SECTION -->
       <section id="store" class="store-section">
         <div>
-          <h2 class="store-title">Visit the LineMaster Shop</h2>
+          <h2 class="store-title">Visit the LineMaster 2.4GHz Shop</h2>
           <p class="store-subtitle">
             Handles, receivers and accessories are available through our Etsy
             store. There you’ll find Typhoon and Zephyr handles, LM-X5
@@ -878,16 +888,18 @@
           <div class="manual-card">
             <div class="manual-title">Typhoon Handle – User Manual</div>
             <div class="manual-meta">
-              10-channel handle for Carrier &amp; Scale pilots · menus, movement
+              5-channel handle for Carrier &amp; Scale pilots · menus, movement
               generators, timer and safety notes.
             </div>
-            <a
-              href="https://linemasters-organization.gitbook.io/linemaster-2.4ghz-typhoon"
-              target="_blank"
-              rel="noopener"
-              class="manual-link"
-              >Open manual</a
-            >
+            <div class="manual-footer">
+              <a
+                href="https://linemasters-organization.gitbook.io/linemaster-2.4ghz-typhoon"
+                target="_blank"
+                rel="noopener"
+                class="tool-link primary"
+                >Open manual</a
+              >
+            </div>
           </div>
 
           <div class="manual-card">
@@ -896,13 +908,15 @@
               Single-channel sport handle for simple, everyday flying with
               modern 2.4GHz reliability.
             </div>
-            <a
-              href="https://linemasters-organization.gitbook.io/linemaster-2.4ghz-zephyr"
-              target="_blank"
-              rel="noopener"
-              class="manual-link"
-              >Open manual</a
-            >
+            <div class="manual-footer">
+              <a
+                href="https://linemasters-organization.gitbook.io/linemaster-2.4ghz-zephyr"
+                target="_blank"
+                rel="noopener"
+                class="tool-link primary"
+                >Open manual</a
+              >
+            </div>
           </div>
 
           <div class="manual-card">
@@ -911,13 +925,15 @@
               5-channel receiver details, installation, binding, manual throttle
               controller and firmware update.
             </div>
-            <a
-              href="https://linemasters-organization.gitbook.io/linemaster-2.4ghz-lm-5x-5ch-receiver/"
-              target="_blank"
-              rel="noopener"
-              class="manual-link"
-              >Open manual</a
-            >
+            <div class="manual-footer">
+              <a
+                href="https://linemasters-organization.gitbook.io/linemaster-2.4ghz-lm-5x-5ch-receiver/"
+                target="_blank"
+                rel="noopener"
+                class="tool-link primary"
+                >Open manual</a
+              >
+            </div>
           </div>
 
           <div class="manual-card">
@@ -926,13 +942,11 @@
               Timer concept, flight timing philosophy and early documentation.
               Content still under development.
             </div>
-            <a
-              href="https://linemasters-organization.gitbook.io/linemaster-2.4ghz"
-              target="_blank"
-              rel="noopener"
-              class="manual-link"
-              >View documentation</a
-            >
+            <div class="manual-footer">
+              <a target="_blank" rel="noopener" class="tool-link disabled"
+                >Coming soon</a
+              >
+            </div>
           </div>
         </div>
       </section>
