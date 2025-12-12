@@ -77,7 +77,7 @@
       .nav-links {
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: 24px;
         font-size: 0.9rem;
       }
 
@@ -351,114 +351,6 @@
         cursor: not-allowed;
       }
 
-      /* ABOUT */
-      .about-section {
-        background: #ffffff;
-        border-radius: 18px;
-        border: 1px solid var(--lm-border);
-        padding: 22px 20px;
-        margin-bottom: 32px;
-        display: grid;
-        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-        gap: 22px;
-        font-size: 0.95rem;
-        color: var(--lm-text-muted);
-      }
-
-      .about-section h2 {
-        margin-top: 0;
-      }
-
-      .about-block-title {
-        font-weight: 600;
-        margin-bottom: 6px;
-        color: var(--lm-text-main);
-      }
-
-      .about-block {
-        margin-bottom: 10px;
-      }
-
-      /* TEAM */
-      .team-section {
-        margin-bottom: 40px;
-      }
-
-      .team-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 16px;
-        margin-top: 16px;
-      }
-
-      .team-card {
-        background: #ffffff;
-        border-radius: 14px;
-        border: 1px solid var(--lm-border);
-        padding: 12px 12px 14px;
-        text-align: center;
-        font-size: 0.85rem;
-        color: var(--lm-text-muted);
-      }
-
-      .team-card img {
-        width: 100%;
-        border-radius: 10px;
-        object-fit: cover;
-        max-height: 260px;
-      }
-
-      .team-name {
-        margin-top: 8px;
-        font-weight: 600;
-        color: var(--lm-text-main);
-      }
-
-      /* STORE */
-      .store-section {
-        background: #111827;
-        color: #f9fafb;
-        border-radius: 18px;
-        padding: 22px 20px;
-        margin-bottom: 40px;
-        display: grid;
-        grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-        gap: 18px;
-        align-items: center;
-      }
-
-      .store-title {
-        font-size: 1.3rem;
-        margin-bottom: 6px;
-      }
-
-      .store-subtitle {
-        font-size: 0.92rem;
-        color: #d1d5db;
-      }
-
-      .store-meta {
-        font-size: 0.85rem;
-        color: #9ca3af;
-        margin-top: 6px;
-      }
-
-      .store-cta {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: flex-start;
-      }
-
-      .store-cta a.btn-primary {
-        text-decoration: none;
-      }
-
-      .store-note {
-        font-size: 0.8rem;
-        color: #e5e7eb;
-      }
-
       /* MANUALS */
       .manuals-grid {
         display: grid;
@@ -590,14 +482,6 @@
           margin-top: 16px;
         }
 
-        .about-section {
-          grid-template-columns: minmax(0, 1fr);
-        }
-
-        .store-section {
-          grid-template-columns: minmax(0, 1fr);
-        }
-
         .contact-section {
           grid-template-columns: minmax(0, 1fr);
         }
@@ -631,8 +515,6 @@
           </div>
           <div class="nav-links">
             <a href="#tools">Tools</a>
-            <a href="#about">About</a>
-            <a href="#store">Store</a>
             <a href="#manuals">Manuals</a>
             <a href="#contact">Contact</a>
             <button class="nav-cta" onclick="scrollToSection('tools')">
@@ -670,7 +552,7 @@
 
           <div class="hero-product">
             <div class="hero-product-blob">
-              <!-- Reemplaza este placeholder por una foto del handle -->
+              <!-- Aquí luego puedes poner una imagen real del Typhoon/Zephyr -->
               <div class="hero-product-placeholder"></div>
             </div>
             <div class="hero-product-tag">
@@ -738,7 +620,7 @@
             </div>
             <div class="tool-card-footer">
               <span>Firmware v1.1.1 · Coming soon</span>
-              <a class="tool-link disabled">Coming soon</a>
+              <a class="tool-link disabled"> Coming soon </a>
             </div>
           </div>
 
@@ -757,111 +639,6 @@
                 Beta coming soon
               </a>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ABOUT SECTION -->
-      <section id="about" class="about-section">
-        <div>
-          <h2 class="section-title">What is LineMaster 2.4GHz?</h2>
-          <div class="about-block">
-            LineMaster 2.4GHz is a control system specifically designed for
-            control line flying, combining the ergonomics of classic handles
-            with modern 2.4GHz radio technology. More than just a transmitter
-            and receiver, it is a modular and evolving platform capable of
-            remotely controlling throttle, flaps, retractable landing gear and
-            many other functions.
-          </div>
-          <div class="about-block">
-            Aimed at pilots who enjoy sport flying as well as Scale and Carrier
-            categories, LineMaster is ready to use straight out of the box. The
-            goal is to expand the possibilities of the hobby—making it more
-            accessible, safe and versatile—while staying true to its roots and
-            building a bridge between radio control and control-line flying.
-          </div>
-        </div>
-        <div>
-          <div class="about-block-title">The story behind</div>
-          <div class="about-block">
-            It started after reading an article in <em>Model Aviation</em>
-            magazine, where many C/L pilots relied on modified transmitters and
-            improvised DIY solutions. As a software developer and aeromodeling
-            enthusiast, Carlos saw a clear opportunity: create something built
-            from the ground up specifically for control line, ready to use
-            without extra work.
-          </div>
-          <div class="about-block">
-            With the support of his long-time friend Eduardo de las Casas and
-            the experience of Bob Whitney, the project evolved through countless
-            test flights, 3D-printed prototypes and hours of tuning. An early
-            prototype even appeared in the December 2024 issue of
-            <em>Model Aviation</em>, giving the project a strong push forward.
-          </div>
-          <div class="about-block">
-            Today, LineMaster 2.4GHz is moving from prototype to a robust,
-            ready-to-use platform that we plan to keep improving together—with a
-            shared goal: enjoy and grow this amazing hobby.
-          </div>
-        </div>
-      </section>
-
-      <!-- TEAM SECTION -->
-      <section class="team-section">
-        <h2 class="section-title">The team</h2>
-        <p class="section-subtitle">
-          LineMaster 2.4GHz is led by Carlos Díaz, with the invaluable support
-          of Eduardo de las Casas, Bob Whitney and many friends and
-          collaborators who helped bring this vision to life.
-        </p>
-        <div class="team-grid">
-          <div class="team-card">
-            <img src="team-carlos.jpg" alt="Carlos Díaz holding a model" />
-            <div class="team-name">Carlos Díaz</div>
-            <div>
-              Founder · Software developer &amp; aeromodeling enthusiast
-            </div>
-          </div>
-          <div class="team-card">
-            <img src="team-eduardo.jpg" alt="Eduardo de las Casas" />
-            <div class="team-name">Eduardo de las Casas</div>
-            <div>Co-developer · Design, testing and validation</div>
-          </div>
-          <div class="team-card">
-            <img
-              src="team-bob.jpg"
-              alt="Bob Whitney with a control-line model"
-            />
-            <div class="team-name">Bob Whitney</div>
-            <div>Test pilot · Advisor and control-line expertise</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- STORE SECTION -->
-      <section id="store" class="store-section">
-        <div>
-          <h2 class="store-title">Visit the LineMaster Shop</h2>
-          <p class="store-subtitle">
-            Handles, receivers and accessories are available through our Etsy
-            store. There you’ll find Typhoon and Zephyr handles, LM-X5
-            receivers, line mounts and other parts designed to keep control-line
-            flying alive.
-          </p>
-          <p class="store-meta">
-            Limited production runs, assembled and tested one by one.
-          </p>
-        </div>
-        <div class="store-cta">
-          <a
-            href="https://www.etsy.com/shop/linemaster24ghz"
-            target="_blank"
-            rel="noopener"
-            class="btn-primary"
-            >Go to Etsy store</a
-          >
-          <div class="store-note">
-            Orders, shipping and payments are handled securely by Etsy.
           </div>
         </div>
       </section>
@@ -890,7 +667,7 @@
             >
           </div>
 
-          <div class="manual-card">
+          <div class="manuals-card manual-card">
             <div class="manual-title">Zephyr Handle – User Manual</div>
             <div class="manual-meta">
               Single-channel sport handle for simple, everyday flying with
@@ -973,8 +750,6 @@
       <span>© 2025 LineMaster 2.4GHz · Where innovation meets tradition.</span>
       <div class="links">
         <a href="#tools">Tools</a>
-        <a href="#about">About</a>
-        <a href="#store">Store</a>
         <a href="#manuals">Manuals</a>
         <a href="#contact">Contact</a>
       </div>
