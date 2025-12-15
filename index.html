@@ -156,7 +156,7 @@
 
       .hero-content {
         display: grid;
-        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+        grid-template-columns: minmax(0, 6fr) minmax(0, 1fr);
         gap: 40px;
         align-items: center;
       }
@@ -222,6 +222,20 @@
 
       .btn-secondary:hover {
         background: #ffffff11;
+      }
+
+      .btn-facebook {
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: #024ba9;
+        border: 1px solid #143a4f55;
+        color: #ffffffcc;
+        font-size: 0.95rem;
+        cursor: pointer;
+      }
+
+      .btn-facebook:hover {
+        background: #0051ff63;
       }
 
       .hero-meta {
@@ -764,6 +778,12 @@
               >
                 Visit our Store
               </button>
+              <button
+                class="btn-facebook"
+                onclick="window.open('https://www.facebook.com/profile.php?id=61560480371015', '_blank')"
+              >
+                Follow us on Facebook
+              </button>
               <button class="btn-secondary" onclick="scrollToSection('tools')">
                 Open Tools
               </button>
@@ -1079,7 +1099,11 @@
               Content still under development.
             </div>
             <div class="manual-footer">
-              <a target="_blank" rel="noopener" class="tool-link disabled"
+              <a
+                href="https://linemasters-organization.gitbook.io/linemaster-2.4ghz-lm-t1-timer/"
+                target="_blank"
+                rel="noopener"
+                class="tool-link primary"
                 >Coming soon</a
               >
             </div>
