@@ -35,14 +35,6 @@
         color: inherit;
       }
 
-      /* NAV + HERO */
-      /* .hero {
-        background: var(--lm-hero-bg);
-        color: #ffffff;
-        padding: 20px 24px 60px;
-        border-radius: 0 0 var(--lm-radius-lg) var(--lm-radius-lg);
-      } */
-
       .hero {
         position: relative;
         color: #ffffff;
@@ -52,16 +44,10 @@
         background: url("./assets/img/hero-handle.jpeg") top / cover no-repeat;
       }
 
-      /* .hero-inner {
-        max-width: 1120px;
-        margin: 0 auto;
-      } */
-
       .hero::before {
         content: "";
         position: absolute;
         inset: 0;
-        /* oscurece la foto para que el texto se lea */
         background: linear-gradient(
           135deg,
           rgba(0, 0, 0, 0.78),
@@ -69,28 +55,14 @@
         );
       }
 
-      /* Asegura que el contenido quede encima del overlay */
-      /* .hero-inner {
-        position: relative;
-        z-index: 1;
-        padding: 0 11%;
-      } */
-
       .hero-inner {
         position: relative;
         z-index: 1;
 
-        max-width: 1120px; /* igual que main */
-        margin: 0 auto; /* centra */
-        padding: 0 16px; /* igual que main */
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 16px;
       }
-
-      /* .nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 32px;
-      } */
 
       .nav {
         max-width: 1120px;
@@ -137,21 +109,6 @@
 
       .nav-links a:hover {
         opacity: 1;
-      }
-
-      .nav-cta {
-        padding: 8px 16px;
-        border-radius: 999px;
-        background: var(--lm-primary);
-        border: none;
-        color: #fff;
-        font-size: 0.9rem;
-        font-weight: 600;
-        cursor: pointer;
-      }
-
-      .nav-cta:hover {
-        background: var(--lm-primary-dark);
       }
 
       .hero-content {
@@ -262,49 +219,6 @@
         display: flex;
         align-items: center;
         gap: 6px;
-      }
-
-      .hero-product {
-        position: relative;
-        display: flex;
-        justify-content: center;
-      }
-
-      .hero-product-blob {
-        width: 280px;
-        height: 280px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 30% 20%, #ffffff22, #00000055);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-      }
-
-      .hero-product-placeholder {
-        width: 200px;
-        height: 200px;
-        border-radius: 120px;
-        border: 1px solid #ffffff33;
-        background: #00000055;
-      }
-
-      .hero-product-tag {
-        position: absolute;
-        right: 0;
-        top: 28%;
-        background: #ffffff;
-        color: #212121;
-        padding: 12px 16px;
-        border-radius: 14px;
-        font-size: 0.8rem;
-        max-width: 180px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-      }
-
-      .hero-product-tag-title {
-        font-weight: 600;
-        margin-bottom: 4px;
       }
 
       /* MAIN LAYOUT */
@@ -451,8 +365,163 @@
         color: var(--lm-text-main);
       }
 
-      .about-block {
+      /* TESTIMONIALS (CAROUSEL) */
+      .testimonials-section {
+        /* background: #ffffff; */
+        border-radius: 18px;
+        border: 1px solid var(--lm-border);
+        padding: 22px 20px;
+        margin-bottom: 32px;
+
+        background: #212121;
+        color: #f9fafb;
+        border-radius: 18px;
+        padding: 22px 20px;
+        margin-bottom: 40px;
+      }
+
+      .testimonials-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 14px;
+      }
+
+      .testimonials-kicker {
+        font-size: 0.85rem;
+        color: var(--lm-text-muted);
+      }
+
+      .carousel {
+        position: relative;
+        overflow: hidden;
+        border-radius: 14px;
+        /* border: 1px solid var(--lm-border);
+        background: #fafafa; */
+        color: #eff6ff;
+      }
+
+      .carousel-track {
+        display: flex;
+        width: 100%;
+        transition: transform 420ms ease;
+        will-change: transform;
+      }
+
+      .carousel-slide {
+        min-width: 100%;
+        padding: 22px 18px 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .testimonial {
+        max-width: 820px;
+        margin: 0 auto;
+      }
+
+      .testimonial-stars {
+        font-size: 1.1rem;
+        letter-spacing: 0.02em;
         margin-bottom: 10px;
+      }
+
+      /* .testimonial-text {
+        font-size: 1.05rem;
+        line-height: 1.6;
+                margin: 0 0 12px;
+      } */
+
+      .testimonial-text {
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin: 0 0 12px;
+        font-style: italic;
+        position: relative;
+        padding: 0 18px; /* espacio para las comillas */
+      }
+
+      .testimonial-text::before,
+      .testimonial-text::after {
+        position: absolute;
+        top: -0.15em;
+        /* font-size: 1.8em; */
+        font-size: 3em;
+        line-height: 1;
+        opacity: 0.35;
+        font-style: normal; /* que las comillas no se inclinen */
+      }
+
+      .testimonial-text::before {
+        content: "“";
+        left: 0;
+      }
+
+      .testimonial-text::after {
+        content: "”";
+        right: 0;
+      }
+
+      .testimonial-name {
+        font-weight: 700;
+        /* color: var(--lm-text-main); */
+      }
+
+      .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.92);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        transition: transform 180ms ease, background 180ms ease;
+        z-index: 2;
+      }
+
+      .carousel-btn:hover {
+        background: rgba(255, 255, 255, 1);
+        transform: translateY(-50%) scale(1.03);
+      }
+
+      .carousel-btn.prev {
+        left: 12px;
+      }
+
+      .carousel-btn.next {
+        right: 12px;
+      }
+
+      .carousel-dots {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 0 0;
+      }
+
+      .carousel-dot {
+        width: 4px;
+        height: 12px;
+        border-radius: 999px;
+        background: #ffffff65;
+        cursor: pointer;
+        transition: transform 160ms ease, background 160ms ease;
+      }
+
+      .carousel-dot.is-active {
+        /* background: var(--lm-primary); */
+        background: #ffffff;
+        transform: scale(1.12);
       }
 
       /* TEAM */
@@ -525,10 +594,6 @@
         flex-direction: column;
         gap: 10px;
         align-items: flex-start;
-      }
-
-      .store-cta a.btn-primary {
-        text-decoration: none;
       }
 
       .store-note {
@@ -654,6 +719,39 @@
         color: inherit;
       }
 
+      /* BACK TO TOP (all sizes) */
+      .back-to-top {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        width: 46px;
+        height: 46px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(33, 33, 33, 0.78);
+        color: #ffffff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 999;
+
+        opacity: 0;
+        transform: translateY(8px);
+        pointer-events: none;
+        transition: opacity 180ms ease, transform 180ms ease,
+          background 180ms ease;
+      }
+
+      .back-to-top.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
       /* RESPONSIVE */
       @media (max-width: 900px) {
         .hero-content {
@@ -671,11 +769,6 @@
           justify-content: center;
         }
 
-        .hero-product-tag {
-          position: static;
-          margin-top: 16px;
-        }
-
         .about-section {
           grid-template-columns: minmax(0, 1fr);
         }
@@ -687,20 +780,6 @@
         .contact-section {
           grid-template-columns: minmax(0, 1fr);
         }
-      }
-
-      .about-balanced {
-        align-items: start;
-      }
-
-      .about-image {
-        margin-top: 16px;
-      }
-
-      .about-image img {
-        width: 100%;
-        border-radius: 14px;
-        display: block;
       }
 
       @media (max-width: 640px) {
@@ -718,36 +797,11 @@
           margin-top: 24px;
         }
 
-        .back-to-top {
-          position: fixed;
-          right: 18px;
-          bottom: 18px;
-          width: 46px;
-          height: 46px;
-          border-radius: 999px;
-          border: 1px solid rgba(255, 255, 255, 0.18);
-          background: rgba(33, 33, 33, 0.78);
-          color: #ffffff;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
-          z-index: 999;
-
-          opacity: 0;
-          transform: translateY(8px);
-          pointer-events: none;
-          transition: opacity 180ms ease, transform 180ms ease,
-            background 180ms ease;
+        .carousel-btn.prev {
+          left: 8px;
         }
-
-        .back-to-top.is-visible {
-          opacity: 1;
-          transform: translateY(0);
-          pointer-events: auto;
+        .carousel-btn.next {
+          right: 8px;
         }
       }
     </style>
@@ -771,7 +825,7 @@
             <a href="#about">About</a>
             <a href="#store">Store</a>
             <a href="#manuals">Manuals</a>
-            <a href="#contact">Contact</a>
+            <a href="#contact">Contact us</a>
           </div>
         </nav>
 
@@ -813,26 +867,7 @@
             </div>
           </div>
 
-          <div class="hero-product">
-            <!-- <div class="hero-product-blob">
-              <img
-                class="hero-product-image"
-                src="./assets/img/hero-handle.jpeg"
-                alt="LineMaster handle"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-              />
-              <div class="hero-product-placeholder"></div>
-            </div> -->
-            <!-- <div class="hero-product-tag">
-              <div class="hero-product-tag-title">
-                Designed for control-line pilots
-              </div>
-              <div style="font-size: 0.78rem">
-                Built for Carrier, Scale and sport flying, combining ergonomic
-                3D-printed handles with smart receivers and dedicated tools.
-              </div>
-            </div> -->
-          </div>
+          <div class="hero-product"></div>
         </div>
       </div>
     </section>
@@ -979,6 +1014,117 @@
             moving toward a robust, ready-to-use platform with one clear goal:
             <strong>enjoy and grow this amazing hobby</strong>.
           </p>
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS (inserted here, before The team) -->
+      <section id="testimonials" class="testimonials-section">
+        <div class="testimonials-header">
+          <h2
+            class="section-title"
+            style="margin-bottom: 6px; margin-top: -8px"
+          >
+            What pilots are saying
+          </h2>
+        </div>
+
+        <div
+          class="carousel"
+          role="region"
+          aria-label="Customer testimonials carousel"
+        >
+          <button
+            class="carousel-btn prev"
+            type="button"
+            aria-label="Previous testimonial"
+          >
+            ‹
+          </button>
+
+          <div class="carousel-track" id="testimonialTrack">
+            <div class="carousel-slide">
+              <div class="testimonial">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">
+                  Superb Service, Excellent Product, VERY well designed, First
+                  Class Molding quality &amp; materials, Great Value. This
+                  product fills exactly a long long needed place in Control Line
+                  modelling! THANK YOU!!
+                </p>
+                <div class="testimonial-name">K Matthew Victor</div>
+              </div>
+            </div>
+
+            <div class="carousel-slide">
+              <div class="testimonial">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">
+                  Very well done product that will be a game changer Control
+                  Line models. I highly recommend and can’t wait to fly this
+                  system.
+                </p>
+                <div class="testimonial-name">Michael J.</div>
+              </div>
+            </div>
+
+            <div class="carousel-slide">
+              <div class="testimonial">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">
+                  Very professionally done and packaging was first rate.
+                </p>
+                <div class="testimonial-name">George</div>
+              </div>
+            </div>
+
+            <div class="carousel-slide">
+              <div class="testimonial">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">
+                  Awesome product! I really like the metal channel buttons and
+                  switches.
+                </p>
+                <div class="testimonial-name">Angel</div>
+              </div>
+            </div>
+
+            <div class="carousel-slide">
+              <div class="testimonial">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">
+                  Great looking product from a great seller.
+                </p>
+                <div class="testimonial-name">colin</div>
+              </div>
+            </div>
+
+            <div class="carousel-slide">
+              <div class="testimonial">
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">
+                  We love the product, looking forward to order more accessories
+                  soon.
+                </p>
+                <div class="testimonial-name">KIPmodeling</div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            class="carousel-btn next"
+            type="button"
+            aria-label="Next testimonial"
+          >
+            ›
+          </button>
+        </div>
+
+        <div
+          class="carousel-dots"
+          id="testimonialDots"
+          aria-label="Carousel dots"
+        >
+          <!-- dots injected by JS -->
         </div>
       </section>
 
@@ -1185,6 +1331,7 @@
       <div class="links">
         <a href="#tools">Tools</a>
         <a href="#about">About</a>
+        <a href="#testimonials">Testimonials</a>
         <a href="#store">Store</a>
         <a href="#manuals">Manuals</a>
         <a href="#contact">Contact</a>
@@ -1215,19 +1362,17 @@
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
-      // Intercepta clicks en links internos (#tools, #about, etc.)
+      // Intercept clicks on internal hash links
       document.addEventListener("click", (e) => {
         const a = e.target.closest('a[href^="#"]');
         if (!a) return;
 
-        const hash = a.getAttribute("href"); // ej: "#tools"
+        const hash = a.getAttribute("href");
         const id = hash.slice(1);
         if (!id) return;
 
         e.preventDefault();
         scrollToSection(id);
-
-        // opcional: actualiza la URL sin salto
         history.pushState(null, "", hash);
       });
 
@@ -1257,11 +1402,12 @@
           "Your email application should now open with a draft message.";
       }
 
+      // Back to top
       const backToTopBtn = document.getElementById("backToTop");
 
       function setBackToTopVisibility() {
         if (!backToTopBtn) return;
-        const showAfter = 300; // px
+        const showAfter = 300;
         const y = window.scrollY || document.documentElement.scrollTop || 0;
         backToTopBtn.classList.toggle("is-visible", y > showAfter);
       }
@@ -1274,6 +1420,91 @@
       backToTopBtn?.addEventListener("click", () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
+
+      // Testimonials carousel
+      const track = document.getElementById("testimonialTrack");
+      const dotsWrap = document.getElementById("testimonialDots");
+      const prevBtn = document.querySelector(".carousel-btn.prev");
+      const nextBtn = document.querySelector(".carousel-btn.next");
+
+      const slides = track ? Array.from(track.children) : [];
+      let index = 0;
+      let timer = null;
+
+      function renderDots() {
+        if (!dotsWrap) return;
+        dotsWrap.innerHTML = "";
+        slides.forEach((_, i) => {
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "carousel-dot" + (i === index ? " is-active" : "");
+          b.setAttribute("aria-label", "Go to testimonial " + (i + 1));
+          b.addEventListener("click", () => {
+            goTo(i, true);
+          });
+          dotsWrap.appendChild(b);
+        });
+      }
+
+      function update() {
+        if (!track) return;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        renderDots();
+      }
+
+      function goTo(i, userAction = false) {
+        if (!slides.length) return;
+        index = (i + slides.length) % slides.length;
+        update();
+        if (userAction) restartAuto();
+      }
+
+      function next(userAction = false) {
+        goTo(index + 1, userAction);
+      }
+
+      function prev(userAction = false) {
+        goTo(index - 1, userAction);
+      }
+
+      function startAuto() {
+        if (!slides.length) return;
+        stopAuto();
+        timer = setInterval(() => next(false), 5200);
+      }
+
+      function stopAuto() {
+        if (timer) clearInterval(timer);
+        timer = null;
+      }
+
+      function restartAuto() {
+        startAuto();
+      }
+
+      nextBtn?.addEventListener("click", () => next(true));
+      prevBtn?.addEventListener("click", () => prev(true));
+
+      // Pause on hover/focus (desktop)
+      const carouselEl = document.querySelector(".carousel");
+      carouselEl?.addEventListener("mouseenter", stopAuto);
+      carouselEl?.addEventListener("mouseleave", startAuto);
+      carouselEl?.addEventListener("focusin", stopAuto);
+      carouselEl?.addEventListener("focusout", startAuto);
+
+      // Keyboard support
+      document.addEventListener("keydown", (e) => {
+        if (!carouselEl) return;
+        const active = document.activeElement;
+        const isInside = active && carouselEl.contains(active);
+        if (!isInside) return;
+
+        if (e.key === "ArrowLeft") prev(true);
+        if (e.key === "ArrowRight") next(true);
+      });
+
+      update();
+      startAuto();
     </script>
   </body>
 </html>
