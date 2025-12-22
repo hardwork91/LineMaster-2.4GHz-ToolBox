@@ -2,215 +2,429 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>LineMaster 2.4GHz LM-X5 Receiver Updater</title>
+    <title>LM-X5 Receiver Firmware Updater | LineMaster 2.4GHz</title>
+
     <meta
       name="description"
-      content="Easily update the firmware of your LM-X5 receiver in a single step."
+      content="Update the firmware of your LineMaster 2.4GHz LM-X5 receiver directly from your browser."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
 
-    <!-- Lite YouTube embed -->
-    <script
-      type="module"
-      src="https://unpkg.com/@justinribeiro/lite-youtube@1.4.0/lite-youtube.js"
-    ></script>
-
-    <!-- ESP Web Tools install button -->
+    <!-- ESP Web Tools -->
     <script type="module">
       import "https://unpkg.com/esp-web-tools/dist/web/install-button.js?module";
     </script>
 
     <style>
+      :root {
+        --lm-bg: #f3f4f6;
+        --lm-card-bg: #ffffff;
+        --lm-primary: #f11313;
+        --lm-primary-dark: #c20b0b;
+        --lm-text-main: #212121;
+        --lm-text-muted: #454545;
+        --lm-border: #e5e7eb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         margin: 0;
-        min-height: 100vh;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
           sans-serif;
-        background: #f9fafb;
-        color: #111827;
-        display: flex;
-        flex-direction: column;
+        background: var(--lm-bg);
+        color: var(--lm-text-main);
       }
 
-      /* Top bar with back button + title */
-      .topbar {
-        background: #f9fafb;
-        padding: 12px 16px;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* HEADER */
+      .header {
         position: sticky;
         top: 0;
-        z-index: 10;
+        z-index: 20;
+        background: #161616;
+        color: #ffffff;
       }
 
-      .topbar .title {
-        font-size: 1rem;
-        font-weight: 600;
+      /* NAV (idéntico patrón al sitio principal) */
+      .nav {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 10px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
       }
 
-      button {
-        padding: 8px 14px;
-        border-radius: 6px;
-        border: 1px solid #d1d5db;
-        cursor: pointer;
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        letter-spacing: 0.03em;
         font-size: 0.95rem;
       }
 
-      button.secondary {
-        background: #ffffff;
-        color: #111827;
+      .logo-mark {
+        width: 34px;
+        height: 34px;
+        overflow: hidden;
       }
 
-      /* Main content */
-      main {
-        padding: 1rem;
-        text-align: center;
-        flex: 1;
-        overflow-y: auto;
+      .logo-mark img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
       }
 
-      main .container {
-        width: 60%;
-        max-width: 720px;
-        min-width: 280px;
+      .hero-tag {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        opacity: 0.75;
+      }
+
+      /* Right side */
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      /* Back button */
+      .btn-ghost {
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+
+      .btn-ghost:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .btn-secondary {
+        padding: 7px 12px;
+        border-radius: 999px;
+        border: 1px solid #d1d5db;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        background: #f9fafb;
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .btn-gost {
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        background: transparent;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      .btn-gost:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      /* ================= HERO ================= */
+      .hero {
+        background: #161616;
+        color: #ffffff;
+        padding: 32px 16px 40px;
+      }
+
+      .hero-inner {
+        max-width: 1120px;
         margin: 0 auto;
       }
 
-      main p {
-        margin-bottom: 1rem;
-        color: #333333;
+      .hero-tag {
+        font-size: 0.75rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        opacity: 0.7;
+        margin-bottom: 8px;
       }
 
-      .videoWrapper {
-        position: relative;
-        padding-bottom: 56.25%; /* 16:9 */
-        height: 0;
-        margin-bottom: 25px;
-        background: #cccccc;
+      .hero-title {
+        font-size: 2.2rem;
+        margin: 0 0 8px;
       }
 
-      .videoWrapper lite-youtube {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
+      .hero-subtitle {
+        max-width: 720px;
+        font-size: 1rem;
+        opacity: 0.9;
       }
 
-      main ol {
-        margin-top: -10px;
-        text-align: left;
-        display: inline-block;
+      /* ================= MAIN ================= */
+      main {
+        max-width: 1120px;
+        margin: 32px auto 48px;
+        padding: 0 16px;
       }
 
+      .stack {
+        display: flex;
+        flex-direction: column;
+        gap: 18px; /* separación real entre bloques */
+      }
+
+      /* White card */
+      .card {
+        background: var(--lm-card-bg);
+        border-radius: 14px;
+        border: 1px solid var(--lm-border);
+        padding: 20px;
+        box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
+      }
+
+      .card-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .muted {
+        color: var(--lm-text-muted);
+        font-size: 0.95rem;
+      }
+
+      .steps {
+        padding-left: 18px;
+        margin: 12px 0;
+      }
+
+      .steps li {
+        margin: 6px 0;
+      }
+
+      /* Warning */
       .alert-danger {
         display: flex;
-        align-items: flex-start;
-        background-color: #fff2ef;
-        padding: 1rem;
-        border-radius: 0.375rem;
-        margin: 1rem 0 1.5rem;
+        gap: 10px;
+        background: #fff2ef;
+        border: 1px solid #ffd4cc;
+        border-radius: 12px;
+        padding: 14px;
+        margin-top: 14px;
+        color: #3a1b16;
+        font-size: 0.92rem;
       }
 
       .alert-danger svg {
+        width: 20px;
+        height: 20px;
+        fill: rgb(251, 44, 54);
         flex-shrink: 0;
-        width: 1.25rem;
-        height: 1.25rem;
-        margin-right: 0.75rem;
-        color: rgb(251, 44, 54);
-        fill: currentColor;
+        margin-top: 2px;
       }
 
-      .alert-danger .alert-text {
-        text-align: left;
+      /* ================= DARK CTA BLOCK ================= */
+      .cta-block {
+        background: #212121;
+        color: #f9fafb;
+        border-radius: 14px;
+        padding: 18px 20px;
+        box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
+      }
+
+      .cta-block .muted {
+        color: #d1d5db;
+      }
+
+      .cta-block .hint {
+        font-size: 0.85rem;
+        color: #c3c3c3;
+        margin-top: 10px;
+      }
+
+      .actions {
+        margin-top: 10px;
       }
 
       /* ESP Web Tools button */
       esp-web-install-button {
-        --esp-tools-button-color: black;
-        --esp-tools-button-text-color: white;
-        --esp-tools-button-border-radius: 6px;
+        --esp-tools-button-color: var(--lm-primary);
+        --esp-tools-button-text-color: #ffffff;
+        --esp-tools-button-border-radius: 999px;
+        --esp-tools-button-padding: 10px 18px;
+        --esp-tools-button-font-size: 0.95rem;
       }
 
-      /* Footer */
+      /* ================= CONTACT ================= */
+      .btn-primary {
+        display: inline-flex;
+        padding: 9px 16px;
+        border-radius: 999px;
+        background: var(--lm-primary);
+        color: #fff;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-primary:hover {
+        background: var(--lm-primary-dark);
+      }
+
+      /* ================= FOOTER ================= */
       footer {
-        background: #121212;
-        color: #ffffff;
-        text-align: center;
-        padding: 0.75rem;
-        font-size: 0.85rem;
+        max-width: 1120px;
+        margin: 24px auto;
+        padding: 0 16px;
+        font-size: 0.82rem;
+        color: #9ca3af;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
       }
     </style>
   </head>
+
   <body>
-    <header class="topbar">
-      <button id="btnBack" class="secondary" onclick="location.href='../'">
-        👈 Back to ToolBox
-      </button>
-      <span class="title">LineMaster 2.4GHz LM-X5 Receiver Updater</span>
+    <!-- HEADER / NAV -->
+    <header class="header">
+      <nav class="nav">
+        <div class="logo">
+          <div class="logo-mark">
+            <img
+              src="../assets/img/logo-small.png"
+              alt="LineMaster 2.4GHz logo"
+            />
+          </div>
+          <div class="hero-tag">Control-Line Radio Ecosystem</div>
+        </div>
+
+        <div class="nav-links">
+          <button
+            class="btn-ghost"
+            onclick="location.href='https://www.linemaster24ghz.com/#tools'"
+          >
+            👈 Back
+          </button>
+        </div>
+      </nav>
     </header>
 
-    <main>
-      <div class="container">
-        <p>
-          This online tool lets you easily install the latest firmware for your
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-tag">Tools & Updaters</div>
+        <h1 class="hero-title">LM-X5 Receiver Firmware Updater</h1>
+        <p class="hero-subtitle">
+          Install the latest firmware for your
           <strong>LineMaster 2.4GHz LM-X5</strong> receiver directly from your
           browser.
         </p>
+      </div>
+    </section>
 
-        <!-- Optional video -->
-        <!--
-        <div class="videoWrapper">
-          <lite-youtube
-            videoid="5EhpCTnGJlE"
-            videotitle="LineMaster 2.4GHz LM-X5 Receiver Firmware Update"
-          ></lite-youtube>
-        </div>
-        -->
+    <!-- MAIN -->
+    <main>
+      <div class="stack">
+        <!-- Instructions -->
+        <section class="card">
+          <h2 class="card-title">Before you update</h2>
+          <p class="muted">
+            Keep it simple: connect your receiver and run the installer. No
+            extra apps required.
+          </p>
 
-        <p><strong>Before you update:</strong></p>
-        <ol>
-          <li>
-            Connect your LM-X5 receiver to your computer using the USB-C data
-            cable provided in your LineMaster 2.4GHz kit (or any other USB-C
-            cable that supports data transfer).
-          </li>
-          <li>Make sure you are using Google Chrome or Microsoft Edge.</li>
-        </ol>
+          <ol class="steps muted">
+            <li>
+              Connect your LM-X5 receiver using a
+              <strong>USB-C data cable</strong>.
+            </li>
+            <li>
+              Use <strong>Google Chrome</strong> or
+              <strong>Microsoft Edge</strong>.
+            </li>
+          </ol>
 
-        <div class="alert-danger" role="alert">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              d="M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12
-             6.5 2 12 2zm0 3a1 1 0 0 0-.993.883L11 6v6a1 1 0 0 0
-             1.993.117L13 12V6a1 1 0 0 0-1-1zm0 12a1.5 1.5 0 1 0
-             .001-3.001A1.5 1.5 0 0 0 12 17z"
-            />
-          </svg>
-          <div class="alert-text">
-            Do not disconnect the receiver or turn off your computer during the
-            update process, as this may render the device unusable. Place the
-            receiver on a secure surface to prevent falls or accidental cable
-            disconnection during the update.
+          <div class="alert-danger">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12
+                6.5 2 12 2zm0 3a1 1 0 0 0-.993.883L11 6v6a1 1 0 0 0
+                1.993.117L13 12V6a1 1 0 0 0-1-1zm0 12a1.5 1.5 0 1 0
+                .001-3.001A1.5 1.5 0 0 0 12 17z"
+              />
+            </svg>
+            <div>
+              Do not disconnect the receiver or turn off your computer during
+              the update. Place the receiver on a stable surface to prevent
+              accidental cable disconnection.
+            </div>
           </div>
-        </div>
+        </section>
 
-        <p>
-          Click the button below to connect your
-          <strong>LM-X5 receiver</strong> and start the update process.
-        </p>
-        <esp-web-install-button manifest="./manifest_LM-5X.json">
-          Connect and update
-        </esp-web-install-button>
+        <!-- CTA -->
+        <section class="cta-block">
+          <p class="muted">Click below to connect and start the update:</p>
+
+          <div class="actions">
+            <esp-web-install-button manifest="./manifest_LM-5X.json">
+              Connect
+            </esp-web-install-button>
+          </div>
+
+          <div class="hint">
+            Tip: if the button does nothing, confirm you’re on Chrome/Edge and
+            the USB cable supports data.
+          </div>
+        </section>
+
+        <!-- Help -->
+        <section class="card">
+          <h2 class="card-title">Need help?</h2>
+          <p class="muted">
+            If the updater can’t find the device, try a different USB port or
+            cable.<br />
+            If you’re still having trouble or have any questions, don’t hesitate
+            to reach out — we’re here to help.
+          </p>
+
+          <div class="actions">
+            <a
+              class="btn-secondary"
+              href="https://www.linemaster24ghz.com/#contact"
+            >
+              Contact us
+            </a>
+          </div>
+        </section>
       </div>
     </main>
 
-    <footer>LineMaster 2.4GHz | LM-X5 Receiver Updater | 2025</footer>
+    <!-- FOOTER -->
+    <footer>
+      <span>© 2025 LineMaster 2.4GHz · LM-X5 Receiver Updater</span>
+      <div>
+        <a href="../">ToolBox</a> ·
+        <a
+          href="https://linemasters-organization.gitbook.io/warranty-and-return-policy/#warranty-claim-procedure"
+          target="_blank"
+          rel="noopener"
+          >Warranty &amp; Return Policy</a
+        >
+      </div>
+    </footer>
   </body>
 </html>

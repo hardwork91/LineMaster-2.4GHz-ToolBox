@@ -132,6 +132,60 @@
         font-size: 1rem;
         font-weight: 600;
       }
+
+      /* -------- Model editor styles -------- */
+      .fieldset {
+        border: 1px solid #e5e7eb;
+        background: #fff;
+        border-radius: 8px;
+        padding: 12px;
+        margin-top: 12px;
+      }
+      .fieldset-title {
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #374151;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 10px;
+      }
+      .field label {
+        display: block;
+        font-size: 0.85rem;
+        color: #374151;
+        margin-bottom: 4px;
+      }
+      .field input[type="number"],
+      .field input[type="text"] {
+        width: 100%;
+        padding: 8px 10px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 0.95rem;
+      }
+      .field input[type="checkbox"] {
+        transform: scale(1.1);
+      }
+      .small-note {
+        font-size: 0.82rem;
+        color: #6b7280;
+        margin-top: 6px;
+      }
+      #modelPreview {
+        margin-top: 8px;
+        padding: 12px;
+        border-radius: 8px;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        white-space: pre-wrap;
+        font-size: 0.85rem;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        max-height: 360px;
+        overflow: auto;
+      }
     </style>
   </head>
   <body>
@@ -142,6 +196,7 @@
 
       <span class="title">LineMaster 2.4GHz Companion</span>
     </header>
+
     <h1>LineMaster 2.4GHz Companion</h1>
 
     <div class="toolbar">
@@ -161,6 +216,31 @@
     <div id="fileContent">
       <div id="fileContentTitle">No file selected.</div>
       <div id="fileContentBody"></div>
+    </div>
+
+    <div class="section-title">Model editor</div>
+    <div id="editor" style="display: none">
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center">
+        <button id="btnLoadModel" class="secondary">
+          Load selected file as Model JSON
+        </button>
+        <button id="btnCopyModelJson" class="secondary" disabled>Copy JSON</button>
+        <button id="btnDownloadModelJson" class="secondary" disabled>
+          Download JSON
+        </button>
+      </div>
+
+      <div
+        id="editorStatus"
+        style="margin-top: 8px; color: #4b5563; font-size: 0.9rem"
+      >
+        No model loaded.
+      </div>
+
+      <div id="modelForm" style="margin-top: 12px"></div>
+
+      <div class="section-title">Edited JSON preview</div>
+      <div id="modelPreview"></div>
     </div>
 
     <div class="section-title">Log</div>
@@ -455,17 +535,26 @@
         const result = await readFile(name);
         let text = result.content || "";
 
-        // Intentar parsear como JSON y formatear con indentación genérica
+        // Try parse JSON & pretty print
         let formatted = text;
         try {
           const obj = JSON.parse(text);
           formatted = JSON.stringify(obj, null, 2);
         } catch (e) {
-          // No es JSON válido; se deja el texto tal cual.
+          // leave as-is
         }
 
         fileContentTitleEl.textContent = "File: " + result.name;
         fileContentBodyEl.textContent = formatted || "(empty file)";
+
+        // Capture as "selected file" for editor
+        selectedFileName = result.name;
+        selectedFileRawText = text;
+        editorEl.style.display = "block";
+        editorStatusEl.textContent =
+          'Selected file: ' +
+          selectedFileName +
+          '. Click "Load selected file as Model JSON".';
       }
 
       async function dumpSdToFolder() {
@@ -500,10 +589,8 @@
               log("Reading file: " + fname);
               const result = await readFile(fname);
 
-              // Contenido original
               const contentToWrite = result.content || "";
 
-              // Nombre base seguro
               let safeName = fname.replace(/[<>:"/\\|?*]/g, "_");
               if (!safeName) safeName = "file.txt";
 
@@ -563,6 +650,308 @@
       btnToggleLog.onclick = () => {
         toggleLogVisibility();
       };
+
+      // ===============================
+      // Model Editor (web-only, no SD write yet)
+      // ===============================
+      const editorEl = document.getElementById("editor");
+      const modelFormEl = document.getElementById("modelForm");
+      const modelPreviewEl = document.getElementById("modelPreview");
+      const editorStatusEl = document.getElementById("editorStatus");
+      const btnLoadModel = document.getElementById("btnLoadModel");
+      const btnCopyModelJson = document.getElementById("btnCopyModelJson");
+      const btnDownloadModelJson = document.getElementById("btnDownloadModelJson");
+
+      let selectedFileName = null;
+      let selectedFileRawText = null;
+      let currentModelObj = null;
+
+      function safeGet(obj, path, fallback) {
+        try {
+          const v = path.split(".").reduce((acc, key) => acc[key], obj);
+          return v === undefined || v === null ? fallback : v;
+        } catch {
+          return fallback;
+        }
+      }
+
+      function safeSet(obj, path, value) {
+        const keys = path.split(".");
+        let cur = obj;
+        for (let i = 0; i < keys.length - 1; i++) {
+          const k = keys[i];
+          if (typeof cur[k] !== "object" || cur[k] === null) cur[k] = {};
+          cur = cur[k];
+        }
+        cur[keys[keys.length - 1]] = value;
+      }
+
+      function renderPreview() {
+        if (!currentModelObj) {
+          modelPreviewEl.textContent = "";
+          return;
+        }
+        modelPreviewEl.textContent = JSON.stringify(currentModelObj, null, 2);
+      }
+
+      function createField({ label, type, value, onChange, note }) {
+        const wrap = document.createElement("div");
+        wrap.className = "field";
+
+        const lab = document.createElement("label");
+        lab.textContent = label;
+
+        if (type === "checkbox") {
+          const input = document.createElement("input");
+          input.type = "checkbox";
+          input.checked = !!value;
+          input.onchange = () => onChange(input.checked);
+          wrap.appendChild(lab);
+          wrap.appendChild(input);
+        } else {
+          const input = document.createElement("input");
+          input.type = type;
+          input.value = value ?? "";
+          input.oninput = () => {
+            if (type === "number") {
+              const v = input.value.trim() === "" ? 0 : Number(input.value);
+              onChange(Number.isFinite(v) ? v : 0);
+            } else {
+              onChange(input.value);
+            }
+          };
+          wrap.appendChild(lab);
+          wrap.appendChild(input);
+        }
+
+        if (note) {
+          const n = document.createElement("div");
+          n.className = "small-note";
+          n.textContent = note;
+          wrap.appendChild(n);
+        }
+
+        return wrap;
+      }
+
+      function createFieldset(title) {
+        const fs = document.createElement("div");
+        fs.className = "fieldset";
+        const t = document.createElement("div");
+        t.className = "fieldset-title";
+        t.textContent = title;
+        const grid = document.createElement("div");
+        grid.className = "grid";
+        fs.appendChild(t);
+        fs.appendChild(grid);
+        return { fs, grid };
+      }
+
+      function renderChannelGroup(objPath, title, channels) {
+        const { fs, grid } = createFieldset(title);
+
+        for (const ch of channels) {
+          const path = `${objPath}.${ch}`;
+          const val = safeGet(currentModelObj, path, 0);
+
+          const isBool = typeof val === "boolean";
+          const type = isBool ? "checkbox" : "number";
+
+          grid.appendChild(
+            createField({
+              label: ch,
+              type,
+              value: val,
+              onChange: (v) => {
+                safeSet(currentModelObj, path, v);
+                renderPreview();
+              },
+            })
+          );
+        }
+
+        return fs;
+      }
+
+      function renderModelForm() {
+        modelFormEl.innerHTML = "";
+        if (!currentModelObj) return;
+
+        // General
+        {
+          const { fs, grid } = createFieldset("General");
+
+          grid.appendChild(
+            createField({
+              label: "name",
+              type: "text",
+              value: safeGet(currentModelObj, "name", ""),
+              onChange: (v) => {
+                safeSet(currentModelObj, "name", v);
+                renderPreview();
+              },
+            })
+          );
+
+          grid.appendChild(
+            createField({
+              label: "mac",
+              type: "text",
+              value: safeGet(currentModelObj, "mac", "00:00:00:00:00:00"),
+              onChange: (v) => {
+                safeSet(currentModelObj, "mac", v);
+                renderPreview();
+              },
+              note: "Recommended: AA:BB:CC:DD:EE:FF",
+            })
+          );
+
+          grid.appendChild(
+            createField({
+              label: "is_binded",
+              type: "checkbox",
+              value: safeGet(currentModelObj, "is_binded", false),
+              onChange: (v) => {
+                safeSet(currentModelObj, "is_binded", v);
+                renderPreview();
+              },
+            })
+          );
+
+          grid.appendChild(
+            createField({
+              label: "has_failsafe",
+              type: "checkbox",
+              value: safeGet(currentModelObj, "has_failsafe", false),
+              onChange: (v) => {
+                safeSet(currentModelObj, "has_failsafe", v);
+                renderPreview();
+              },
+            })
+          );
+
+          grid.appendChild(
+            createField({
+              label: "throttle_cut",
+              type: "number",
+              value: safeGet(currentModelObj, "throttle_cut", -100),
+              onChange: (v) => {
+                safeSet(currentModelObj, "throttle_cut", v);
+                renderPreview();
+              },
+              note: "Default: -100",
+            })
+          );
+
+          modelFormEl.appendChild(fs);
+        }
+
+        const CH = ["ch1", "ch2", "ch3", "ch4", "ch5", "ch6"];
+        const RND = ["rnd1", "rnd2", "rnd3", "rnd4", "rnd5"];
+
+        modelFormEl.appendChild(
+          renderChannelGroup("failsafe", "Failsafe (ch1..ch6)", CH)
+        );
+        modelFormEl.appendChild(
+          renderChannelGroup("positions", "Positions (ch1..ch6)", CH)
+        );
+        modelFormEl.appendChild(renderChannelGroup("expo", "Expo (ch1..ch6)", CH));
+        modelFormEl.appendChild(
+          renderChannelGroup("reverse", "Reverse (ch1..ch6)", CH)
+        );
+
+        modelFormEl.appendChild(
+          renderChannelGroup("min", "Min (ch1..ch6 + rnd1..rnd5)", [...CH, ...RND])
+        );
+        modelFormEl.appendChild(renderChannelGroup("mid", "Mid (ch1..ch6)", CH));
+        modelFormEl.appendChild(
+          renderChannelGroup("max", "Max (ch1..ch6 + rnd1..rnd5)", [...CH, ...RND])
+        );
+        modelFormEl.appendChild(
+          renderChannelGroup("speed", "Speed (ch1..ch6 + rnd1..rnd5)", [
+            ...CH,
+            ...RND,
+          ])
+        );
+
+        modelFormEl.appendChild(renderChannelGroup("mode", "Mode (rnd1..rnd5)", RND));
+        modelFormEl.appendChild(
+          renderChannelGroup("frequency", "Frequency (rnd1..rnd5)", RND)
+        );
+      }
+
+      function tryLoadSelectedAsModel() {
+        if (!selectedFileRawText) {
+          editorStatusEl.textContent =
+            "No file selected/read yet. Click READ on a file first.";
+          return;
+        }
+
+        let obj;
+        try {
+          obj = JSON.parse(selectedFileRawText);
+        } catch (e) {
+          editorStatusEl.textContent = "Selected file is not valid JSON.";
+          currentModelObj = null;
+          renderModelForm();
+          renderPreview();
+          btnCopyModelJson.disabled = true;
+          btnDownloadModelJson.disabled = true;
+          return;
+        }
+
+        const looksLikeModel =
+          typeof obj === "object" &&
+          obj &&
+          "name" in obj &&
+          "mac" in obj &&
+          "min" in obj &&
+          "max" in obj;
+
+        currentModelObj = obj;
+
+        editorEl.style.display = "block";
+        editorStatusEl.textContent = looksLikeModel
+          ? "Model loaded from: " + selectedFileName
+          : "JSON loaded, but it doesn't look like a Model config.";
+
+        renderModelForm();
+        renderPreview();
+        btnCopyModelJson.disabled = false;
+        btnDownloadModelJson.disabled = false;
+      }
+
+      async function copyModelJson() {
+        if (!currentModelObj) return;
+        const text = JSON.stringify(currentModelObj, null, 2);
+        await navigator.clipboard.writeText(text);
+        editorStatusEl.textContent = "JSON copied to clipboard.";
+      }
+
+      function downloadModelJson() {
+        if (!currentModelObj) return;
+        const text = JSON.stringify(currentModelObj, null, 2);
+        const blob = new Blob([text], { type: "application/json" });
+
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        const base = (currentModelObj.name || "model")
+          .toString()
+          .trim()
+          .replace(/\s+/g, "_");
+        a.download = `${base || "model"}_edited.json`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(a.href);
+
+        editorStatusEl.textContent = "JSON downloaded.";
+      }
+
+      btnLoadModel.onclick = () => tryLoadSelectedAsModel();
+      btnCopyModelJson.onclick = () =>
+        copyModelJson().catch((e) => log("Clipboard error: " + e));
+      btnDownloadModelJson.onclick = () => downloadModelJson();
     </script>
   </body>
 </html>
