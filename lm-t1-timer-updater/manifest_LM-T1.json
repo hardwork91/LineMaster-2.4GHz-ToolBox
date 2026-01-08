@@ -1,6 +1,6 @@
 {
-  "name": "Firmware receiver",
-  "version": "1.1.5",
+  "name": "LM-T1 Timer firmware",
+  "version": "0.4.1",
   "builds": [
     {
       "chipFamily": "ESP32-C3",

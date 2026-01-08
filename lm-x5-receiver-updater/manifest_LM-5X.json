@@ -1,6 +1,6 @@
 {
-  "name": "Firmware receiver",
-  "version": "1.1.5",
+  "name": "LM-X5 Receiver firmware",
+  "version": "1.1.5", 
   "builds": [
     {
       "chipFamily": "ESP32-C3",
