@@ -6,7 +6,7 @@
       "chipFamily": "ESP32-C3",
       "parts": [
         {
-          "path": "../firmwares/lm-t1-v1.1.5.bin",
+          "path": "../firmwares/lm-t1-v0.4.1.bin",
           "offset": 0
         }
       ]

@@ -423,6 +423,92 @@
         cursor: not-allowed;
       }
 
+      /* PRODUCTS */
+      .products-section {
+        margin-bottom: 40px;
+      }
+
+      .products-header {
+        margin-bottom: 14px;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 18px;
+      }
+
+      .product-card {
+        background: var(--lm-card-bg);
+        border-radius: 14px;
+        border: 1px solid var(--lm-border);
+        overflow: hidden;
+        box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .product-media {
+        background: #0f0f0f;
+        aspect-ratio: 16 / 10;
+        overflow: hidden;
+      }
+
+      .product-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .product-body {
+        padding: 16px 18px 18px;
+      }
+
+      .product-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.75rem;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: #eff6ff;
+        color: #1d4ed8;
+        margin-bottom: 10px;
+      }
+
+      .product-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+
+      .product-desc {
+        font-size: 0.92rem;
+        color: var(--lm-text-muted);
+        margin-bottom: 14px;
+        line-height: 1.45;
+      }
+
+      .product-actions {
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .product-link {
+        padding: 9px 14px;
+        border-radius: 999px;
+        background: var(--lm-primary);
+        border: 1px solid var(--lm-primary-dark);
+        color: #ffffff;
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      .product-link:hover {
+        background: var(--lm-primary-dark);
+      }
+
       /* ABOUT */
       .about-section {
         background: #ffffff;
@@ -1005,8 +1091,10 @@
               </p>
             </div>
             <div class="tool-card-footer">
-              <span></span>
-              <a class="tool-link disabled">Coming soon</a>
+              <span>Stable · 0.4.1</span>
+              <a href="./lm-t1-timer-updater/" class="tool-link primary"
+                >Open tool</a
+              >
             </div>
           </div>
 
@@ -1024,6 +1112,124 @@
               <a href="./lm-companion/" class="tool-link default"> Beta </a>
             </div>
           </div>
+        </div>
+      </section>
+
+      <div class="sketchfab-embed-wrapper">
+        <iframe
+          title="LM-X5 Receiver"
+          frameborder="0"
+          allowfullscreen
+          mozallowfullscreen="true"
+          webkitallowfullscreen="true"
+          allow="autoplay; fullscreen; xr-spatial-tracking"
+          xr-spatial-tracking
+          execution-while-out-of-viewport
+          execution-while-not-rendered
+          web-share
+          width="640"
+          height="480"
+          src="https://sketchfab.com/models/b01e332935f6483a9336a2e57e9e28eb/embed?autospin=1&autostart=1&preload=1&transparent=1&ui_hint=0"
+        >
+        </iframe>
+      </div>
+
+      <!-- PRODUCTS SECTION -->
+      <section id="products" class="products-section">
+        <div class="products-header">
+          <h2 class="section-title">Products</h2>
+          <p class="section-subtitle">
+            Explore our current lineup — purpose-built gear for control-line
+            pilots.
+          </p>
+        </div>
+
+        <div class="products-grid">
+          <!-- Product card -->
+          <article class="product-card">
+            <div class="product-media">
+              <img
+                src="./assets/img/products/lm-x5.jpg"
+                alt="LM-X5 5-channel receiver"
+                loading="lazy"
+              />
+            </div>
+            <div class="product-body">
+              <div class="product-tag">Receiver · 5CH</div>
+              <div class="product-title">LM-X5 Receiver</div>
+              <div class="product-desc">
+                5-channel receiver designed for the LineMaster ecosystem.
+                Reliable, compact and easy to update.
+              </div>
+              <div class="product-actions">
+                <a
+                  class="product-link"
+                  href="https://www.etsy.com/listing/XXXXXXXXX"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  View product
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Duplicate cards for each product -->
+          <article class="product-card">
+            <div class="product-media">
+              <img
+                src="./assets/img/products/typhoon.jpg"
+                alt="Typhoon handle"
+                loading="lazy"
+              />
+            </div>
+            <div class="product-body">
+              <div class="product-tag">Handle · 5CH</div>
+              <div class="product-title">Typhoon Handle</div>
+              <div class="product-desc">
+                Advanced handle for Carrier &amp; Scale: menus, profiles,
+                movement generators and safety-first logic.
+              </div>
+              <div class="product-actions">
+                <a
+                  class="product-link"
+                  href="https://www.etsy.com/listing/YYYYYYYYY"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  View product
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-media">
+              <img
+                src="./assets/img/products/zephyr.jpg"
+                alt="Zephyr handle"
+                loading="lazy"
+              />
+            </div>
+            <div class="product-body">
+              <div class="product-tag">Handle · Sport</div>
+              <div class="product-title">Zephyr Handle</div>
+              <div class="product-desc">
+                Simple, everyday flying with modern 2.4GHz reliability — no
+                fuss.
+              </div>
+              <div class="product-actions">
+                <a
+                  class="product-link"
+                  href="https://www.etsy.com/listing/ZZZZZZZZZ"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  View product
+                </a>
+              </div>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -1335,7 +1541,7 @@
           </div>
 
           <div class="manual-card">
-            <div class="manual-title">LM-T1 Timer – Documentation</div>
+            <div class="manual-title">LM-T1 Timer – User Manual</div>
             <div class="manual-meta">
               Timer concept, flight timing philosophy and early documentation.
               Content still under development.
@@ -1346,7 +1552,7 @@
                 target="_blank"
                 rel="noopener"
                 class="tool-link primary"
-                >Coming soon</a
+                >Open manual</a
               >
             </div>
           </div>
