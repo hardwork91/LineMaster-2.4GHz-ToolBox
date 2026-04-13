@@ -1,0 +1,57 @@
+/* ============================================================
+   LineMaster 2.4GHz – Design Tokens
+   Single source of truth for colors, spacing, radii & typography.
+   Edit here to restyle the entire site.
+   ============================================================ */
+
+:root {
+  /* ── Brand colors ─────────────────────────────────── */
+  --lm-primary: #f11313;
+  --lm-primary-dark: #c20b0b;
+  --lm-primary-light: #ff4d4d;
+
+  /* ── Surfaces ─────────────────────────────────────── */
+  --lm-bg: #f3f4f6;
+  --lm-card-bg: #ffffff;
+  --lm-dark-bg: #161616;
+  --lm-dark-section-bg: #212121;
+
+  /* ── Text ──────────────────────────────────────────── */
+  --lm-text-main: #212121;
+  --lm-text-muted: #454545;
+  --lm-text-light: #6b7280;
+  --lm-text-on-dark: #f9fafb;
+
+  /* ── Borders ───────────────────────────────────────── */
+  --lm-border: #e5e7eb;
+  --lm-border-dark: #d1d5db;
+
+  /* ── Radii ─────────────────────────────────────────── */
+  --lm-radius-sm: 8px;
+  --lm-radius-md: 14px;
+  --lm-radius-lg: 18px;
+  --lm-radius-pill: 999px;
+
+  /* ── Layout ────────────────────────────────────────── */
+  --lm-max-width: 1120px;
+  --lm-nav-height: 56px;
+
+  /* ── Accent colors (buttons, badges) ───────────────── */
+  --lm-blue: #2563eb;
+  --lm-blue-dark: #1d4ed8;
+  --lm-blue-bg: #eff6ff;
+  --lm-facebook: #024ba9;
+  --lm-etsy: #f1641e;
+  --lm-green: #16a34a;
+  --lm-green-bg: #f0fdf4;
+  --lm-amber: #d97706;
+  --lm-amber-bg: #fffbeb;
+
+  /* ── Shadows ───────────────────────────────────────── */
+  --lm-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
+  --lm-shadow-md: 0 6px 16px rgba(15, 23, 42, 0.05);
+  --lm-shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.08);
+
+  /* ── Transitions ───────────────────────────────────── */
+  --lm-ease: 200ms ease;
+}
