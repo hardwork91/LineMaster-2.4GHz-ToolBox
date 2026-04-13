@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pathfinder | LineMaster 2.4GHz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Pathfinder – Real-time 3D flight data visualization tool. An incoming LineMaster 2.4GHz project." />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/ico/apple-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/ico/favicon-32x32.png" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="stylesheet" href="../css/variables.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+
+    <style>
+      .project-hero {
+        background: linear-gradient(135deg, #1a1a2e, #16213e);
+        color: #fff;
+        padding: 48px 16px 56px;
+      }
+      .project-hero-inner {
+        max-width: var(--lm-max-width);
+        margin: 0 auto;
+        text-align: center;
+      }
+      .project-hero-tag {
+        display: inline-block;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        padding: 4px 12px;
+        border-radius: var(--lm-radius-pill);
+        background: rgba(217, 119, 6, 0.2);
+        color: #fbbf24;
+        margin-bottom: 14px;
+      }
+      .project-hero-title { font-size: 2.4rem; margin: 0 0 12px; }
+      .project-hero-subtitle {
+        font-size: 1.05rem;
+        opacity: 0.85;
+        line-height: 1.6;
+        max-width: 620px;
+        margin: 0 auto 24px;
+      }
+
+      .product-section { max-width: var(--lm-max-width); margin: 32px auto; padding: 0 16px; }
+      .product-section h2 { font-size: 1.3rem; margin-bottom: 14px; }
+
+      .info-card {
+        background: var(--lm-card-bg);
+        border: 1px solid var(--lm-border);
+        border-radius: var(--lm-radius-md);
+        padding: 22px;
+        margin-bottom: 24px;
+        font-size: 0.95rem;
+        color: var(--lm-text-muted);
+        line-height: 1.6;
+      }
+
+      .try-banner {
+        background: var(--lm-dark-section-bg);
+        color: var(--lm-text-on-dark);
+        border-radius: var(--lm-radius-md);
+        padding: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-bottom: 24px;
+      }
+      .try-banner strong { display: block; margin-bottom: 4px; }
+      .try-banner span { font-size: 0.85rem; opacity: 0.8; }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+      <nav class="nav">
+        <a href="../" class="logo">
+          <div class="logo-mark"><img src="../assets/img/logo-small.png" alt="LineMaster logo" /></div>
+          LineMaster 2.4GHz
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Toggle navigation">&#9776;</button>
+        <div class="nav-links">
+          <a href="../">Home</a>
+          <div class="nav-dropdown">
+            <a href="../#products">Products &#9662;</a>
+            <div class="nav-dropdown-menu">
+              <a href="../Products/typhoon.html">Typhoon Handle</a>
+              <a href="../Products/zephyr.html">Zephyr Handle</a>
+              <a href="../Products/lm-x5.html">LM-X5 Receiver</a>
+              <a href="../Products/lm-t1.html">LM-T1 Timer</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <a href="../#projects" class="active">Projects &#9662;</a>
+            <div class="nav-dropdown-menu">
+              <a href="pathfinder.html" class="active">Pathfinder</a>
+              <a href="companion.html">Companion Tool</a>
+            </div>
+          </div>
+          <a href="../#store">Store</a>
+          <a href="../#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="project-hero">
+      <div class="project-hero-inner">
+        <div class="project-hero-tag">Incoming Project</div>
+        <h1 class="project-hero-title">Pathfinder</h1>
+        <p class="project-hero-subtitle">
+          Real-time 3D visualization tool for flight data. Built with the Godot Engine,
+          Pathfinder brings a new dimension to understanding and analyzing control-line flight.
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══ CONTENT ═══ -->
+    <div class="product-section">
+      <h2>About this Project</h2>
+      <div class="info-card">
+        <p>
+          Pathfinder is an experimental visualization tool that renders flight data in a
+          3D environment. It runs directly in the browser as a Godot 4 web export (WebAssembly),
+          requiring no installation.
+        </p>
+        <p>
+          This project is currently under active development. Features, interface and
+          capabilities may change significantly as it evolves.
+        </p>
+      </div>
+    </div>
+
+    <div class="product-section">
+      <div class="try-banner">
+        <div>
+          <strong>Try the current build</strong>
+          <span>Experimental — runs in Chrome/Edge on desktop</span>
+        </div>
+        <a href="../Products/Tracker3D/index.html" class="tool-link primary">Launch Pathfinder</a>
+      </div>
+    </div>
+
+    <footer>
+      <span>&copy; 2025 LineMaster 2.4GHz · Where innovation meets tradition.</span>
+      <div class="links">
+        <a href="../">Home</a>
+        <a href="../#products">Products</a>
+        <a href="../#store">Store</a>
+        <a href="../#contact">Contact</a>
+      </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">&#8593;</button>
+
+    <script>
+      document.querySelector(".nav-toggle")?.addEventListener("click", () => { document.querySelector(".nav-links")?.classList.toggle("open"); });
+      if (window.innerWidth <= 768) { document.querySelectorAll(".nav-dropdown > a").forEach(a => { a.addEventListener("click", e => { e.preventDefault(); a.parentElement.classList.toggle("open"); }); }); }
+      const b = document.getElementById("backToTop");
+      window.addEventListener("scroll", () => { b?.classList.toggle("is-visible", (window.scrollY || 0) > 300); }, { passive: true });
+      b?.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: "smooth" }); });
+    </script>
+  </body>
+</html>

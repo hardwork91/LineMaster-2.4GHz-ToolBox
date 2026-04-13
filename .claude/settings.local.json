@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.etsy.com)",
+      "Bash(curl -s -L -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36\" \"https://www.etsy.com/listing/4313133678\")",
+      "WebSearch",
+      "WebFetch(domain:stunthanger.com)",
+      "WebFetch(domain:forum.flitetest.com)",
+      "WebFetch(domain:www.linemaster24ghz.com)",
+      "WebFetch(domain:linemasters-organization.gitbook.io)",
+      "Bash(grep -rn \"products/\" Products/*.html projects/*.html index.html)",
+      "Bash(grep -rn 'href=\"\\\\.\\\\./products/' Products/*.html projects/*.html)",
+      "Bash(grep -rn 'href=\"./products/' index.html)",
+      "Bash(cp \"c:/Users/CarlosArturoDiazFigu/Documents/LineMaster/Productos/Tracker/Diseno/Logo/Text.jpg\" \"C:/Users/CarlosArturoDiazFigu/Documents/LineMaster/software/LineMaster/LineMaster-2.4GHz-ToolBox/assets/img/products/pathfinder-logo.jpg\")",
+      "Bash(cp \"c:/Users/CarlosArturoDiazFigu/Documents/LineMaster/Productos/Tracker/Diseno/Logo/Pathfinder.png\" \"C:/Users/CarlosArturoDiazFigu/Documents/LineMaster/software/LineMaster/LineMaster-2.4GHz-ToolBox/assets/img/products/pathfinder.png\")"
+    ]
+  }
+}
