@@ -12,7 +12,12 @@
       "Bash(grep -rn 'href=\"\\\\.\\\\./products/' Products/*.html projects/*.html)",
       "Bash(grep -rn 'href=\"./products/' index.html)",
       "Bash(cp \"c:/Users/CarlosArturoDiazFigu/Documents/LineMaster/Productos/Tracker/Diseno/Logo/Text.jpg\" \"C:/Users/CarlosArturoDiazFigu/Documents/LineMaster/software/LineMaster/LineMaster-2.4GHz-ToolBox/assets/img/products/pathfinder-logo.jpg\")",
-      "Bash(cp \"c:/Users/CarlosArturoDiazFigu/Documents/LineMaster/Productos/Tracker/Diseno/Logo/Pathfinder.png\" \"C:/Users/CarlosArturoDiazFigu/Documents/LineMaster/software/LineMaster/LineMaster-2.4GHz-ToolBox/assets/img/products/pathfinder.png\")"
+      "Bash(cp \"c:/Users/CarlosArturoDiazFigu/Documents/LineMaster/Productos/Tracker/Diseno/Logo/pathfinder.jpg\" \"C:/Users/CarlosArturoDiazFigu/Documents/LineMaster/software/LineMaster/LineMaster-2.4GHz-ToolBox/assets/img/products/pathfinder.jpg\")",
+      "Bash(curl:*)",
+      "Bash(grep -oP 'https://i\\\\.etsystatic\\\\.com[^\"'\\\\''\\\\\\\\s]*')",
+      "Bash(grep -oP 'https://i\\\\.etsystatic\\\\.com[^\"'\\\\''\\\\\\\\s<>]*\\\\.\\(jpg|png|webp\\)')",
+      "Bash(grep -oP 'https://i\\\\.etsystatic\\\\.com[^\"'\\\\''\\\\\\\\s<>]+')",
+      "Bash(grep -oP 'https://i\\\\.etsystatic\\\\.com[^\"'\\\\''\\\\\\\\s<>]+il_fullxfull[^\"'\\\\''\\\\\\\\s<>]+')"
     ]
   }
 }

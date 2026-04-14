@@ -284,6 +284,123 @@ main {
   cursor: not-allowed;
 }
 
+/* ── Product gallery carousel ────────────────────── */
+.gallery {
+  position: relative;
+  border-radius: var(--lm-radius-lg);
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.gallery[data-empty] {
+  display: none;
+}
+
+.gallery-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.gallery-track {
+  display: flex;
+  height: 100%;
+  transition: transform 380ms ease;
+  will-change: transform;
+}
+
+.gallery-slide {
+  min-width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.gallery-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--lm-radius-pill);
+  border: none;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition: background var(--lm-ease);
+  backdrop-filter: blur(4px);
+}
+
+.gallery-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.gallery-btn.prev { left: 10px; }
+.gallery-btn.next { right: 10px; }
+
+.gallery-counter {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  font-size: 0.75rem;
+  color: #ffffffcc;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 3px 10px;
+  border-radius: var(--lm-radius-pill);
+  z-index: 3;
+  backdrop-filter: blur(4px);
+}
+
+.gallery-thumbs {
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px;
+  overflow-x: auto;
+  background: #111;
+  scrollbar-width: thin;
+  scrollbar-color: #444 transparent;
+}
+
+.gallery-thumb {
+  flex-shrink: 0;
+  width: 64px;
+  height: 44px;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  opacity: 0.5;
+  transition: opacity var(--lm-ease), border-color var(--lm-ease);
+}
+
+.gallery-thumb.active {
+  border-color: var(--lm-primary);
+  opacity: 1;
+}
+
+.gallery-thumb:hover {
+  opacity: 0.85;
+}
+
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* ── Section primitives ──────────────────────────── */
 .section-title {
   font-size: 1.4rem;

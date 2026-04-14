@@ -190,6 +190,12 @@
       </div>
     </div>
 
+    <!-- ═══ GALLERY ═══ -->
+    <div class="product-section">
+      <h2>Gallery</h2>
+      <div id="gallery" class="gallery" data-folder="../assets/img/products/lm-x5/" tabindex="0"></div>
+    </div>
+
     <!-- ═══ SPECS ═══ -->
     <div class="product-section">
       <h2>Specifications</h2>
@@ -243,6 +249,7 @@
 
     <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">&#8593;</button>
 
+    <script src="../js/gallery.js"></script>
     <script>
       document.querySelector(".nav-toggle")?.addEventListener("click", () => { document.querySelector(".nav-links")?.classList.toggle("open"); });
       if (window.innerWidth <= 768) { document.querySelectorAll(".nav-dropdown > a").forEach(a => { a.addEventListener("click", e => { e.preventDefault(); a.parentElement.classList.toggle("open"); }); }); }
