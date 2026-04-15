@@ -17,7 +17,12 @@
       "Bash(grep -oP 'https://i\\\\.etsystatic\\\\.com[^\"'\\\\''\\\\\\\\s]*')",
       "Bash(grep -oP 'https://i\\\\.etsystatic\\\\.com[^\"'\\\\''\\\\\\\\s<>]*\\\\.\\(jpg|png|webp\\)')",
       "Bash(grep -oP 'https://i\\\\.etsystatic\\\\.com[^\"'\\\\''\\\\\\\\s<>]+')",
-      "Bash(grep -oP 'https://i\\\\.etsystatic\\\\.com[^\"'\\\\''\\\\\\\\s<>]+il_fullxfull[^\"'\\\\''\\\\\\\\s<>]+')"
+      "Bash(grep -oP 'https://i\\\\.etsystatic\\\\.com[^\"'\\\\''\\\\\\\\s<>]+il_fullxfull[^\"'\\\\''\\\\\\\\s<>]+')",
+      "Bash(ls -la .nojekyll)",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(curl -s \"https://www.linemaster24ghz.com/Products/typhoon.html\")",
+      "Read(//tmp/**)",
+      "Bash(python3 -m http.server 8001)"
     ]
   }
 }

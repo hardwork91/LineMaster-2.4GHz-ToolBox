@@ -299,19 +299,35 @@ main {
 .gallery-viewport {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
   overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
+/* Fallback for browsers without aspect-ratio support */
+@supports not (aspect-ratio: 1) {
+  .gallery-viewport {
+    height: 0;
+    padding-bottom: 62.5%;
+  }
+  .gallery-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
 }
 
 .gallery-track {
   display: flex;
+  flex-wrap: nowrap;
   height: 100%;
   transition: transform 380ms ease;
   will-change: transform;
 }
 
 .gallery-slide {
-  min-width: 100%;
+  flex: 0 0 100%;
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -378,6 +394,8 @@ main {
   flex-shrink: 0;
   width: 64px;
   height: 44px;
+  padding: 0;
+  background: none;
   border-radius: 6px;
   overflow: hidden;
   cursor: pointer;
