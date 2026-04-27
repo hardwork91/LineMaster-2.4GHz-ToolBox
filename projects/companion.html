@@ -5,108 +5,67 @@
     <title>Companion Tool | LineMaster 2.4GHz</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="LineMaster 2.4GHz Companion – Browser-based tool to emulate your handle, edit profiles and sync SD card configuration." />
-
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/ico/apple-icon-180x180.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/ico/favicon-32x32.png" />
-    <meta name="theme-color" content="#ffffff" />
-
+    <meta name="theme-color" content="#14141A" />
     <link rel="stylesheet" href="../css/variables.css" />
     <link rel="stylesheet" href="../css/global.css" />
-
     <style>
       .project-hero {
-        background: linear-gradient(135deg, #1a1a2e, #16213e);
-        color: #fff;
-        padding: 48px 16px 56px;
-      }
-      .project-hero-inner {
-        max-width: var(--lm-max-width);
-        margin: 0 auto;
+        background: var(--lm-black);
+        border-bottom: 1px solid var(--lm-steel);
+        padding: 80px var(--lm-gutter) 72px;
         text-align: center;
       }
-      .project-hero-tag {
+      .project-hero__inner { max-width: 720px; margin: 0 auto; }
+      .project-hero__tag {
         display: inline-block;
-        font-size: 0.75rem;
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-2xs);
+        letter-spacing: 0.18em;
         text-transform: uppercase;
-        letter-spacing: 0.12em;
-        padding: 4px 12px;
-        border-radius: var(--lm-radius-pill);
-        background: rgba(217, 119, 6, 0.2);
-        color: #fbbf24;
-        margin-bottom: 14px;
-      }
-      .project-hero-title { font-size: 2.4rem; margin: 0 0 12px; }
-      .project-hero-subtitle {
-        font-size: 1.05rem;
-        opacity: 0.85;
-        line-height: 1.6;
-        max-width: 620px;
-        margin: 0 auto 24px;
-      }
-
-      .product-section { max-width: var(--lm-max-width); margin: 32px auto; padding: 0 16px; }
-      .product-section h2 { font-size: 1.3rem; margin-bottom: 14px; }
-
-      .info-card {
-        background: var(--lm-card-bg);
-        border: 1px solid var(--lm-border);
-        border-radius: var(--lm-radius-md);
-        padding: 22px;
-        margin-bottom: 24px;
-        font-size: 0.95rem;
-        color: var(--lm-text-muted);
-        line-height: 1.6;
-      }
-
-      .features-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 14px;
-        margin-bottom: 32px;
-      }
-      .feature-card {
-        background: var(--lm-card-bg);
-        border: 1px solid var(--lm-border);
-        border-radius: var(--lm-radius-md);
-        padding: 16px;
-      }
-      .feature-card strong { display: block; margin-bottom: 4px; }
-      .feature-card p { margin: 0; font-size: 0.9rem; color: var(--lm-text-muted); }
-
-      .try-banner {
-        background: var(--lm-dark-section-bg);
-        color: var(--lm-text-on-dark);
-        border-radius: var(--lm-radius-md);
-        padding: 22px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 14px;
-        margin-bottom: 24px;
-      }
-      .try-banner strong { display: block; margin-bottom: 4px; }
-      .try-banner span { font-size: 0.85rem; opacity: 0.8; }
-
-      .compat-note {
-        background: var(--lm-amber-bg);
-        border: 1px solid #fde68a;
-        border-radius: var(--lm-radius-sm);
-        padding: 12px 16px;
-        font-size: 0.85rem;
         color: var(--lm-amber);
-        margin-bottom: 24px;
+        border: 1px solid var(--lm-amber);
+        border-radius: var(--lm-radius-pill);
+        padding: 4px 12px;
+        margin-bottom: var(--lm-space-5);
+      }
+      .project-hero__h {
+        font-family: var(--lm-font-display);
+        font-weight: 900;
+        font-size: clamp(56px, 9vw, 112px);
+        text-transform: uppercase;
+        line-height: 0.88;
+        letter-spacing: -0.015em;
+        color: var(--lm-paper);
+        margin: 0 0 var(--lm-space-5);
+      }
+      .project-hero__sub {
+        font-size: var(--lm-text-lg);
+        color: var(--lm-platinum);
+        line-height: 1.5;
+        margin: 0 auto;
+        max-width: 56ch;
+      }
+      .compat-note {
+        background: var(--lm-graphite);
+        border: 1px solid var(--lm-steel);
+        border-left: 3px solid var(--lm-amber);
+        padding: var(--lm-space-4) var(--lm-space-5);
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-xs);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--lm-amber);
+        margin-bottom: var(--lm-space-5);
       }
     </style>
   </head>
 
-  <body>
+  <body class="lm-dark">
     <header class="header">
       <nav class="nav">
-        <a href="../" class="logo">
-          <div class="logo-mark"><img src="../assets/img/logo-small.png" alt="LineMaster logo" /></div>
-          LineMaster 2.4GHz
-        </a>
+        <a href="../" class="logo"><img src="../assets/img/logo-lockup-white.png" alt="LineMaster 2.4GHz" /></a>
         <button class="nav-toggle" type="button" aria-label="Toggle navigation">&#9776;</button>
         <div class="nav-links">
           <a href="../">Home</a>
@@ -124,7 +83,7 @@
             <div class="nav-dropdown-menu">
               <a href="pathfinder.html">Pathfinder</a>
               <a href="companion.html" class="active">Companion Tool</a>
-              <a href="scheme-generator/">Scheme Generator</a>
+              <a href="scheme-generator/" target="_blank" rel="noopener">Scheme Generator</a>
             </div>
           </div>
           <a href="../#store">Store</a>
@@ -133,54 +92,30 @@
       </nav>
     </header>
 
-    <!-- ═══ HERO ═══ -->
     <section class="project-hero">
-      <div class="project-hero-inner">
-        <div class="project-hero-tag">Beta</div>
-        <h1 class="project-hero-title">Companion Tool</h1>
-        <p class="project-hero-subtitle">
-          Browser-based utility to emulate your LineMaster handle on screen, edit model
-          profiles and sync SD card configuration for Typhoon and Zephyr handles.
-        </p>
+      <div class="project-hero__inner">
+        <div class="project-hero__tag">Beta</div>
+        <h1 class="project-hero__h">Companion<br>Tool</h1>
+        <p class="project-hero__sub">Browser-based utility to emulate your LineMaster handle on screen, edit model profiles and sync SD card configuration for Typhoon and Zephyr handles.</p>
       </div>
     </section>
 
-    <!-- ═══ CONTENT ═══ -->
     <div class="product-section">
-      <div class="compat-note">
-        <strong>Browser compatibility:</strong> Requires Chrome or Edge on desktop (Web Serial API).
-        Not available on mobile browsers or Safari.
-      </div>
+      <div class="compat-note">Browser compatibility: Chrome or Edge on desktop only (Web Serial API). Not available on mobile or Safari.</div>
 
       <h2>About this Project</h2>
       <div class="info-card">
-        <p>
-          The Companion Tool connects to your LineMaster handle via USB using the Web Serial API.
-          It provides a visual interface to view and edit model profiles, configure settings
-          and manage SD card contents — all without installing any software.
-        </p>
-        <p>
-          This tool is currently in beta. Features are being actively developed and refined
-          based on pilot feedback.
-        </p>
+        <p>The Companion Tool connects to your LineMaster handle via USB using the Web Serial API. It provides a visual interface to view and edit model profiles, configure settings and manage SD card contents — all without installing any software.</p>
+        <p>This tool is currently in beta. Features are being actively developed and refined based on pilot feedback.</p>
       </div>
     </div>
 
     <div class="product-section">
       <h2>Planned Features</h2>
       <div class="features-grid">
-        <div class="feature-card">
-          <strong>Handle Emulation</strong>
-          <p>See your handle's display and controls rendered on screen in real time.</p>
-        </div>
-        <div class="feature-card">
-          <strong>Model Profile Editor</strong>
-          <p>Create, edit and organize model profiles with a visual interface.</p>
-        </div>
-        <div class="feature-card">
-          <strong>SD Card Sync</strong>
-          <p>Read and write configuration files on your handle's SD card directly from the browser.</p>
-        </div>
+        <div class="feature-card"><strong>Handle Emulation</strong><p>See your handle's display and controls rendered on screen in real time.</p></div>
+        <div class="feature-card"><strong>Profile Editor</strong><p>Create, edit and organize model profiles with a visual interface.</p></div>
+        <div class="feature-card"><strong>SD Card Sync</strong><p>Read and write configuration files on your handle's SD card directly from the browser.</p></div>
       </div>
     </div>
 
@@ -190,12 +125,12 @@
           <strong>Try the beta</strong>
           <span>Connect your handle via USB-C — Chrome or Edge on desktop only</span>
         </div>
-        <a href="../lm-companion/" class="tool-link primary">Launch Companion</a>
+        <a href="../lm-companion/" class="lm-btn lm-btn--primary">Launch Companion <span class="lm-btn__arrow">→</span></a>
       </div>
     </div>
 
     <footer>
-      <span>&copy; 2025 LineMaster 2.4GHz · Where innovation meets tradition.</span>
+      <span>© 2025 LineMaster 2.4GHz · Miami, FL</span>
       <div class="links">
         <a href="../">Home</a>
         <a href="../#products">Products</a>

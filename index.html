@@ -2,159 +2,126 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>LineMaster 2.4GHz – Official Portal</title>
+    <title>LineMaster 2.4GHz — Control-Line Radio System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="LineMaster 2.4GHz – A modern control system designed specifically for control-line flying. Handles, receivers, timers and tools."
-    />
+    <meta name="description" content="LineMaster 2.4GHz — Purpose-built control system for control-line flying. Handles, receivers, timers and browser-based tools." />
 
-    <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/ico/apple-icon-180x180.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/ico/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/ico/favicon-16x16.png" />
     <link rel="manifest" href="./assets/ico/manifest.json" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#14141A" />
 
-    <!-- Shared styles -->
     <link rel="stylesheet" href="./css/variables.css" />
     <link rel="stylesheet" href="./css/global.css" />
 
     <style>
-      /* ── Hero (home only) ──────────────────────────── */
-      .hero {
-        position: relative;
-        color: #ffffff;
-        padding: 20px 24px 60px;
-        border-radius: 0 0 var(--lm-radius-lg) var(--lm-radius-lg);
+      /* ── Hero ─────────────────────────────────── */
+      .site-hero {
+        background: var(--lm-black) url(./assets/img/hero-handle.jpeg) center / cover no-repeat;
+        border-bottom: 1px solid var(--lm-steel);
         overflow: hidden;
-        background: url("./assets/img/hero-handle.jpeg") top / cover no-repeat;
+        position: relative;
       }
 
-      .hero::before {
+      .site-hero::before {
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(135deg, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.4));
+        background: linear-gradient(to right, rgba(10,10,11,0.93) 40%, rgba(10,10,11,0.45) 100%);
+        z-index: 1;
       }
 
-      .hero-inner {
-        position: relative;
-        z-index: 1;
+      .site-hero__inner {
         max-width: var(--lm-max-width);
         margin: 0 auto;
-        padding: 0 16px;
+        padding: 96px var(--lm-gutter) 96px;
+        position: relative;
+        z-index: 2;
       }
 
-      .hero-content {
-        display: grid;
-        grid-template-columns: minmax(0, 6fr) minmax(0, 1fr);
-        gap: 40px;
-        align-items: center;
+      .site-hero__copy {
+        max-width: 620px;
       }
 
-      .hero-tag {
-        font-size: 0.85rem;
+      .site-hero__eyebrow {
+        color: var(--lm-red);
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-2xs);
+        letter-spacing: 0.22em;
         text-transform: uppercase;
-        letter-spacing: 0.15em;
-        opacity: 0.8;
-      }
-
-      .hero-title {
-        font-size: 3rem;
-        line-height: 1.1;
-        margin-bottom: 6px;
-      }
-
-      .hero-slogan {
-        font-size: 1.5rem;
-        font-weight: 500;
-        opacity: 0.95;
-        margin-bottom: 12px;
-      }
-
-      .hero-subtitle {
-        font-size: 0.98rem;
-        max-width: 460px;
-        opacity: 0.9;
-        margin-bottom: 20px;
-      }
-
-      .hero-actions {
         display: flex;
-        flex-wrap: wrap;
+        align-items: center;
         gap: 10px;
-        margin-bottom: 18px;
+        margin-bottom: 24px;
       }
 
-      .hero-meta {
-        display: flex;
-        gap: 16px;
-        font-size: 0.85rem;
-        opacity: 0.85;
+      .site-hero__eyebrow::before {
+        content: "";
+        width: 32px;
+        height: 1px;
+        background: var(--lm-red);
+        flex-shrink: 0;
       }
 
-      .hero-meta-item {
-        display: flex;
-        align-items: center;
-        gap: 6px;
+      .site-hero__h {
+        font-family: var(--lm-font-display);
+        font-weight: 900;
+        text-transform: uppercase;
+        font-size: clamp(64px, 9vw, 132px);
+        line-height: 0.86;
+        letter-spacing: -0.015em;
+        color: var(--lm-paper);
+        margin: 0 0 28px;
       }
 
-      /* ── News strip ────────────────────────────────── */
-      .news-strip {
-        background: #ffffff;
-        border-radius: var(--lm-radius-md);
-        border: 1px solid var(--lm-border);
-        padding: 10px 14px;
-        font-size: 0.85rem;
-        color: var(--lm-text-muted);
+      .site-hero__h em { font-style: normal; color: var(--lm-red); }
+
+      .site-hero__subtitle {
+        font-family: var(--lm-font-body);
+        font-size: var(--lm-text-xl);
+        font-weight: 700;
+        color: var(--lm-paper);
+        margin: 0 0 12px;
+        line-height: 1.2;
+      }
+
+      .site-hero__lede {
+        font-size: 18px;
+        line-height: 1.5;
+        color: var(--lm-platinum);
+        max-width: 420px;
+        margin-bottom: 36px;
+      }
+
+      .site-hero__cta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 20px; }
+
+      .site-hero__badges {
         display: flex;
+        gap: 20px;
         flex-wrap: wrap;
-        gap: 12px;
-        align-items: center;
-        margin-bottom: 28px;
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-2xs);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--lm-platinum);
+        opacity: 0.75;
       }
 
-      .news-label {
-        font-weight: 600;
-        color: var(--lm-text-main);
-      }
-
-      .news-dot {
-        width: 4px;
-        height: 4px;
-        border-radius: 50%;
-        background: #9ca3af;
-      }
-
-      /* ── Responsive hero ───────────────────────────── */
-      @media (max-width: 900px) {
-        .hero-content {
-          grid-template-columns: minmax(0, 1fr);
-          text-align: center;
-        }
-        .hero-subtitle, .hero-meta { margin-left: auto; margin-right: auto; }
-        .hero-actions { justify-content: center; }
-      }
-
-      @media (max-width: 640px) {
-        .hero {
-          border-radius: 0 0 14px 14px;
-          padding: 16px 14px 40px;
-        }
+      @media (max-width: 800px) {
+        .site-hero__inner { padding: 64px var(--lm-gutter); }
+        .site-hero__h { font-size: clamp(52px, 14vw, 80px); }
+        .site-hero::before { background: rgba(10,10,11,0.88); }
       }
     </style>
   </head>
 
-  <body>
+  <body class="lm-dark">
     <!-- ═══ HEADER ═══ -->
     <header class="header">
       <nav class="nav">
         <a href="./" class="logo">
-          <div class="logo-mark">
-            <img src="./assets/img/logo-small.png" alt="LineMaster logo" />
-          </div>
-          LineMaster 2.4GHz
+          <img src="./assets/img/logo-lockup-white.png" alt="LineMaster 2.4GHz" />
         </a>
 
         <button class="nav-toggle" type="button" aria-label="Toggle navigation">&#9776;</button>
@@ -185,329 +152,213 @@
     </header>
 
     <!-- ═══ HERO ═══ -->
-    <section class="hero">
-      <div class="hero-inner">
-        <div class="hero-content">
-          <div>
-            <div class="hero-tag">Control-Line 2.4 GHz System</div>
-            <h1 class="hero-title">LineMaster 2.4GHz</h1>
-            <p class="hero-slogan">Where innovation meets tradition</p>
-            <p class="hero-subtitle">
-              A modern control system designed specifically for control-line
-              flying, combining the ergonomics of classic handles with modern
-              2.4 GHz radio technology.
-            </p>
-            <div class="hero-actions">
-              <a href="#products" class="btn-primary">Explore products</a>
-              <a
-                href="https://www.etsy.com/shop/linemaster24ghz"
-                target="_blank"
-                rel="noopener"
-                class="btn-etsy"
-              >Shop on Etsy</a>
-              <a
-                href="https://www.facebook.com/profile.php?id=61560480371015"
-                target="_blank"
-                rel="noopener"
-                class="btn-facebook"
-              >Facebook</a>
-            </div>
-            <div class="hero-meta">
-              <span class="hero-meta-item">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
-                Ready to fly
-              </span>
-              <span class="hero-meta-item">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                Free firmware updates
-              </span>
-            </div>
+    <section class="site-hero">
+      <div class="site-hero__inner">
+        <div class="site-hero__copy">
+          <div class="site-hero__eyebrow">Control-Line 2.4 GHz System</div>
+          <h1 class="site-hero__h">LineMaster<br><em>2.4GHz</em></h1>
+          <p class="site-hero__subtitle">Where innovation meets tradition</p>
+          <p class="site-hero__lede">A modern control system designed specifically for control-line flying, combining the ergonomics of classic handles with modern 2.4 GHz radio technology.</p>
+          <div class="site-hero__cta">
+            <a href="#products" class="lm-btn lm-btn--primary lm-btn--lg">Explore products <span class="lm-btn__arrow">→</span></a>
+            <a href="https://www.etsy.com/shop/linemaster24ghz" target="_blank" rel="noopener" class="lm-btn lm-btn--ghost-light" style="height:54px;font-size:14px;padding:0 22px">Shop on Etsy</a>
+            <a href="https://www.facebook.com/profile.php?id=61560480371015" target="_blank" rel="noopener" class="lm-btn lm-btn--ghost-light" style="height:54px;font-size:14px;padding:0 22px">Facebook</a>
           </div>
-          <div></div>
+          <div class="site-hero__badges">
+            <span>⊙ Ready to fly</span>
+            <span>⊙ Free firmware updates</span>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ═══ MAIN ═══ -->
     <main>
-      <!-- News -->
-      <div class="news-strip">
-        <span class="news-label">Latest</span>
-        <span class="news-dot"></span>
-        <span>LM-T1 Timer now available on Etsy</span>
-        <span class="news-dot"></span>
-        <span>LM-X5 firmware v1.1.5 released</span>
-      </div>
-
       <!-- ── Products ── -->
-      <section id="products">
-        <h2 class="section-title">Products</h2>
-        <p class="section-subtitle">
-          Purpose-built gear for control-line pilots. Click on a product to learn more.
-        </p>
+      <section id="products" class="site-section">
+        <div class="section-label">Products</div>
+        <h2 class="section-title">Purpose-built<br>gear for C/L pilots</h2>
+        <p class="section-subtitle">Click on a product to learn more, view specs and access firmware tools.</p>
 
         <div class="products-grid">
-          <!-- Typhoon -->
-          <a href="./Products/typhoon.html" class="product-card" style="color:inherit">
-            <div class="product-media">
+          <a href="./Products/typhoon.html" class="pcard" style="color:inherit;text-decoration:none">
+            <div class="pcard__media">
               <img src="./assets/img/products/typhoon.jpg" alt="Typhoon Handle" loading="lazy" />
             </div>
-            <div class="product-body">
-              <div class="tag">Handle · 5CH</div>
-              <div class="product-title">Typhoon</div>
-              <p class="product-desc">
-                5-channel handle for Carrier &amp; Scale pilots. Proportional throttle,
-                movement generators, OLED display, integrated timer and unlimited model storage.
-              </p>
-              <div class="product-actions">
-                <span class="product-link">Learn more</span>
-              </div>
+            <div class="pcard__body">
+              <div class="pcard__sku">LM-Typhoon · Handle · 5CH</div>
+              <h3 class="pcard__name">Typhoon</h3>
+              <div class="pcard__sub">5-channel handle for Carrier &amp; Scale pilots. Proportional throttle, movement generators, OLED display, integrated timer and unlimited model storage.</div>
+              <span class="lm-btn lm-btn--sm lm-btn--ghost-light" style="align-self:flex-start;margin-top:auto">View →</span>
             </div>
           </a>
 
-          <!-- Zephyr -->
-          <a href="./Products/zephyr.html" class="product-card" style="color:inherit">
-            <div class="product-media">
+          <a href="./Products/zephyr.html" class="pcard" style="color:inherit;text-decoration:none">
+            <div class="pcard__media">
               <img src="./assets/img/products/zephyr.jpg" alt="Zephyr Handle" loading="lazy" />
             </div>
-            <div class="product-body">
-              <div class="tag">Handle · Sport</div>
-              <div class="product-title">Zephyr</div>
-              <p class="product-desc">
-                Single-channel sport handle for simple, everyday flying with modern
-                2.4GHz reliability. Lightweight, comfortable and straight to the point.
-              </p>
-              <div class="product-actions">
-                <span class="product-link">Learn more</span>
-              </div>
+            <div class="pcard__body">
+              <div class="pcard__sku">LM-Zephyr · Handle · Sport</div>
+              <h3 class="pcard__name">Zephyr</h3>
+              <div class="pcard__sub">Single-channel sport handle for simple, everyday flying with modern 2.4 GHz reliability. Lightweight, comfortable and straight to the point.</div>
+              <span class="lm-btn lm-btn--sm lm-btn--ghost-light" style="align-self:flex-start;margin-top:auto">View →</span>
             </div>
           </a>
 
-          <!-- LM-X5 -->
-          <a href="./Products/lm-x5.html" class="product-card" style="color:inherit">
-            <div class="product-media">
+          <a href="./Products/lm-x5.html" class="pcard" style="color:inherit;text-decoration:none">
+            <div class="pcard__media">
               <img src="./assets/img/products/lm-x5.jpg" alt="LM-X5 Receiver" loading="lazy" />
             </div>
-            <div class="product-body">
-              <div class="tag">Receiver · 5CH</div>
-              <div class="product-title">LM-X5 Receiver</div>
-              <p class="product-desc">
-                Compact 5-channel receiver under 15g. RGB LED status, bind button,
-                manual throttle input, USB-C firmware updates. Electric and combustion compatible.
-              </p>
-              <div class="product-actions">
-                <span class="product-link">Learn more</span>
-              </div>
+            <div class="pcard__body">
+              <div class="pcard__sku">LM-X5 · Receiver · 5CH</div>
+              <h3 class="pcard__name">X5 Receiver</h3>
+              <div class="pcard__sub">Compact 5-channel receiver under 15 g. RGB LED status, bind button, manual throttle input, USB-C firmware updates. Electric and combustion compatible.</div>
+              <span class="lm-btn lm-btn--sm lm-btn--ghost-light" style="align-self:flex-start;margin-top:auto">View →</span>
             </div>
           </a>
 
-          <!-- LM-T1 -->
-          <a href="./Products/lm-t1.html" class="product-card" style="color:inherit">
-            <div class="product-media">
+          <a href="./Products/lm-t1.html" class="pcard" style="color:inherit;text-decoration:none">
+            <div class="pcard__media">
               <img src="./assets/img/products/lm-t1.jpg" alt="LM-T1 Timer" loading="lazy" />
             </div>
-            <div class="product-body">
-              <div class="tag amber">Timer · New</div>
-              <div class="product-title">LM-T1 Timer</div>
-              <p class="product-desc">
-                Compact timer under 15g with OLED display and thumb switch. Programmable
-                motor start delay, acceleration curve, max RPM and flight time.
-              </p>
-              <div class="product-actions">
-                <span class="product-link">Learn more</span>
-              </div>
+            <div class="pcard__body">
+              <div class="pcard__sku">LM-T1 · Timer · Electric</div>
+              <h3 class="pcard__name">T1 Timer</h3>
+              <div class="pcard__sub">Compact timer under 15 g with OLED display and thumb switch. Programmable motor start delay, acceleration curve, max RPM and total flight time.</div>
+              <span class="lm-btn lm-btn--sm lm-btn--ghost-light" style="align-self:flex-start;margin-top:auto">View →</span>
             </div>
           </a>
         </div>
       </section>
 
       <!-- ── Incoming Projects ── -->
-      <section id="projects" style="margin-top: 40px">
-        <h2 class="section-title">Incoming Projects</h2>
-        <p class="section-subtitle">
-          Tools and experiences under development. Stay tuned for updates.
-        </p>
+      <section id="projects" class="site-section">
+        <div class="section-label">Projects</div>
+        <h2 class="section-title">Tools under<br>development</h2>
+        <p class="section-subtitle">Browser-based experiences and visualization tools built for the C/L community.</p>
 
         <div class="products-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))">
-          <a href="./projects/pathfinder.html" class="product-card" style="color:inherit">
-            <div class="product-media" style="background:#1a1a2e">
+          <a href="./projects/pathfinder.html" class="pcard" style="color:inherit;text-decoration:none">
+            <div class="pcard__media" style="background:#0a0a14">
               <img src="./assets/img/products/pathfinder.jpg" alt="Pathfinder" loading="lazy" />
             </div>
-            <div class="product-body">
-              <div class="tag amber">In development</div>
-              <div class="product-title">Pathfinder</div>
-              <p class="product-desc">
-                3D visualization platform for flight data analysis.
-              </p>
-              <div class="product-actions">
-                <span class="product-link">Learn more</span>
-              </div>
+            <div class="pcard__body">
+              <div class="pcard__sku" style="color:var(--lm-amber)">In development</div>
+              <h3 class="pcard__name">Pathfinder</h3>
+              <div class="pcard__sub">Advanced 3D flight data visualization. Powered by Godot Engine — runs in the browser, no install required.</div>
+              <span class="lm-btn lm-btn--sm lm-btn--ghost-light" style="align-self:flex-start;margin-top:auto">Learn more →</span>
             </div>
           </a>
 
-          <a href="./projects/companion.html" class="product-card" style="color:inherit">
-            <div class="product-media" style="background:#1a1a2e">
+          <a href="./projects/companion.html" class="pcard" style="color:inherit;text-decoration:none">
+            <div class="pcard__media" style="background:#0a0a14">
               <img src="./assets/img/products/companion.jpg" alt="Companion Tool" loading="lazy" />
             </div>
-            <div class="product-body">
-              <div class="tag amber">Beta</div>
-              <div class="product-title">Companion Tool</div>
-              <p class="product-desc">
-                Browser-based tool to emulate your handle on screen, edit model profiles
-                and sync SD card configuration.
-              </p>
-              <div class="product-actions">
-                <span class="product-link">Learn more</span>
-              </div>
+            <div class="pcard__body">
+              <div class="pcard__sku" style="color:var(--lm-amber)">Beta</div>
+              <h3 class="pcard__name">Companion</h3>
+              <div class="pcard__sub">Browser-based tool to emulate your handle on screen, edit model profiles and sync SD card configuration.</div>
+              <span class="lm-btn lm-btn--sm lm-btn--ghost-light" style="align-self:flex-start;margin-top:auto">Learn more →</span>
             </div>
           </a>
 
-          <a href="./projects/scheme-generator/" target="_blank" rel="noopener noreferrer" class="product-card" style="color:inherit">
-            <div class="product-media" style="background:#1a1a2e">
+          <a href="./projects/scheme-generator/" target="_blank" rel="noopener noreferrer" class="pcard" style="color:inherit;text-decoration:none">
+            <div class="pcard__media" style="background:#0a0a14">
               <img src="./assets/img/products/scheme-generator.jpg" alt="Scheme Generator" loading="lazy" />
             </div>
-            <div class="product-body">
-              <div class="tag amber">Beta</div>
-              <div class="product-title">Scheme Generator</div>
-              <p class="product-desc">
-                Procedural paint scheme generator for model aircraft. Design wing, 
-                fuselage, and tail patterns in 3D and preview them from multiple
-                angles.
-              </p>
-              <div class="product-actions">
-                <span class="product-link">Launch tool ↗</span>
-              </div>
+            <div class="pcard__body">
+              <div class="pcard__sku" style="color:var(--lm-amber)">Beta</div>
+              <h3 class="pcard__name">Scheme<br>Generator</h3>
+              <div class="pcard__sub">Procedural paint scheme generator for model aircraft. Design wing, fuselage and tail patterns in 3D.</div>
+              <span class="lm-btn lm-btn--sm lm-btn--ghost-light" style="align-self:flex-start;margin-top:auto">Launch ↗</span>
             </div>
           </a>
         </div>
       </section>
 
       <!-- ── About ── -->
-      <section id="about" class="about-section" style="margin-top: 40px">
-        <div class="about-col">
-          <h2 class="section-title">What is LineMaster 2.4GHz?</h2>
-          <p>
-            <strong>LineMaster 2.4GHz</strong> is a control system designed
-            specifically for control-line flying, combining the ergonomics of
-            classic handles with modern 2.4 GHz radio technology.
-          </p>
-          <ul class="about-highlights">
-            <li>Designed for <strong>Carrier, Scale and Sport</strong> flying</li>
-            <li>Ready to use <strong>out of the box</strong></li>
-            <li>Modular platform: throttle, flaps, retracts and more</li>
-            <li>Built to improve <strong>safety and versatility</strong></li>
-          </ul>
-          <p>
-            More than just a transmitter and receiver, LineMaster is an evolving
-            platform created to expand the possibilities of the hobby while
-            staying true to its roots.
-          </p>
+      <section id="about" class="site-section">
+        <div class="section-label">About</div>
+        <div class="about-section">
+          <div>
+            <h2 class="section-title" style="margin-bottom:var(--lm-space-5)">What is<br>LineMaster 2.4GHz?</h2>
+            <p><strong>LineMaster 2.4GHz</strong> is a control system designed specifically for control-line flying, combining the ergonomics of classic handles with modern 2.4 GHz radio technology.</p>
+            <ul class="about-highlights">
+              <li>Designed for <strong>Carrier, Scale and Sport</strong> flying</li>
+              <li>Ready to use <strong>out of the box</strong></li>
+              <li>Modular platform: throttle, flaps, retracts and more</li>
+              <li>Built to improve <strong>safety and versatility</strong></li>
+            </ul>
+            <p>More than just a transmitter and receiver, LineMaster is an evolving platform created to expand the possibilities of the hobby while staying true to its roots.</p>
 
-          <h3 class="about-block-title">Built with pilots in mind</h3>
-          <p>
-            LineMaster 2.4GHz was designed around how control-line pilots
-            actually fly. From the handle ergonomics to the firmware logic,
-            every decision prioritizes predictability, safety and confidence in
-            the circle.
-          </p>
-          <p>
-            LineMaster integrates naturally while quietly adding modern
-            capabilities. This is not about changing the hobby — it is about
-            supporting it, respecting decades of tradition while giving pilots
-            reliable tools that simply work.
-          </p>
-        </div>
-        <div class="about-col">
-          <h3 class="about-block-title">Why it exists</h3>
-          <p>
-            For years, control-line pilots have relied on modified transmitters,
-            DIY setups and improvised solutions. While functional, these
-            approaches require time, tools and experience.
-          </p>
-          <p>
-            LineMaster was created to offer a
-            <strong>purpose-built solution</strong>, designed from the ground up
-            for C/L pilots who want modern capabilities without unnecessary
-            complexity.
-          </p>
-          <h3 class="about-block-title">From idea to reality</h3>
-          <p>
-            Developed through countless test flights and 3D-printed prototypes,
-            refined with the support of <strong>Eduardo de las Casas</strong>
-            and <strong>Bob Whitney</strong>.
-          </p>
-          <p>
-            An early prototype was featured in
-            <em>Model Aviation – December 2024</em>. Today, LineMaster 2.4GHz is
-            moving toward a robust, ready-to-use platform with one clear goal:
-            <strong>enjoy and grow this amazing hobby</strong>.
-          </p>
+            <h3 class="about-block-title" style="margin-top:var(--lm-space-6)">Built with pilots in mind</h3>
+            <p>LineMaster 2.4GHz was designed around how control-line pilots actually fly. From the handle ergonomics to the firmware logic, every decision prioritizes predictability, safety and confidence in the circle.</p>
+          </div>
+          <div>
+            <h3 class="about-block-title">Why it exists</h3>
+            <p>For years, control-line pilots have relied on modified transmitters, DIY setups and improvised solutions. LineMaster offers a purpose-built solution designed from the ground up for C/L pilots who want modern capabilities without unnecessary complexity.</p>
+
+            <h3 class="about-block-title" style="margin-top:var(--lm-space-5)">From idea to reality</h3>
+            <p>Developed through countless test flights and 3D-printed prototypes, refined with the support of <strong>Eduardo de las Casas</strong> and <strong>Bob Whitney</strong>.</p>
+            <p>An early prototype was featured in <em>Model Aviation – December 2024</em>. Today, LineMaster 2.4GHz is moving toward a robust, ready-to-use platform with one clear goal: enjoy and grow this amazing hobby.</p>
+
+            <hr class="lm-rule" style="margin:var(--lm-space-5) 0" />
+            <div class="lm-mono" style="font-size:var(--lm-text-2xs);letter-spacing:0.18em;text-transform:uppercase;color:var(--lm-silver)">Carlos Díaz · Founder · Miami, FL</div>
+          </div>
         </div>
       </section>
 
       <!-- ── Testimonials ── -->
       <section id="testimonials" class="testimonials-section">
         <div class="testimonials-header">
-          <h2 class="section-title" style="margin-bottom:6px;margin-top:-8px">
-            What pilots are saying
-          </h2>
+          <div>
+            <div class="section-label">Pilots</div>
+            <h2 class="section-title" style="margin-bottom:0">What pilots<br>are saying</h2>
+          </div>
         </div>
         <div class="carousel" role="region" aria-label="Customer testimonials carousel">
           <button class="carousel-btn prev" type="button" aria-label="Previous testimonial">&#8249;</button>
           <div class="carousel-track" id="testimonialTrack">
             <div class="carousel-slide">
               <div class="testimonial">
-                <div class="testimonial-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-                <p class="testimonial-text">
-                  Superb Service, Excellent Product, VERY well designed, First
-                  Class Molding quality &amp; materials, Great Value. This
-                  product fills exactly a long long needed place in Control Line
-                  modelling! THANK YOU!!
-                </p>
-                <div class="testimonial-name">K Matthew Victor</div>
+                <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+                <p class="testimonial-text">"Fills exactly a long long needed place in Control Line modelling."</p>
+                <div class="testimonial-name">K. Matthew Victor · Verified buyer</div>
               </div>
             </div>
             <div class="carousel-slide">
               <div class="testimonial">
-                <div class="testimonial-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-                <p class="testimonial-text">
-                  Very well done product that will be a game changer Control
-                  Line models. I highly recommend and can't wait to fly this
-                  system.
-                </p>
-                <div class="testimonial-name">Michael J.</div>
+                <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+                <p class="testimonial-text">"Very well done product. I highly recommend — can't wait to fly this system."</p>
+                <div class="testimonial-name">Michael J. · Verified buyer</div>
               </div>
             </div>
             <div class="carousel-slide">
               <div class="testimonial">
-                <div class="testimonial-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-                <p class="testimonial-text">Very professionally done and packaging was first rate.</p>
-                <div class="testimonial-name">George</div>
+                <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+                <p class="testimonial-text">"Very professionally done. Packaging was first rate."</p>
+                <div class="testimonial-name">George · Verified buyer</div>
               </div>
             </div>
             <div class="carousel-slide">
               <div class="testimonial">
-                <div class="testimonial-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-                <p class="testimonial-text">
-                  Awesome product! I really like the metal channel buttons and switches.
-                </p>
-                <div class="testimonial-name">Angel</div>
+                <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+                <p class="testimonial-text">"Awesome product. I really like the metal channel buttons and switches."</p>
+                <div class="testimonial-name">Angel · Verified buyer</div>
               </div>
             </div>
             <div class="carousel-slide">
               <div class="testimonial">
-                <div class="testimonial-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-                <p class="testimonial-text">Great looking product from a great seller.</p>
-                <div class="testimonial-name">colin</div>
+                <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+                <p class="testimonial-text">"Great looking product from a great seller."</p>
+                <div class="testimonial-name">Colin · Verified buyer</div>
               </div>
             </div>
             <div class="carousel-slide">
               <div class="testimonial">
-                <div class="testimonial-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
-                <p class="testimonial-text">
-                  We love the product, looking forward to order more accessories soon.
-                </p>
-                <div class="testimonial-name">KIPmodeling</div>
+                <div class="testimonial-stars">★ ★ ★ ★ ★</div>
+                <p class="testimonial-text">"We love the product, looking forward to ordering more accessories soon."</p>
+                <div class="testimonial-name">KIPmodeling · Verified buyer</div>
               </div>
             </div>
           </div>
@@ -518,12 +369,9 @@
 
       <!-- ── Team ── -->
       <section class="team-section">
-        <h2 class="section-title">The team</h2>
-        <p class="section-subtitle">
-          LineMaster 2.4GHz is led by Carlos Díaz, with the invaluable support
-          of Eduardo de las Casas, Bob Whitney and many friends and
-          collaborators who helped bring this vision to life.
-        </p>
+        <div class="section-label">Team</div>
+        <h2 class="section-title">The people<br>behind it</h2>
+        <p class="section-subtitle">LineMaster 2.4GHz is led by Carlos Díaz, with invaluable support from Eduardo de las Casas and Bob Whitney.</p>
         <div class="team-grid">
           <div class="team-card">
             <img src="./assets/img/carlos.jpeg" alt="Carlos Díaz holding a model" />
@@ -546,111 +394,72 @@
       <!-- ── Store ── -->
       <section id="store" class="store-section">
         <div>
-          <h2 class="store-title">Visit the LineMaster 2.4GHz Shop</h2>
-          <p class="store-subtitle">
-            Handles, receivers and accessories are available through our Etsy
-            store. There you'll find Typhoon and Zephyr handles, LM-X5
-            receivers, line mounts and other parts designed to keep control-line
-            flying alive.
-          </p>
-          <p class="store-meta">
-            Limited production runs, assembled and tested one by one.
-          </p>
+          <div class="section-label" style="margin-bottom:var(--lm-space-3)">Store</div>
+          <h2 class="store-title">Visit the LineMaster<br>2.4GHz Shop</h2>
+          <p class="store-subtitle">Handles, receivers and accessories available through our Etsy store. Typhoon and Zephyr handles, LM-X5 receivers, line mounts and other parts designed to keep control-line flying alive.</p>
+          <p class="store-meta">Limited production runs — assembled and tested one by one.</p>
         </div>
         <div class="store-cta">
-          <a
-            href="https://www.etsy.com/shop/linemaster24ghz"
-            target="_blank"
-            rel="noopener"
-            class="btn-etsy"
-          >Go to Etsy store</a>
-          <div class="store-note">
-            Orders, shipping and payments are handled securely by Etsy.
-          </div>
+          <a href="https://www.etsy.com/shop/linemaster24ghz" target="_blank" rel="noopener" class="lm-btn lm-btn--primary lm-btn--lg">Go to Etsy Store <span class="lm-btn__arrow">→</span></a>
+          <div class="store-note">Orders and payments handled securely by Etsy.</div>
         </div>
       </section>
 
       <!-- ── Contact ── -->
       <section id="contact" class="contact-section">
         <div>
-          <h2 class="contact-title">Need help or want to share feedback?</h2>
-          <p class="contact-subtitle">
-            If you have questions about installation, firmware updates or
-            compatibility, or if you want to suggest a feature, send us a brief
-            message and we'll get back to you.
-          </p>
-          <div class="social-list" aria-label="Contact and social links">
-            <h4 class="social-title">Direct contact</h4>
-            <div class="social-item">
-              Email:
-              <a href="mailto:linemaster2.4ghz@gmail.com">linemaster2.4ghz@gmail.com</a>
-            </div>
-            <div class="social-item">
-              Facebook:
-              <a href="https://www.facebook.com/profile.php?id=61560480371015" target="_blank" rel="noopener">
-                LineMaster 2.4GHz
-              </a>
-            </div>
-            <div class="social-item">
-              YouTube:
-              <a href="https://www.youtube.com/@LineMaster2.4" target="_blank" rel="noopener">
-                @LineMaster2.4
-              </a>
-            </div>
+          <div class="section-label">Contact</div>
+          <h2 class="contact-title">Questions?<br>Feedback?</h2>
+          <p class="contact-subtitle">Installation, firmware, compatibility — or suggestions. Send a message and we'll get back to you.</p>
+          <div class="social-list">
+            <div class="social-title">— Direct contact</div>
+            <div class="social-item">Email: <a href="mailto:linemaster2.4ghz@gmail.com">linemaster2.4ghz@gmail.com</a></div>
+            <div class="social-item">Facebook: <a href="https://www.facebook.com/profile.php?id=61560480371015" target="_blank" rel="noopener">LineMaster 2.4GHz</a></div>
+            <div class="social-item">YouTube: <a href="https://www.youtube.com/@LineMaster2.4" target="_blank" rel="noopener">@LineMaster2.4</a></div>
           </div>
         </div>
         <form class="contact-form" onsubmit="handleContactSubmit(event)">
           <div>
             <label for="name">Name</label>
-            <input id="name" name="name" type="text" required />
+            <input id="name" name="name" type="text" placeholder="Your name" required />
           </div>
           <div>
             <label for="message">Message</label>
-            <textarea id="message" name="message" required></textarea>
+            <textarea id="message" name="message" placeholder="Your message" required></textarea>
           </div>
-          <button type="submit" class="btn-primary">Send</button>
-          <div id="contact-status" style="font-size:0.8rem;margin-top:4px"></div>
+          <a class="lm-btn lm-btn--primary" id="contactSubmitBtn" href="#" onclick="document.querySelector('.contact-form').requestSubmit?.() || document.querySelector('.contact-form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));return false;">Send Message <span class="lm-btn__arrow">→</span></a>
+          <div id="contact-status"></div>
         </form>
       </section>
     </main>
 
     <!-- ═══ FOOTER ═══ -->
     <footer>
-      <span>&copy; 2025 LineMaster 2.4GHz · Where innovation meets tradition.</span>
+      <span>© 2025 LineMaster 2.4GHz · Miami, FL</span>
       <div class="links">
         <a href="./">Home</a>
         <a href="#products">Products</a>
         <a href="#store">Store</a>
         <a href="#contact">Contact</a>
-        <a
-          href="https://linemasters-organization.gitbook.io/warranty-and-return-policy/#warranty-claim-procedure"
-          target="_blank"
-          rel="noopener"
-        >Warranty &amp; Return Policy</a>
+        <a href="https://linemasters-organization.gitbook.io/warranty-and-return-policy/#warranty-claim-procedure" target="_blank" rel="noopener">Warranty &amp; Returns</a>
       </div>
     </footer>
 
-    <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top" title="Back to top">
-      &#8593;
-    </button>
+    <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">&#8593;</button>
 
     <script>
-      /* ── Mobile nav toggle ── */
+      /* ── Mobile nav ── */
       document.querySelector(".nav-toggle")?.addEventListener("click", () => {
         document.querySelector(".nav-links")?.classList.toggle("open");
       });
 
-      /* Mobile dropdown toggle */
       if (window.innerWidth <= 768) {
         document.querySelectorAll(".nav-dropdown > a").forEach((a) => {
-          a.addEventListener("click", (e) => {
-            e.preventDefault();
-            a.parentElement.classList.toggle("open");
-          });
+          a.addEventListener("click", (e) => { e.preventDefault(); a.parentElement.classList.toggle("open"); });
         });
       }
 
-      /* ── Smooth scroll for hash links ── */
+      /* ── Smooth scroll ── */
       document.addEventListener("click", (e) => {
         const a = e.target.closest('a[href^="#"]');
         if (!a) return;
@@ -671,23 +480,15 @@
         const status = document.getElementById("contact-status");
         const to = "linemaster2.4ghz@gmail.com";
         const subject = encodeURIComponent("LineMaster 2.4GHz Support – " + (name || "Pilot"));
-        const bodyLines = ["Name: " + (name || "-"), "Message:", message || "-", "", "Sent from LineMaster 2.4GHz portal."];
-        const body = encodeURIComponent(bodyLines.join("\n"));
+        const body = encodeURIComponent(["Name: " + (name || "-"), "Message:", message || "-", "", "Sent from LineMaster 2.4GHz portal."].join("\n"));
         window.location.href = "mailto:" + to + "?subject=" + subject + "&body=" + body;
-        status.textContent = "Your email application should now open with a draft message.";
+        status.textContent = "Your email client should now open with a draft message.";
       }
 
       /* ── Back to top ── */
-      const backToTopBtn = document.getElementById("backToTop");
-      function setBackToTopVisibility() {
-        if (!backToTopBtn) return;
-        backToTopBtn.classList.toggle("is-visible", (window.scrollY || 0) > 300);
-      }
-      window.addEventListener("scroll", setBackToTopVisibility, { passive: true });
-      setBackToTopVisibility();
-      backToTopBtn?.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
+      const b = document.getElementById("backToTop");
+      window.addEventListener("scroll", () => { b?.classList.toggle("is-visible", (window.scrollY || 0) > 300); }, { passive: true });
+      b?.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: "smooth" }); });
 
       /* ── Testimonials carousel ── */
       const track = document.getElementById("testimonialTrack");
@@ -695,44 +496,32 @@
       const prevBtn = document.querySelector(".carousel-btn.prev");
       const nextBtn = document.querySelector(".carousel-btn.next");
       const slides = track ? Array.from(track.children) : [];
-      let index = 0;
-      let timer = null;
+      let index = 0, timer = null;
 
       function renderDots() {
         if (!dotsWrap) return;
         dotsWrap.innerHTML = "";
         slides.forEach((_, i) => {
-          const b = document.createElement("button");
-          b.type = "button";
-          b.className = "carousel-dot" + (i === index ? " is-active" : "");
-          b.setAttribute("aria-label", "Go to testimonial " + (i + 1));
-          b.addEventListener("click", () => goTo(i, true));
-          dotsWrap.appendChild(b);
+          const d = document.createElement("button");
+          d.type = "button";
+          d.className = "carousel-dot" + (i === index ? " is-active" : "");
+          d.setAttribute("aria-label", "Go to testimonial " + (i + 1));
+          d.addEventListener("click", () => goTo(i, true));
+          dotsWrap.appendChild(d);
         });
       }
-      function update() { if (!track) return; track.style.transform = `translateX(-${index * 100}%)`; renderDots(); }
-      function goTo(i, user = false) { if (!slides.length) return; index = (i + slides.length) % slides.length; update(); if (user) restartAuto(); }
-      function next(user = false) { goTo(index + 1, user); }
-      function prev(user = false) { goTo(index - 1, user); }
-      function startAuto() { stopAuto(); if (slides.length) timer = setInterval(() => next(false), 5200); }
-      function stopAuto() { if (timer) clearInterval(timer); timer = null; }
-      function restartAuto() { startAuto(); }
 
-      nextBtn?.addEventListener("click", () => next(true));
-      prevBtn?.addEventListener("click", () => prev(true));
+      function update() { if (!track) return; track.style.transform = `translateX(-${index * 100}%)`; renderDots(); }
+      function goTo(i, user = false) { if (!slides.length) return; index = (i + slides.length) % slides.length; update(); if (user) startAuto(); }
+      function startAuto() { if (timer) clearInterval(timer); if (slides.length) timer = setInterval(() => goTo(index + 1), 5200); }
+      function stopAuto()  { if (timer) { clearInterval(timer); timer = null; } }
+
+      nextBtn?.addEventListener("click", () => goTo(index + 1, true));
+      prevBtn?.addEventListener("click", () => goTo(index - 1, true));
 
       const carouselEl = document.querySelector(".carousel");
       carouselEl?.addEventListener("mouseenter", stopAuto);
       carouselEl?.addEventListener("mouseleave", startAuto);
-      carouselEl?.addEventListener("focusin", stopAuto);
-      carouselEl?.addEventListener("focusout", startAuto);
-
-      document.addEventListener("keydown", (e) => {
-        if (!carouselEl) return;
-        if (!carouselEl.contains(document.activeElement)) return;
-        if (e.key === "ArrowLeft") prev(true);
-        if (e.key === "ArrowRight") next(true);
-      });
 
       update();
       startAuto();

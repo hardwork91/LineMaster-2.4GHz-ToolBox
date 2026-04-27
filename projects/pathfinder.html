@@ -5,83 +5,55 @@
     <title>Pathfinder | LineMaster 2.4GHz</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Pathfinder – Real-time 3D flight data visualization tool. An incoming LineMaster 2.4GHz project." />
-
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/ico/apple-icon-180x180.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/ico/favicon-32x32.png" />
-    <meta name="theme-color" content="#ffffff" />
-
+    <meta name="theme-color" content="#14141A" />
     <link rel="stylesheet" href="../css/variables.css" />
     <link rel="stylesheet" href="../css/global.css" />
-
     <style>
       .project-hero {
-        background: linear-gradient(135deg, #1a1a2e, #16213e);
-        color: #fff;
-        padding: 48px 16px 56px;
-      }
-      .project-hero-inner {
-        max-width: var(--lm-max-width);
-        margin: 0 auto;
+        background: var(--lm-black);
+        border-bottom: 1px solid var(--lm-steel);
+        padding: 80px var(--lm-gutter) 72px;
         text-align: center;
       }
-      .project-hero-tag {
+      .project-hero__inner { max-width: 720px; margin: 0 auto; }
+      .project-hero__tag {
         display: inline-block;
-        font-size: 0.75rem;
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-2xs);
+        letter-spacing: 0.18em;
         text-transform: uppercase;
-        letter-spacing: 0.12em;
-        padding: 4px 12px;
+        color: var(--lm-amber);
+        border: 1px solid var(--lm-amber);
         border-radius: var(--lm-radius-pill);
-        background: rgba(217, 119, 6, 0.2);
-        color: #fbbf24;
-        margin-bottom: 14px;
+        padding: 4px 12px;
+        margin-bottom: var(--lm-space-5);
       }
-      .project-hero-title { font-size: 2.4rem; margin: 0 0 12px; }
-      .project-hero-subtitle {
-        font-size: 1.05rem;
-        opacity: 0.85;
-        line-height: 1.6;
-        max-width: 620px;
-        margin: 0 auto 24px;
+      .project-hero__h {
+        font-family: var(--lm-font-display);
+        font-weight: 900;
+        font-size: clamp(56px, 9vw, 112px);
+        text-transform: uppercase;
+        line-height: 0.88;
+        letter-spacing: -0.015em;
+        color: var(--lm-paper);
+        margin: 0 0 var(--lm-space-5);
       }
-
-      .product-section { max-width: var(--lm-max-width); margin: 32px auto; padding: 0 16px; }
-      .product-section h2 { font-size: 1.3rem; margin-bottom: 14px; }
-
-      .info-card {
-        background: var(--lm-card-bg);
-        border: 1px solid var(--lm-border);
-        border-radius: var(--lm-radius-md);
-        padding: 22px;
-        margin-bottom: 24px;
-        font-size: 0.95rem;
-        color: var(--lm-text-muted);
-        line-height: 1.6;
+      .project-hero__sub {
+        font-size: var(--lm-text-lg);
+        color: var(--lm-platinum);
+        line-height: 1.5;
+        margin: 0 auto;
+        max-width: 56ch;
       }
-
-      .try-banner {
-        background: var(--lm-dark-section-bg);
-        color: var(--lm-text-on-dark);
-        border-radius: var(--lm-radius-md);
-        padding: 22px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 14px;
-        margin-bottom: 24px;
-      }
-      .try-banner strong { display: block; margin-bottom: 4px; }
-      .try-banner span { font-size: 0.85rem; opacity: 0.8; }
     </style>
   </head>
 
-  <body>
+  <body class="lm-dark">
     <header class="header">
       <nav class="nav">
-        <a href="../" class="logo">
-          <div class="logo-mark"><img src="../assets/img/logo-small.png" alt="LineMaster logo" /></div>
-          LineMaster 2.4GHz
-        </a>
+        <a href="../" class="logo"><img src="../assets/img/logo-lockup-white.png" alt="LineMaster 2.4GHz" /></a>
         <button class="nav-toggle" type="button" aria-label="Toggle navigation">&#9776;</button>
         <div class="nav-links">
           <a href="../">Home</a>
@@ -108,31 +80,29 @@
       </nav>
     </header>
 
-    <!-- ═══ HERO ═══ -->
     <section class="project-hero">
-      <div class="project-hero-inner">
-        <div class="project-hero-tag">Incoming Project</div>
-        <h1 class="project-hero-title">Pathfinder</h1>
-        <p class="project-hero-subtitle">
-          Advanced 3D flight data visualization tool. Powered by the Godot Engine, 
-          Pathfinder transforms how control-line flight is analyzed and understood
-        </p>
+      <div class="project-hero__inner">
+        <div class="project-hero__tag">Incoming Project</div>
+        <h1 class="project-hero__h">Pathfinder</h1>
+        <p class="project-hero__sub">Advanced 3D flight data visualization. Powered by the Godot Engine — runs in the browser as a WebAssembly export, no installation required.</p>
       </div>
     </section>
 
-    <!-- ═══ CONTENT ═══ -->
     <div class="product-section">
       <h2>About this Project</h2>
       <div class="info-card">
-        <p>
-          Pathfinder is an experimental visualization tool that renders flight data in a
-          3D environment. It runs directly in the browser as a Godot 4 web export (WebAssembly),
-          requiring no installation.
-        </p>
-        <p>
-          This project is currently under active development. Features, interface and
-          capabilities may change significantly as it evolves.
-        </p>
+        <p>Pathfinder is an experimental visualization tool that renders flight data in a 3D environment. It runs directly in the browser as a Godot 4 web export (WebAssembly), requiring no installation.</p>
+        <p>This project is currently under active development. Features, interface and capabilities may change significantly as it evolves.</p>
+      </div>
+    </div>
+
+    <div class="product-section">
+      <h2>Planned Features</h2>
+      <div class="features-grid">
+        <div class="feature-card"><strong>3D Flight Track</strong><p>Visualize complete flight paths in three dimensions — altitude, speed and heading in real time.</p></div>
+        <div class="feature-card"><strong>Telemetry Overlay</strong><p>Channel values, RSSI, latency and failsafe state overlaid on the 3D view.</p></div>
+        <div class="feature-card"><strong>Replay Mode</strong><p>Record and replay flights frame by frame to analyze technique and identify issues.</p></div>
+        <div class="feature-card"><strong>No Install</strong><p>Runs as a Godot 4 WASM export — open the URL, grant camera permission, fly.</p></div>
       </div>
     </div>
 
@@ -140,14 +110,14 @@
       <div class="try-banner">
         <div>
           <strong>Try the current build</strong>
-          <span>Experimental — runs in Chrome/Edge on desktop</span>
+          <span>Experimental — runs in Chrome / Edge on desktop</span>
         </div>
-        <a href="../Products/Tracker3D/index.html" class="tool-link primary">Launch Pathfinder</a>
+        <a href="../Products/Tracker3D/index.html" class="lm-btn lm-btn--primary">Launch Pathfinder <span class="lm-btn__arrow">→</span></a>
       </div>
     </div>
 
     <footer>
-      <span>&copy; 2025 LineMaster 2.4GHz · Where innovation meets tradition.</span>
+      <span>© 2025 LineMaster 2.4GHz · Miami, FL</span>
       <div class="links">
         <a href="../">Home</a>
         <a href="../#products">Products</a>

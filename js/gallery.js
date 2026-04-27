@@ -110,16 +110,19 @@
     container.appendChild(thumbStrip);
 
     // Logic
+    let initialized = false;
+
     function update() {
       track.style.transform = "translateX(-" + idx * 100 + "%)";
       counter.textContent = (idx + 1) + " / " + urls.length;
       thumbs.forEach((t, i) => t.classList.toggle("active", i === idx));
-      // Scroll active thumb into view
-      thumbs[idx].scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center",
-      });
+      if (initialized) {
+        thumbs[idx].scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      }
     }
 
     function goTo(i) {
@@ -130,8 +133,8 @@
     prevBtn.addEventListener("click", () => goTo(idx - 1));
     nextBtn.addEventListener("click", () => goTo(idx + 1));
 
-    // Keyboard
-    container.addEventListener("keydown", (e) => {
+    // Keyboard (delegated to document so container doesn't need tabindex)
+    document.addEventListener("keydown", (e) => {
       if (e.key === "ArrowLeft") goTo(idx - 1);
       if (e.key === "ArrowRight") goTo(idx + 1);
     });
@@ -152,6 +155,7 @@
     }, { passive: true });
 
     update();
+    initialized = true;
   }
 
   init();

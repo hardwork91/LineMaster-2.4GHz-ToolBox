@@ -1,57 +1,248 @@
 /* ============================================================
-   LineMaster 2.4GHz – Design Tokens
-   Single source of truth for colors, spacing, radii & typography.
-   Edit here to restyle the entire site.
+   LineMaster 2.4GHz — Design Foundations
+   Colors, Type, Spacing, Radii, Shadows, Motion + Primitives
+   Import this file FIRST in every page.
    ============================================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800;900&display=swap');
+
 :root {
-  /* ── Brand colors ─────────────────────────────────── */
-  --lm-primary: #f11313;
-  --lm-primary-dark: #c20b0b;
-  --lm-primary-light: #ff4d4d;
+  /* ---------- NEUTRALS ---------- */
+  --lm-black:     #0A0A0B;
+  --lm-ink:       #14141A;
+  --lm-graphite:  #1E1E26;
+  --lm-steel:     #2A2A33;
+  --lm-gunmetal:  #3D3D48;
+  --lm-silver:    #8A8A95;
+  --lm-platinum:  #C9C9D1;
+  --lm-bone:      #F2F2EC;
+  --lm-paper:     #FAFAF6;
 
-  /* ── Surfaces ─────────────────────────────────────── */
-  --lm-bg: #f3f4f6;
-  --lm-card-bg: #ffffff;
-  --lm-dark-bg: #161616;
-  --lm-dark-section-bg: #212121;
+  /* ---------- SIGNAL RED ---------- */
+  --lm-red:       #D7261E;
+  --lm-red-hot:   #FF3B2F;
+  --lm-red-deep:  #8C1812;
+  --lm-red-tint:  #2A0E0C;
 
-  /* ── Text ──────────────────────────────────────────── */
-  --lm-text-main: #212121;
-  --lm-text-muted: #454545;
-  --lm-text-light: #6b7280;
-  --lm-text-on-dark: #f9fafb;
+  /* ---------- TELEMETRY (data UI only) ---------- */
+  --lm-amber:     #F0A93B;
+  --lm-jade:      #2FBF7E;
+  --lm-cyan:      #4FB8E0;
 
-  /* ── Borders ───────────────────────────────────────── */
-  --lm-border: #e5e7eb;
-  --lm-border-dark: #d1d5db;
+  /* ---------- TYPE ---------- */
+  --lm-font-display: 'Barlow Condensed', 'Oswald', 'Bebas Neue', sans-serif;
+  --lm-font-body:    'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --lm-font-mono:    'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
 
-  /* ── Radii ─────────────────────────────────────────── */
-  --lm-radius-sm: 8px;
-  --lm-radius-md: 14px;
-  --lm-radius-lg: 18px;
+  --lm-text-2xs: 11px;
+  --lm-text-xs:  12px;
+  --lm-text-sm:  14px;
+  --lm-text-md:  16px;
+  --lm-text-lg:  18px;
+  --lm-text-xl:  22px;
+  --lm-text-2xl: 28px;
+  --lm-text-3xl: 40px;
+  --lm-text-4xl: 56px;
+  --lm-text-5xl: 80px;
+  --lm-text-6xl: 120px;
+
+  /* ---------- SPACING (4px grid) ---------- */
+  --lm-space-1:  4px;
+  --lm-space-2:  8px;
+  --lm-space-3:  12px;
+  --lm-space-4:  16px;
+  --lm-space-5:  24px;
+  --lm-space-6:  32px;
+  --lm-space-7:  48px;
+  --lm-space-8:  64px;
+  --lm-space-9:  96px;
+  --lm-space-10: 128px;
+  --lm-space-11: 192px;
+
+  /* ---------- RADII ---------- */
+  --lm-radius-0:    0;
+  --lm-radius-1:    2px;
+  --lm-radius-2:    4px;
+  --lm-radius-3:    8px;
+  --lm-radius-4:    12px;
   --lm-radius-pill: 999px;
 
-  /* ── Layout ────────────────────────────────────────── */
-  --lm-max-width: 1120px;
-  --lm-nav-height: 56px;
+  /* legacy aliases used in product pages */
+  --lm-radius-sm:  var(--lm-radius-3);
+  --lm-radius-md:  var(--lm-radius-3);
+  --lm-radius-lg:  var(--lm-radius-4);
 
-  /* ── Accent colors (buttons, badges) ───────────────── */
-  --lm-blue: #2563eb;
-  --lm-blue-dark: #1d4ed8;
-  --lm-blue-bg: #eff6ff;
-  --lm-facebook: #024ba9;
-  --lm-etsy: #f1641e;
-  --lm-green: #16a34a;
-  --lm-green-bg: #f0fdf4;
-  --lm-amber: #d97706;
-  --lm-amber-bg: #fffbeb;
+  /* ---------- STROKES ---------- */
+  --lm-stroke-hair:  1px;
+  --lm-stroke-1:     1.5px;
+  --lm-stroke-2:     2px;
+  --lm-stroke-heavy: 3px;
 
-  /* ── Shadows ───────────────────────────────────────── */
-  --lm-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.06);
-  --lm-shadow-md: 0 6px 16px rgba(15, 23, 42, 0.05);
-  --lm-shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.08);
+  /* ---------- SHADOWS ---------- */
+  --lm-shadow-sm:       0 1px 2px rgba(0,0,0,.4);
+  --lm-shadow-md:       0 8px 24px rgba(0,0,0,.35);
+  --lm-shadow-lg:       0 24px 60px rgba(0,0,0,.55);
+  --lm-shadow-red-glow: 0 0 0 1px rgba(215,38,30,.4), 0 0 24px rgba(215,38,30,.35);
 
-  /* ── Transitions ───────────────────────────────────── */
-  --lm-ease: 200ms ease;
+  /* ---------- MOTION ---------- */
+  --lm-ease-out:  cubic-bezier(.2,.7,.2,1);
+  --lm-ease-in:   cubic-bezier(.6,0,.8,.2);
+  --lm-ease-snap: cubic-bezier(.4,0,.1,1);
+  --lm-dur-fast:  120ms;
+  --lm-dur-base:  220ms;
+  --lm-dur-slow:  420ms;
+  --lm-ease:      220ms cubic-bezier(.4,0,.1,1);
+
+  /* ---------- LAYOUT ---------- */
+  --lm-max-content: 1280px;
+  --lm-max-width:   1280px;
+  --lm-gutter:      clamp(16px, 4vw, 48px);
+  --lm-nav-height:  56px;
 }
+
+/* ============================================================
+   TYPE PRIMITIVES
+   ============================================================ */
+
+.lm-display,
+.lm-h1, .lm-h2, .lm-h3 {
+  font-family: var(--lm-font-display);
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.lm-h1 { font-size: clamp(56px, 9vw, 120px); font-weight: 800; }
+.lm-h2 { font-size: clamp(40px, 6vw, 80px);  font-weight: 700; }
+.lm-h3 { font-size: clamp(28px, 4vw, 56px);  font-weight: 700; }
+
+.lm-eyebrow {
+  font-family: var(--lm-font-mono);
+  font-size: var(--lm-text-2xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.lm-body {
+  font-family: var(--lm-font-body);
+  font-size: var(--lm-text-md);
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+}
+
+.lm-lede {
+  font-family: var(--lm-font-body);
+  font-size: var(--lm-text-lg);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+}
+
+.lm-mono {
+  font-family: var(--lm-font-mono);
+  font-feature-settings: "tnum" 1, "ss01" 1;
+}
+
+.lm-spec {
+  font-family: var(--lm-font-mono);
+  font-size: var(--lm-text-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.lm-slash::before { content: "/"; opacity: 0.4; margin: 0 0.5em; }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.lm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lm-space-2);
+  height: 44px;
+  padding: 0 var(--lm-space-5);
+  font-family: var(--lm-font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 15px;
+  border: var(--lm-stroke-1) solid currentColor;
+  border-radius: var(--lm-radius-1);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--lm-dur-fast) var(--lm-ease-snap);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.lm-btn--primary {
+  background: var(--lm-red);
+  border-color: var(--lm-red);
+  color: var(--lm-paper);
+}
+.lm-btn--primary:hover {
+  background: var(--lm-red-hot);
+  border-color: var(--lm-red-hot);
+}
+
+.lm-btn--ghost-light { color: var(--lm-paper); }
+.lm-btn--ghost-light:hover { background: var(--lm-paper); color: var(--lm-ink); }
+
+.lm-btn--ghost-dark { color: var(--lm-ink); }
+.lm-btn--ghost-dark:hover { background: var(--lm-ink); color: var(--lm-paper); }
+
+.lm-btn--sm { height: 36px; font-size: 13px; padding: 0 16px; }
+.lm-btn--lg { height: 54px; font-size: 17px; padding: 0 32px; }
+
+.lm-btn__arrow { transition: transform var(--lm-dur-fast); }
+.lm-btn:hover .lm-btn__arrow { transform: translateX(3px); }
+
+/* ============================================================
+   BADGES
+   ============================================================ */
+
+.lm-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  padding: 0 10px;
+  font-family: var(--lm-font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: var(--lm-radius-pill);
+  border: 1px solid currentColor;
+}
+
+.lm-badge__dot {
+  width: 6px; height: 6px;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.lm-badge--live { color: var(--lm-red-hot); }
+.lm-badge--ok   { color: var(--lm-jade); }
+.lm-badge--warn { color: var(--lm-amber); }
+.lm-badge--info { color: var(--lm-cyan); }
+
+/* ============================================================
+   RULE
+   ============================================================ */
+
+.lm-rule { height: 1px; background: var(--lm-steel); border: 0; }
+.lm-rule--paper { background: rgba(20,20,26,0.12); }
+
+/* ============================================================
+   RESET
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+body.lm-dark  { background: var(--lm-ink);   color: var(--lm-paper); }
+body.lm-paper { background: var(--lm-paper); color: var(--lm-ink); }

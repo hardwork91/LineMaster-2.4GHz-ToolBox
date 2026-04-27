@@ -4,103 +4,40 @@
     <meta charset="UTF-8" />
     <title>LM-X5 Receiver | LineMaster 2.4GHz</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="LineMaster 2.4GHz LM-X5 – Compact 5-channel receiver under 15g for control-line aircraft." />
-
+    <meta name="description" content="LineMaster 2.4GHz LM-X5 – Compact 5-channel receiver under 15g. RGB LED, bind button, USB-C firmware updates. Electric and combustion compatible." />
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/ico/apple-icon-180x180.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/ico/favicon-32x32.png" />
-    <meta name="theme-color" content="#ffffff" />
-
+    <meta name="theme-color" content="#14141A" />
     <link rel="stylesheet" href="../css/variables.css" />
     <link rel="stylesheet" href="../css/global.css" />
-
     <style>
-      .product-hero {
-        background: var(--lm-dark-bg);
-        color: #fff;
-        padding: 40px 16px 48px;
+      .product-hero { background: var(--lm-black); border-bottom: 1px solid var(--lm-steel); overflow: hidden; }
+      .product-hero__inner {
+        max-width: var(--lm-max-width); margin: 0 auto;
+        padding: 56px var(--lm-gutter) 0;
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 48px; align-items: center; min-height: 520px;
       }
-      .product-hero-inner {
-        max-width: var(--lm-max-width);
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        gap: 32px;
-        align-items: center;
-      }
-      .product-hero-img {
-        border-radius: var(--lm-radius-lg);
-        overflow: hidden;
-        background: #0f0f0f;
-      }
-      .product-hero-img img { width: 100%; display: block; }
-      .product-hero-tag { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.7; margin-bottom: 8px; }
-      .product-hero-title { font-size: 2.4rem; margin: 0 0 8px; }
-      .product-hero-subtitle { font-size: 1rem; opacity: 0.85; line-height: 1.5; margin-bottom: 20px; }
-      .product-hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
-
-      .product-section { max-width: var(--lm-max-width); margin: 32px auto; padding: 0 16px; }
-      .product-section h2 { font-size: 1.3rem; margin-bottom: 14px; }
-
-      .features-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 14px;
-        margin-bottom: 32px;
-      }
-      .feature-card {
-        background: var(--lm-card-bg);
-        border: 1px solid var(--lm-border);
-        border-radius: var(--lm-radius-md);
-        padding: 16px;
-      }
-      .feature-card strong { display: block; margin-bottom: 4px; }
-      .feature-card p { margin: 0; font-size: 0.9rem; color: var(--lm-text-muted); }
-
-      .links-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 14px;
-      }
-      .link-card {
-        background: var(--lm-card-bg);
-        border: 1px solid var(--lm-border);
-        border-radius: var(--lm-radius-md);
-        padding: 18px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-      .link-card h3 { margin: 0; font-size: 1rem; }
-      .link-card p { margin: 0; font-size: 0.85rem; color: var(--lm-text-muted); flex: 1; }
-
-      .fw-banner {
-        background: var(--lm-blue-bg);
-        border: 1px solid #bfdbfe;
-        border-radius: var(--lm-radius-md);
-        padding: 18px;
-        margin-bottom: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-      .fw-banner-text strong { display: block; margin-bottom: 2px; }
-      .fw-banner-text span { font-size: 0.85rem; color: var(--lm-text-muted); }
-
+      .product-hero__media { overflow: hidden; background: var(--lm-black); align-self: end; }
+      .product-hero__media img { width: 100%; display: block; }
+      .product-hero__copy { padding-bottom: 56px; }
+      .product-hero__tag { font-family: var(--lm-font-mono); font-size: var(--lm-text-2xs); letter-spacing: 0.22em; text-transform: uppercase; color: var(--lm-red); margin-bottom: var(--lm-space-5); display: flex; align-items: center; gap: 10px; }
+      .product-hero__tag::before { content: ""; width: 24px; height: 1px; background: var(--lm-red); }
+      .product-hero__h { font-family: var(--lm-font-display); font-weight: 900; font-size: clamp(56px, 8vw, 112px); text-transform: uppercase; line-height: 0.88; letter-spacing: -0.015em; color: var(--lm-paper); margin: 0 0 var(--lm-space-5); }
+      .product-hero__sub { font-size: var(--lm-text-md); color: var(--lm-platinum); line-height: 1.55; max-width: 46ch; margin-bottom: var(--lm-space-6); }
+      .product-hero__actions { display: flex; flex-wrap: wrap; gap: 12px; }
       @media (max-width: 768px) {
-        .product-hero-inner { grid-template-columns: 1fr; }
+        .product-hero__inner { grid-template-columns: 1fr; min-height: auto; padding-bottom: 0; }
+        .product-hero__media { order: -1; }
+        .product-hero__copy { padding-bottom: 40px; }
       }
     </style>
   </head>
 
-  <body>
+  <body class="lm-dark">
     <header class="header">
       <nav class="nav">
-        <a href="../" class="logo">
-          <div class="logo-mark"><img src="../assets/img/logo-small.png" alt="LineMaster logo" /></div>
-          LineMaster 2.4GHz
-        </a>
+        <a href="../" class="logo"><img src="../assets/img/logo-lockup-white.png" alt="LineMaster 2.4GHz" /></a>
         <button class="nav-toggle" type="button" aria-label="Toggle navigation">&#9776;</button>
         <div class="nav-links">
           <a href="../">Home</a>
@@ -127,124 +64,96 @@
       </nav>
     </header>
 
-    <!-- ═══ PRODUCT HERO ═══ -->
     <section class="product-hero">
-      <div class="product-hero-inner">
-        <div class="product-hero-img">
-          <img src="../assets/img/products/lm-x5.jpg" alt="LineMaster 2.4GHz LM-X5 Receiver" />
+      <div class="product-hero__inner">
+        <div class="product-hero__media">
+          <img src="../assets/img/products/lm-x5.jpg" alt="LineMaster LM-X5 Receiver" />
         </div>
-        <div>
-          <div class="product-hero-tag">Receiver · 5 Channels</div>
-          <h1 class="product-hero-title">LM-X5 Receiver</h1>
-          <p class="product-hero-subtitle">
-            Compact, lightweight and highly versatile 5-channel receiver designed
-            specifically for control-line aircraft. Under 15 grams, compatible
-            with both electric and combustion models.
-          </p>
-          <div class="product-hero-actions">
-            <a href="https://www.etsy.com/listing/4313136756" target="_blank" rel="noopener" class="btn-etsy">Buy on Etsy</a>
-            <a href="https://linemasters-organization.gitbook.io/linemaster-2.4ghz-lm-5x-5ch-receiver/" target="_blank" rel="noopener" class="btn-outline" style="color:#fff;border-color:#ffffff55">User Manual</a>
+        <div class="product-hero__copy">
+          <div class="product-hero__tag">Receiver · 5 Channels</div>
+          <h1 class="product-hero__h">X5<br>Receiver</h1>
+          <p class="product-hero__sub">Compact, lightweight and highly versatile 5-channel receiver designed specifically for control-line aircraft. Under 15 grams, compatible with both electric and combustion models.</p>
+          <div class="product-hero__actions">
+            <a href="https://www.etsy.com/listing/4313136756" target="_blank" rel="noopener" class="lm-btn lm-btn--primary lm-btn--lg">Buy on Etsy <span class="lm-btn__arrow">→</span></a>
+            <a href="https://linemasters-organization.gitbook.io/linemaster-2.4ghz-lm-x5-receiver/" target="_blank" rel="noopener" class="lm-btn lm-btn--ghost-light" style="height:54px;font-size:14px;padding:0 22px">User Manual</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══ FIRMWARE UPDATER ═══ -->
     <div class="product-section">
       <div class="fw-banner">
         <div class="fw-banner-text">
           <strong>Firmware Updater Available</strong>
-          <span>Update your LM-X5 receiver directly from your browser using a USB-C cable. Current version: v1.1.5</span>
+          <span>Update your LM-X5 receiver directly from your browser using a USB-C cable · Current version: v1.1.5</span>
         </div>
-        <a href="../lm-x5-receiver-updater/" class="tool-link primary">Open Firmware Updater</a>
+        <a href="../lm-x5-receiver-updater/" class="lm-btn lm-btn--primary lm-btn--sm">Open Firmware Updater →</a>
       </div>
     </div>
 
-    <!-- ═══ FEATURES ═══ -->
     <div class="product-section">
       <h2>Key Features</h2>
       <div class="features-grid">
-        <div class="feature-card">
-          <strong>5-Channel PWM Output</strong>
-          <p>Full 5-channel control for throttle, flaps, retracts and more.</p>
-        </div>
-        <div class="feature-card">
-          <strong>RGB LED Status Indicator</strong>
-          <p>Multicolor LED for clear visual feedback on binding, signal and operation status.</p>
-        </div>
-        <div class="feature-card">
-          <strong>Manual Throttle Input</strong>
-          <p>Dedicated input pin for manual throttle control devices. Enables throttle authority for scale and carrier models.</p>
-        </div>
-        <div class="feature-card">
-          <strong>Easy Binding</strong>
-          <p>Dedicated bind button for quick and simple pairing with any LineMaster handle.</p>
-        </div>
-        <div class="feature-card">
-          <strong>USB-C Firmware Updates</strong>
-          <p>Keep your receiver up to date directly from your browser using ESP Web Tools.</p>
-        </div>
-        <div class="feature-card">
-          <strong>Durable PETG Case</strong>
-          <p>3D-printed case in PETG, resistant to sun exposure and designed for reliability.</p>
-        </div>
+        <div class="feature-card"><strong>5-Channel PWM Output</strong><p>Full 5-channel control for throttle, flaps, retracts and more.</p></div>
+        <div class="feature-card"><strong>RGB LED Status Indicator</strong><p>Multicolor LED for clear visual feedback on binding, signal and operation status.</p></div>
+        <div class="feature-card"><strong>Manual Throttle Input</strong><p>Dedicated input pin for manual throttle control devices.</p></div>
+        <div class="feature-card"><strong>Easy Binding</strong><p>Dedicated bind button for quick and simple pairing with any LineMaster handle.</p></div>
+        <div class="feature-card"><strong>USB-C Firmware Updates</strong><p>Keep your receiver up to date directly from your browser using ESP Web Tools.</p></div>
+        <div class="feature-card"><strong>Durable PETG Case</strong><p>3D-printed case in PETG, resistant to sun exposure and designed for reliability.</p></div>
       </div>
     </div>
 
-    <!-- ═══ GALLERY ═══ -->
     <div class="product-section">
       <h2>Gallery</h2>
-      <div id="gallery" class="gallery" data-folder="../assets/img/products/lm-x5/" tabindex="0"></div>
+      <div id="gallery" class="gallery" data-folder="../assets/img/products/lm-x5/"></div>
     </div>
 
-    <!-- ═══ SPECS ═══ -->
     <div class="product-section">
       <h2>Specifications</h2>
-      <div class="card" style="overflow:hidden;margin-bottom:32px">
-        <table class="specs-table">
-          <tr><th>Dimensions</th><td>38.2 × 27.1 × 15.5 mm</td></tr>
-          <tr><th>Weight</th><td>14.1 g</td></tr>
-          <tr><th>Frequency</th><td>2.400 – 2.4800 GHz</td></tr>
-          <tr><th>Channels</th><td>5CH PWM</td></tr>
-          <tr><th>Operating Voltage</th><td>DC 4.0 – 6.0 V</td></tr>
-          <tr><th>Antenna Length</th><td>13.5 mm</td></tr>
-          <tr><th>Firmware Update</th><td>USB-C (browser-based)</td></tr>
-          <tr><th>Compatibility</th><td>Electric and combustion control-line models</td></tr>
-          <tr><th>Case Material</th><td>3D-printed PETG</td></tr>
-        </table>
+      <div class="spec-block">
+        <div class="spec-rows">
+          <span>Dimensions</span><span>38.2 × 27.1 × 15.5 mm</span>
+          <span>Weight</span><span>14.1 g</span>
+          <span>Frequency</span><span>2.400 – 2.4800 GHz</span>
+          <span>Channels</span><span>5CH PWM</span>
+          <span>Operating Voltage</span><span>DC 4.0 – 6.0 V</span>
+          <span>Antenna Length</span><span>13.5 mm</span>
+          <span>Firmware Update</span><span>USB-C (browser-based)</span>
+          <span>Compatibility</span><span>Electric and combustion control-line models</span>
+          <span>Case Material</span><span>3D-printed PETG</span>
+        </div>
       </div>
     </div>
 
-    <!-- ═══ LINKS ═══ -->
     <div class="product-section">
       <h2>Resources</h2>
       <div class="links-grid">
         <div class="link-card">
           <h3>User Manual</h3>
           <p>Installation, binding, manual throttle controller and firmware update guide.</p>
-          <a href="https://linemasters-organization.gitbook.io/linemaster-2.4ghz-lm-5x-5ch-receiver/" target="_blank" rel="noopener" class="tool-link primary">Open manual</a>
+          <a href="https://linemasters-organization.gitbook.io/linemaster-2.4ghz-lm-x5-receiver/" target="_blank" rel="noopener" class="lm-btn lm-btn--primary lm-btn--sm">Open Manual <span class="lm-btn__arrow">→</span></a>
         </div>
         <div class="link-card">
           <h3>Firmware Updater</h3>
           <p>Browser-based tool to flash the latest firmware via USB-C and ESP Web Tools.</p>
-          <a href="../lm-x5-receiver-updater/" class="tool-link primary">Open updater</a>
+          <a href="../lm-x5-receiver-updater/" class="lm-btn lm-btn--ghost-light lm-btn--sm">Open Updater →</a>
         </div>
         <div class="link-card">
           <h3>Buy on Etsy</h3>
           <p>Order the LM-X5 receiver from the official LineMaster shop.</p>
-          <a href="https://www.etsy.com/listing/4313136756" target="_blank" rel="noopener" class="btn-etsy" style="align-self:flex-start;font-size:0.85rem;padding:7px 14px">View on Etsy</a>
+          <a href="https://www.etsy.com/listing/4313136756" target="_blank" rel="noopener" class="lm-btn lm-btn--primary lm-btn--sm">View on Etsy <span class="lm-btn__arrow">→</span></a>
         </div>
       </div>
     </div>
 
     <footer>
-      <span>&copy; 2025 LineMaster 2.4GHz · Where innovation meets tradition.</span>
+      <span>© 2025 LineMaster 2.4GHz · Miami, FL</span>
       <div class="links">
         <a href="../">Home</a>
         <a href="../#products">Products</a>
         <a href="../#store">Store</a>
         <a href="../#contact">Contact</a>
-        <a href="https://linemasters-organization.gitbook.io/warranty-and-return-policy/#warranty-claim-procedure" target="_blank" rel="noopener">Warranty &amp; Return Policy</a>
+        <a href="https://linemasters-organization.gitbook.io/warranty-and-return-policy/#warranty-claim-procedure" target="_blank" rel="noopener">Warranty &amp; Returns</a>
       </div>
     </footer>
 
@@ -252,6 +161,8 @@
 
     <script src="../js/gallery.js"></script>
     <script>
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
       document.querySelector(".nav-toggle")?.addEventListener("click", () => { document.querySelector(".nav-links")?.classList.toggle("open"); });
       if (window.innerWidth <= 768) { document.querySelectorAll(".nav-dropdown > a").forEach(a => { a.addEventListener("click", e => { e.preventDefault(); a.parentElement.classList.toggle("open"); }); }); }
       const b = document.getElementById("backToTop");

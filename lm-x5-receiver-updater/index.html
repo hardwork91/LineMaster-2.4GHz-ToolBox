@@ -3,13 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <title>LM-X5 Receiver Firmware Updater | LineMaster 2.4GHz</title>
-
-    <meta
-      name="description"
-      content="Update the firmware of your LineMaster 2.4GHz LM-X5 receiver directly from your browser."
-    />
+    <meta name="description" content="Update the firmware of your LineMaster 2.4GHz LM-X5 receiver directly from your browser." />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/ico/apple-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/ico/favicon-32x32.png" />
+    <meta name="theme-color" content="#14141A" />
+    <link rel="stylesheet" href="../css/variables.css" />
 
     <!-- ESP Web Tools -->
     <script type="module">
@@ -17,413 +16,252 @@
     </script>
 
     <style>
-      :root {
-        --lm-bg: #f3f4f6;
-        --lm-card-bg: #ffffff;
-        --lm-primary: #f11313;
-        --lm-primary-dark: #c20b0b;
-        --lm-text-main: #212121;
-        --lm-text-muted: #454545;
-        --lm-border: #e5e7eb;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
+      *, *::before, *::after { box-sizing: border-box; }
 
       body {
         margin: 0;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          sans-serif;
-        background: var(--lm-bg);
-        color: var(--lm-text-main);
+        background: var(--lm-ink);
+        color: var(--lm-paper);
+        font-family: var(--lm-font-body);
+        font-size: var(--lm-text-sm);
+        line-height: 1.6;
       }
 
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
+      a { text-decoration: none; color: inherit; }
 
-      /* HEADER */
-      .header {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        background: #161616;
-        color: #ffffff;
+      /* ── Topbar ── */
+      .updater-header {
+        position: sticky; top: 0; z-index: 20;
+        background: var(--lm-black);
+        border-bottom: 1px solid var(--lm-steel);
       }
-
-      /* NAV (idéntico patrón al sitio principal) */
-      .nav {
-        max-width: 1120px;
-        margin: 0 auto;
-        padding: 10px 16px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+      .updater-nav {
+        max-width: var(--lm-max-width); margin: 0 auto;
+        padding: 0 var(--lm-gutter);
+        height: 56px;
+        display: flex; align-items: center; justify-content: space-between;
       }
-
-      .logo {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 700;
-        letter-spacing: 0.03em;
-        font-size: 0.95rem;
-      }
-
-      .logo-mark {
-        width: 34px;
-        height: 34px;
-        overflow: hidden;
-      }
-
-      .logo-mark img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        display: block;
-      }
-
-      .hero-tag {
-        font-size: 0.8rem;
+      .updater-logo img { height: 26px; display: block; }
+      .back-link {
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-2xs);
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        letter-spacing: 0.15em;
-        opacity: 0.75;
+        color: var(--lm-platinum);
+        border: 1px solid var(--lm-steel);
+        padding: 6px 14px;
+        transition: border-color var(--lm-dur-fast) var(--lm-ease), color var(--lm-dur-fast) var(--lm-ease);
       }
+      .back-link:hover { color: var(--lm-paper); border-color: var(--lm-platinum); }
 
-      /* Right side */
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 20px;
+      /* ── Hero ── */
+      .updater-hero {
+        background: var(--lm-black);
+        border-bottom: 1px solid var(--lm-steel);
+        padding: 56px var(--lm-gutter) 48px;
       }
-
-      /* Back button */
-      .btn-ghost {
-        padding: 8px 14px;
-        border-radius: 999px;
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.35);
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 0.9rem;
-        cursor: pointer;
-      }
-
-      .btn-ghost:hover {
-        background: rgba(255, 255, 255, 0.08);
-      }
-
-      .btn-secondary {
-        padding: 7px 12px;
-        border-radius: 999px;
-        border: 1px solid #d1d5db;
-        font-size: 0.85rem;
-        font-weight: 600;
-        cursor: pointer;
-        background: #f9fafb;
-      }
-
-      .btn-secondary:hover {
-        background: rgba(255, 255, 255, 0.08);
-      }
-
-      .btn-gost {
-        padding: 8px 14px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.35);
-        background: transparent;
-        color: #fff;
-        cursor: pointer;
-      }
-
-      .btn-gost:hover {
-        background: rgba(255, 255, 255, 0.08);
-      }
-
-      /* ================= HERO ================= */
-      .hero {
-        background: #161616;
-        color: #ffffff;
-        padding: 32px 16px 40px;
-      }
-
-      .hero-inner {
-        max-width: 1120px;
-        margin: 0 auto;
-      }
-
-      .hero-tag {
-        font-size: 0.75rem;
-        letter-spacing: 0.15em;
+      .updater-hero__inner { max-width: var(--lm-max-width); margin: 0 auto; }
+      .updater-hero__eyebrow {
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-2xs);
+        letter-spacing: 0.22em;
         text-transform: uppercase;
-        opacity: 0.7;
-        margin-bottom: 8px;
+        color: var(--lm-red);
+        display: flex; align-items: center; gap: 10px;
+        margin-bottom: var(--lm-space-4);
+      }
+      .updater-hero__eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--lm-red); }
+      .updater-hero__h {
+        font-family: var(--lm-font-display);
+        font-weight: 900;
+        font-size: clamp(40px, 6vw, 80px);
+        text-transform: uppercase;
+        line-height: 0.9;
+        letter-spacing: -0.015em;
+        color: var(--lm-paper);
+        margin: 0 0 var(--lm-space-4);
+      }
+      .updater-hero__sub {
+        font-size: var(--lm-text-md);
+        color: var(--lm-platinum);
+        line-height: 1.55;
+        max-width: 52ch;
+        margin: 0;
       }
 
-      .hero-title {
-        font-size: 2.2rem;
-        margin: 0 0 8px;
-      }
-
-      .hero-subtitle {
+      /* ── Main layout ── */
+      .updater-main {
         max-width: 720px;
-        font-size: 1rem;
-        opacity: 0.9;
+        margin: 0 auto;
+        padding: var(--lm-space-8) var(--lm-gutter) var(--lm-space-10);
+        display: flex; flex-direction: column; gap: var(--lm-space-5);
       }
 
-      /* ================= MAIN ================= */
-      main {
-        max-width: 1120px;
-        margin: 32px auto 48px;
-        padding: 0 16px;
+      /* ── Info card ── */
+      .u-card {
+        background: var(--lm-graphite);
+        border: 1px solid var(--lm-steel);
+        padding: var(--lm-space-6);
       }
-
-      .stack {
-        display: flex;
-        flex-direction: column;
-        gap: 18px; /* separación real entre bloques */
-      }
-
-      /* White card */
-      .card {
-        background: var(--lm-card-bg);
-        border-radius: 14px;
-        border: 1px solid var(--lm-border);
-        padding: 20px;
-        box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
-      }
-
-      .card-title {
-        font-size: 1.05rem;
+      .u-card__title {
+        font-family: var(--lm-font-display);
         font-weight: 700;
-        margin-bottom: 8px;
+        font-size: var(--lm-text-xl);
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        color: var(--lm-paper);
+        margin: 0 0 var(--lm-space-3);
       }
-
-      .muted {
-        color: var(--lm-text-muted);
-        font-size: 0.95rem;
+      .u-card p {
+        margin: 0 0 var(--lm-space-3);
+        color: var(--lm-platinum);
+        font-size: var(--lm-text-sm);
       }
+      .u-card p:last-child { margin-bottom: 0; }
 
       .steps {
-        padding-left: 18px;
-        margin: 12px 0;
+        list-style: decimal;
+        padding-left: 20px;
+        margin: var(--lm-space-3) 0;
+        color: var(--lm-platinum);
+        font-size: var(--lm-text-sm);
+        line-height: 1.7;
       }
+      .steps li { margin: var(--lm-space-1) 0; }
+      .steps strong { color: var(--lm-paper); }
 
-      .steps li {
-        margin: 6px 0;
+      .alert {
+        display: flex; gap: var(--lm-space-3);
+        background: rgba(215, 38, 30, 0.08);
+        border: 1px solid rgba(215, 38, 30, 0.3);
+        border-left: 3px solid var(--lm-red);
+        padding: var(--lm-space-4);
+        margin-top: var(--lm-space-4);
+        font-size: var(--lm-text-sm);
+        color: var(--lm-platinum);
+        line-height: 1.55;
       }
+      .alert svg { width: 18px; height: 18px; fill: var(--lm-red); flex-shrink: 0; margin-top: 2px; }
 
-      /* Warning */
-      .alert-danger {
-        display: flex;
-        gap: 10px;
-        background: #fff2ef;
-        border: 1px solid #ffd4cc;
-        border-radius: 12px;
-        padding: 14px;
-        margin-top: 14px;
-        color: #3a1b16;
-        font-size: 0.92rem;
-      }
-
-      .alert-danger svg {
-        width: 20px;
-        height: 20px;
-        fill: rgb(251, 44, 54);
-        flex-shrink: 0;
-        margin-top: 2px;
-      }
-
-      /* ================= DARK CTA BLOCK ================= */
+      /* ── CTA block ── */
       .cta-block {
-        background: #212121;
-        color: #f9fafb;
-        border-radius: 14px;
-        padding: 18px 20px;
-        box-shadow: 0 6px 16px rgba(15, 23, 42, 0.12);
+        background: var(--lm-graphite);
+        border: 1px solid var(--lm-steel);
+        border-left: 3px solid var(--lm-red);
+        padding: var(--lm-space-6);
       }
-
-      .cta-block .muted {
-        color: #d1d5db;
+      .cta-block p {
+        color: var(--lm-platinum);
+        font-size: var(--lm-text-sm);
+        margin: 0 0 var(--lm-space-4);
       }
-
-      .cta-block .hint {
-        font-size: 0.85rem;
-        color: #c3c3c3;
-        margin-top: 10px;
-      }
-
-      .actions {
-        margin-top: 10px;
+      .cta-hint {
+        margin-top: var(--lm-space-4);
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-2xs);
+        letter-spacing: 0.06em;
+        color: var(--lm-steel-300, #6B6B7A);
       }
 
       /* ESP Web Tools button */
       esp-web-install-button {
-        --esp-tools-button-color: var(--lm-primary);
+        --esp-tools-button-color: var(--lm-red);
         --esp-tools-button-text-color: #ffffff;
-        --esp-tools-button-border-radius: 999px;
-        --esp-tools-button-padding: 10px 18px;
-        --esp-tools-button-font-size: 0.95rem;
+        --esp-tools-button-border-radius: 2px;
+        --esp-tools-button-padding: 12px 24px;
+        --esp-tools-button-font-size: 0.9rem;
       }
 
-      /* ================= CONTACT ================= */
-      .btn-primary {
-        display: inline-flex;
-        padding: 9px 16px;
-        border-radius: 999px;
-        background: var(--lm-primary);
-        color: #fff;
-        font-weight: 700;
-        border: none;
+      /* ── Ghost button ── */
+      .btn-outline {
+        display: inline-flex; align-items: center;
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-2xs);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--lm-platinum);
+        border: 1px solid var(--lm-steel);
+        padding: 10px 18px;
+        background: transparent;
         cursor: pointer;
+        text-decoration: none;
+        transition: border-color var(--lm-dur-fast) var(--lm-ease), color var(--lm-dur-fast) var(--lm-ease);
       }
+      .btn-outline:hover { color: var(--lm-paper); border-color: var(--lm-platinum); }
 
-      .btn-primary:hover {
-        background: var(--lm-primary-dark);
+      /* ── Footer ── */
+      .updater-footer {
+        border-top: 1px solid var(--lm-steel);
+        padding: var(--lm-space-5) var(--lm-gutter);
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-2xs);
+        letter-spacing: 0.06em;
+        color: #6B6B7A;
+        display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--lm-space-3);
       }
-
-      /* ================= FOOTER ================= */
-      footer {
-        max-width: 1120px;
-        margin: 24px auto;
-        padding: 0 16px;
-        font-size: 0.82rem;
-        color: #9ca3af;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
+      .updater-footer a { color: inherit; }
+      .updater-footer a:hover { color: var(--lm-platinum); }
+      .updater-footer .links { display: flex; gap: var(--lm-space-4); }
     </style>
   </head>
 
   <body>
-    <!-- HEADER / NAV -->
-    <header class="header">
-      <nav class="nav">
-        <div class="logo">
-          <div class="logo-mark">
-            <img
-              src="../assets/img/logo-small.png"
-              alt="LineMaster 2.4GHz logo"
-            />
-          </div>
-          <div class="hero-tag">Control-Line Radio Ecosystem</div>
-        </div>
-
-        <div class="nav-links">
-          <button
-            class="btn-ghost"
-            onclick="location.href='https://www.linemaster24ghz.com/#tools'"
-          >
-            👈 Back
-          </button>
-        </div>
+    <header class="updater-header">
+      <nav class="updater-nav">
+        <a href="../" class="updater-logo">
+          <img src="../assets/img/logo-lockup-white.png" alt="LineMaster 2.4GHz" />
+        </a>
+        <a href="https://www.linemaster24ghz.com/#tools" class="back-link">👈 Back</a>
       </nav>
     </header>
 
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-inner">
-        <div class="hero-tag">Tools & Updaters</div>
-        <h1 class="hero-title">LM-X5 Receiver Firmware Updater</h1>
-        <p class="hero-subtitle">
-          Install the latest firmware for your
-          <strong>LineMaster 2.4GHz LM-X5</strong> receiver directly from your
-          browser.
-        </p>
+    <section class="updater-hero">
+      <div class="updater-hero__inner">
+        <div class="updater-hero__eyebrow">Tools &amp; Updaters</div>
+        <h1 class="updater-hero__h">LM-X5 Receiver Firmware Updater</h1>
+        <p class="updater-hero__sub">Install the latest firmware for your LineMaster 2.4GHz LM-X5 receiver directly from your browser.</p>
       </div>
     </section>
 
-    <!-- MAIN -->
-    <main>
-      <div class="stack">
-        <!-- Instructions -->
-        <section class="card">
-          <h2 class="card-title">Before you update</h2>
-          <p class="muted">
-            Keep it simple: connect your receiver and run the installer. No
-            extra apps required.
-          </p>
+    <main class="updater-main">
 
-          <ol class="steps muted">
-            <li>
-              Connect your LM-X5 receiver using a
-              <strong>USB-C data cable</strong>.
-            </li>
-            <li>
-              Use <strong>Google Chrome</strong> or
-              <strong>Microsoft Edge</strong>.
-            </li>
-          </ol>
-
-          <div class="alert-danger">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12
-                6.5 2 12 2zm0 3a1 1 0 0 0-.993.883L11 6v6a1 1 0 0 0
-                1.993.117L13 12V6a1 1 0 0 0-1-1zm0 12a1.5 1.5 0 1 0
-                .001-3.001A1.5 1.5 0 0 0 12 17z"
-              />
-            </svg>
-            <div>
-              Do not disconnect the receiver or turn off your computer during
-              the update. Place the receiver on a stable surface to prevent
-              accidental cable disconnection.
-            </div>
-          </div>
-        </section>
-
-        <!-- CTA -->
-        <section class="cta-block">
-          <p class="muted">Click below to connect and start the update:</p>
-
-          <div class="actions">
-            <esp-web-install-button manifest="./manifest_LM-5X.json">
-              Connect
-            </esp-web-install-button>
-          </div>
-
-          <div class="hint">
-            Tip: if the button does nothing, confirm you’re on Chrome/Edge and
-            the USB cable supports data.
-          </div>
-        </section>
-
-        <!-- Help -->
-        <section class="card">
-          <h2 class="card-title">Need help?</h2>
-          <p class="muted">
-            If the updater can’t find the device, try a different USB port or
-            cable.<br />
-            If you’re still having trouble or have any questions, don’t hesitate
-            to reach out — we’re here to help.
-          </p>
-
-          <div class="actions">
-            <a
-              class="btn-secondary"
-              href="https://www.linemaster24ghz.com/#contact"
-            >
-              Contact us
-            </a>
-          </div>
-        </section>
+      <div class="u-card">
+        <h2 class="u-card__title">Before you update</h2>
+        <p>Keep it simple: connect your receiver and run the installer. No extra apps required.</p>
+        <ol class="steps">
+          <li>Connect your LM-X5 receiver using a <strong>USB-C data cable</strong>.</li>
+          <li>Use <strong>Google Chrome</strong> or <strong>Microsoft Edge</strong>.</li>
+        </ol>
+        <div class="alert">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2zm0 3a1 1 0 0 0-.993.883L11 6v6a1 1 0 0 0 1.993.117L13 12V6a1 1 0 0 0-1-1zm0 12a1.5 1.5 0 1 0 .001-3.001A1.5 1.5 0 0 0 12 17z"/>
+          </svg>
+          <div>Do not disconnect the receiver or turn off your computer during the update. Place the receiver on a stable surface to prevent accidental cable disconnection.</div>
+        </div>
       </div>
+
+      <div class="cta-block">
+        <p>Click below to connect and start the update:</p>
+        <esp-web-install-button manifest="./manifest_LM-5X.json">
+          Connect
+        </esp-web-install-button>
+        <div class="cta-hint">Tip: if the button does nothing, confirm you're on Chrome/Edge and the USB cable supports data.</div>
+      </div>
+
+      <div class="u-card">
+        <h2 class="u-card__title">Need help?</h2>
+        <p>If the updater can't find the device, try a different USB port or cable.</p>
+        <p>If you're still having trouble or have any questions, don't hesitate to reach out — we're here to help.</p>
+        <a class="btn-outline" href="https://www.linemaster24ghz.com/#contact">Contact us</a>
+      </div>
+
     </main>
 
-    <!-- FOOTER -->
-    <footer>
+    <footer class="updater-footer">
       <span>© 2025 LineMaster 2.4GHz · LM-X5 Receiver Updater</span>
-      <div>
-        <a href="../">ToolBox</a> ·
-        <a
-          href="https://linemasters-organization.gitbook.io/warranty-and-return-policy/#warranty-claim-procedure"
-          target="_blank"
-          rel="noopener"
-          >Warranty &amp; Return Policy</a
-        >
+      <div class="links">
+        <a href="../">ToolBox</a>
+        <a href="https://linemasters-organization.gitbook.io/warranty-and-return-policy/#warranty-claim-procedure" target="_blank" rel="noopener">Warranty &amp; Return Policy</a>
       </div>
     </footer>
   </body>
