@@ -11,15 +11,18 @@
     <link rel="stylesheet" href="../css/variables.css" />
     <link rel="stylesheet" href="../css/global.css" />
     <style>
-      .project-hero {
-        background: var(--lm-black);
-        border-bottom: 1px solid var(--lm-steel);
-        padding: 80px var(--lm-gutter) 72px;
-        text-align: center;
+      .project-hero { background: var(--lm-black); border-bottom: 1px solid var(--lm-steel); overflow: hidden; }
+      .project-hero__inner {
+        max-width: var(--lm-max-width); margin: 0 auto;
+        padding: 56px var(--lm-gutter) 0;
+        display: grid; grid-template-columns: 1fr 1fr;
+        gap: 48px; align-items: center; min-height: 520px;
       }
-      .project-hero__inner { max-width: 720px; margin: 0 auto; }
+      .project-hero__media { overflow: hidden; background: var(--lm-black); }
+      .project-hero__media img { width: 100%; display: block; }
+      .project-hero__copy { padding-bottom: 56px; }
       .project-hero__tag {
-        display: inline-block;
+        display: inline-flex; align-items: center;
         font-family: var(--lm-font-mono);
         font-size: var(--lm-text-2xs);
         letter-spacing: 0.18em;
@@ -33,7 +36,7 @@
       .project-hero__h {
         font-family: var(--lm-font-display);
         font-weight: 900;
-        font-size: clamp(56px, 9vw, 112px);
+        font-size: clamp(56px, 8vw, 112px);
         text-transform: uppercase;
         line-height: 0.88;
         letter-spacing: -0.015em;
@@ -41,11 +44,11 @@
         margin: 0 0 var(--lm-space-5);
       }
       .project-hero__sub {
-        font-size: var(--lm-text-lg);
+        font-size: var(--lm-text-md);
         color: var(--lm-platinum);
-        line-height: 1.5;
-        margin: 0 auto;
-        max-width: 56ch;
+        line-height: 1.55;
+        max-width: 46ch;
+        margin-bottom: var(--lm-space-6);
       }
       .compat-note {
         background: var(--lm-graphite);
@@ -58,6 +61,11 @@
         text-transform: uppercase;
         color: var(--lm-amber);
         margin-bottom: var(--lm-space-5);
+      }
+      @media (max-width: 768px) {
+        .project-hero__inner { grid-template-columns: 1fr; min-height: auto; padding-bottom: 0; }
+        .project-hero__media { order: -1; }
+        .project-hero__copy { padding-bottom: 40px; }
       }
     </style>
   </head>
@@ -94,9 +102,14 @@
 
     <section class="project-hero">
       <div class="project-hero__inner">
-        <div class="project-hero__tag">Beta</div>
-        <h1 class="project-hero__h">Companion<br>Tool</h1>
-        <p class="project-hero__sub">Browser-based utility to emulate your LineMaster handle on screen, edit model profiles and sync SD card configuration for Typhoon and Zephyr handles.</p>
+        <div class="project-hero__copy">
+          <div class="project-hero__tag">Beta</div>
+          <h1 class="project-hero__h">Companion<br>Tool</h1>
+          <p class="project-hero__sub">Browser-based utility to emulate your LineMaster handle on screen, edit model profiles and sync SD card configuration for Typhoon and Zephyr handles.</p>
+        </div>
+        <div class="project-hero__media">
+          <img src="../assets/img/products/companion.jpg" alt="LineMaster Companion Tool" />
+        </div>
       </div>
     </section>
 
