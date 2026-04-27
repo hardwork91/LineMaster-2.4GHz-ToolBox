@@ -207,12 +207,12 @@ main {
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1px;
-  border: 1px solid var(--lm-steel);
+  gap: 8px;
 }
 
 .pcard {
   background: var(--lm-graphite);
+  border: 1px solid var(--lm-steel);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -344,13 +344,13 @@ main {
 .features-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  border: 1px solid var(--lm-steel);
+  gap: 8px;
   margin-bottom: var(--lm-space-6);
 }
 
 .feature-card {
   background: var(--lm-graphite);
+  border: 1px solid var(--lm-steel);
   padding: var(--lm-space-5);
 }
 
@@ -376,13 +376,13 @@ main {
 .config-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  border: 1px solid var(--lm-steel);
+  gap: 8px;
   margin-bottom: var(--lm-space-6);
 }
 
 .config-item {
   background: var(--lm-graphite);
+  border: 1px solid var(--lm-steel);
   padding: var(--lm-space-5);
   text-align: center;
 }
@@ -1107,9 +1107,8 @@ footer a:hover { color: var(--lm-paper); }
   .carousel-btn.prev { left: 0; }
   .carousel-btn.next { right: 0; }
 
-  .products-grid { gap: 0; }
-  .features-grid { gap: 0; grid-template-columns: repeat(2, 1fr); }
-  .config-grid { gap: 0; grid-template-columns: repeat(2, 1fr); }
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .config-grid { grid-template-columns: repeat(2, 1fr); }
   .links-grid { gap: 0; }
   .team-grid { gap: 0; }
 }
