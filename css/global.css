@@ -471,13 +471,13 @@ main {
 .links-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1px;
-  border: 1px solid var(--lm-steel);
+  gap: 8px;
   margin-bottom: var(--lm-space-7);
 }
 
 .link-card {
   background: var(--lm-graphite);
+  border: 1px solid var(--lm-steel);
   padding: var(--lm-space-5);
   display: flex;
   flex-direction: column;
@@ -1109,7 +1109,6 @@ footer a:hover { color: var(--lm-paper); }
 
   .features-grid { grid-template-columns: repeat(2, 1fr); }
   .config-grid { grid-template-columns: repeat(2, 1fr); }
-  .links-grid { gap: 0; }
   .team-grid { gap: 0; }
 }
 
