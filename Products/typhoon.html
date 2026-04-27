@@ -10,6 +10,7 @@
     <meta name="theme-color" content="#14141A" />
     <link rel="stylesheet" href="../css/variables.css" />
     <link rel="stylesheet" href="../css/global.css" />
+    <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
     <style>
       .product-hero { background: var(--lm-black); border-bottom: 1px solid var(--lm-steel); overflow: hidden; }
       .product-hero__inner {
@@ -163,8 +164,7 @@
 
     <script src="../js/gallery.js"></script>
     <script>
-      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: 'instant' });
       document.querySelector(".nav-toggle")?.addEventListener("click", () => { document.querySelector(".nav-links")?.classList.toggle("open"); });
       if (window.innerWidth <= 768) { document.querySelectorAll(".nav-dropdown > a").forEach(a => { a.addEventListener("click", e => { e.preventDefault(); a.parentElement.classList.toggle("open"); }); }); }
       const b = document.getElementById("backToTop");
