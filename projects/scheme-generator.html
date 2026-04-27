@@ -2,9 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Companion Tool | LineMaster 2.4GHz</title>
+    <title>Scheme Generator | LineMaster 2.4GHz</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="LineMaster 2.4GHz Companion – Browser-based tool to emulate your handle, edit profiles and sync SD card configuration." />
+    <meta name="description" content="LineMaster 2.4GHz Scheme Generator – Visual tool to design and export color schemes for control-line model aircraft." />
 
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/ico/apple-icon-180x180.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/ico/favicon-32x32.png" />
@@ -87,16 +87,6 @@
       }
       .try-banner strong { display: block; margin-bottom: 4px; }
       .try-banner span { font-size: 0.85rem; opacity: 0.8; }
-
-      .compat-note {
-        background: var(--lm-amber-bg);
-        border: 1px solid #fde68a;
-        border-radius: var(--lm-radius-sm);
-        padding: 12px 16px;
-        font-size: 0.85rem;
-        color: var(--lm-amber);
-        margin-bottom: 24px;
-      }
     </style>
   </head>
 
@@ -123,8 +113,8 @@
             <a href="../#projects" class="active">Projects &#9662;</a>
             <div class="nav-dropdown-menu">
               <a href="pathfinder.html">Pathfinder</a>
-              <a href="companion.html" class="active">Companion Tool</a>
-              <a href="scheme-generator/">Scheme Generator</a>
+              <a href="companion.html">Companion Tool</a>
+              <a href="scheme-generator.html" class="active">Scheme Generator</a>
             </div>
           </div>
           <a href="../#store">Store</a>
@@ -136,32 +126,28 @@
     <!-- ═══ HERO ═══ -->
     <section class="project-hero">
       <div class="project-hero-inner">
-        <div class="project-hero-tag">Beta</div>
-        <h1 class="project-hero-title">Companion Tool</h1>
+        <div class="project-hero-tag">Incoming Project</div>
+        <h1 class="project-hero-title">Scheme Generator</h1>
         <p class="project-hero-subtitle">
-          Browser-based utility to emulate your LineMaster handle on screen, edit model
-          profiles and sync SD card configuration for Typhoon and Zephyr handles.
+          Visual design tool for creating and exporting color schemes for control-line
+          model aircraft. Design your livery, preview it in real time and share it with
+          the community.
         </p>
       </div>
     </section>
 
     <!-- ═══ CONTENT ═══ -->
     <div class="product-section">
-      <div class="compat-note">
-        <strong>Browser compatibility:</strong> Requires Chrome or Edge on desktop (Web Serial API).
-        Not available on mobile browsers or Safari.
-      </div>
-
       <h2>About this Project</h2>
       <div class="info-card">
         <p>
-          The Companion Tool connects to your LineMaster handle via USB using the Web Serial API.
-          It provides a visual interface to view and edit model profiles, configure settings
-          and manage SD card contents — all without installing any software.
+          The Scheme Generator is a browser-based tool that lets you paint and design
+          color schemes directly on a model silhouette. Choose colors, patterns and
+          markings, then export your design as an image or share a link.
         </p>
         <p>
-          This tool is currently in beta. Features are being actively developed and refined
-          based on pilot feedback.
+          This project is currently under active development. Features, interface and
+          capabilities may change significantly as it evolves.
         </p>
       </div>
     </div>
@@ -170,16 +156,20 @@
       <h2>Planned Features</h2>
       <div class="features-grid">
         <div class="feature-card">
-          <strong>Handle Emulation</strong>
-          <p>See your handle's display and controls rendered on screen in real time.</p>
+          <strong>Model Silhouettes</strong>
+          <p>Paint directly onto accurate top-view and side-view model outlines.</p>
         </div>
         <div class="feature-card">
-          <strong>Model Profile Editor</strong>
-          <p>Create, edit and organize model profiles with a visual interface.</p>
+          <strong>Color Picker</strong>
+          <p>Full color palette with support for custom hex values and saved swatches.</p>
         </div>
         <div class="feature-card">
-          <strong>SD Card Sync</strong>
-          <p>Read and write configuration files on your handle's SD card directly from the browser.</p>
+          <strong>Export &amp; Share</strong>
+          <p>Download your scheme as a PNG image or share it via a short link.</p>
+        </div>
+        <div class="feature-card">
+          <strong>Pattern Library</strong>
+          <p>Choose from built-in geometric patterns and classic control-line liveries.</p>
         </div>
       </div>
     </div>
@@ -187,10 +177,10 @@
     <div class="product-section">
       <div class="try-banner">
         <div>
-          <strong>Try the beta</strong>
-          <span>Connect your handle via USB-C — Chrome or Edge on desktop only</span>
+          <strong>Try the current build</strong>
+          <span>Work in progress — runs in any modern browser</span>
         </div>
-        <a href="../lm-companion/" class="tool-link primary">Launch Companion</a>
+        <a href="scheme-generator/" class="tool-link primary">Launch Scheme Generator</a>
       </div>
     </div>
 
