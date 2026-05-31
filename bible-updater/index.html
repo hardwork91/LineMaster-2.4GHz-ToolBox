@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Biblia Updater | LineMaster 2.4GHz</title>
+    <meta
+      name="description"
+      content="Update the firmware of your LineMaster 2.4GHz Biblia device directly from your browser."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/ico/apple-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/ico/favicon-32x32.png" />
+    <meta name="theme-color" content="#14141A" />
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700;800;900&display=swap');
+      :root {
+        --lm-black:#0A0A0B; --lm-ink:#14141A; --lm-graphite:#1E1E26; --lm-steel:#2A2A33; --lm-gunmetal:#3D3D48;
+        --lm-silver:#8A8A95; --lm-platinum:#C9C9D1; --lm-bone:#F2F2EC; --lm-paper:#FAFAF6;
+        --lm-red:#D7261E; --lm-red-hot:#FF3B2F; --lm-red-deep:#8C1812; --lm-red-tint:#2A0E0C;
+        --lm-amber:#F0A93B; --lm-jade:#2FBF7E; --lm-cyan:#4FB8E0;
+        --lm-font-display:'Barlow Condensed','Oswald','Bebas Neue',sans-serif;
+        --lm-font-body:'Space Grotesk','Inter',system-ui,sans-serif;
+        --lm-font-mono:'JetBrains Mono','IBM Plex Mono',ui-monospace,monospace;
+        --lm-text-2xs:11px; --lm-text-xs:12px; --lm-text-sm:14px; --lm-text-md:16px;
+        --lm-text-lg:18px; --lm-text-xl:22px; --lm-text-2xl:28px; --lm-text-3xl:40px;
+        --lm-space-1:4px; --lm-space-2:8px; --lm-space-3:12px; --lm-space-4:16px;
+        --lm-space-5:24px; --lm-space-6:32px; --lm-space-7:48px; --lm-space-8:64px;
+        --lm-space-9:96px; --lm-space-10:128px;
+        --lm-ease:220ms cubic-bezier(.4,0,.1,1);
+        --lm-dur-fast:120ms;
+        --lm-max-width:1280px; --lm-gutter:clamp(16px,4vw,48px);
+      }
+    </style>
+
+    <!-- ESP Web Tools -->
+    <script type="module">
+      import 'https://unpkg.com/esp-web-tools/dist/web/install-button.js?module';
+    </script>
+
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: var(--lm-ink);
+        color: var(--lm-paper);
+        font-family: var(--lm-font-body);
+        font-size: var(--lm-text-sm);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex; flex-direction: column;
+      }
+
+      a { text-decoration: none; color: inherit; }
+
+      /* ── Topbar ── */
+      .updater-header {
+        position: sticky; top: 0; z-index: 20;
+        background: var(--lm-black);
+        border-bottom: 1px solid var(--lm-steel);
+      }
+      .updater-nav {
+        max-width: var(--lm-max-width); margin: 0 auto;
+        padding: 0 var(--lm-gutter);
+        height: 56px;
+        display: flex; align-items: center; justify-content: space-between;
+      }
+      .updater-logo img { height: 26px; display: block; }
+      .back-link {
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-2xs);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--lm-platinum);
+        border: 1px solid var(--lm-steel);
+        padding: 6px 14px;
+        transition: border-color var(--lm-dur-fast) var(--lm-ease),
+                    color var(--lm-dur-fast) var(--lm-ease);
+      }
+      .back-link:hover { color: var(--lm-paper); border-color: var(--lm-platinum); }
+
+      /* ── Main ── */
+      .updater-main {
+        flex: 1;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        gap: var(--lm-space-6);
+        padding: var(--lm-space-9) var(--lm-gutter);
+        text-align: center;
+      }
+      .updater-eyebrow {
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-2xs);
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--lm-red);
+      }
+      .updater-h1 {
+        font-family: var(--lm-font-display);
+        font-weight: 900;
+        font-size: clamp(44px, 7vw, 88px);
+        text-transform: uppercase;
+        line-height: 0.9;
+        letter-spacing: -0.015em;
+        color: var(--lm-paper);
+        margin: 0;
+      }
+
+      /* ESP Web Tools install button */
+      esp-web-install-button {
+        --esp-tools-button-color: var(--lm-red);
+        --esp-tools-button-text-color: #ffffff;
+        --esp-tools-button-border-radius: 2px;
+        --esp-tools-button-padding: 14px 32px;
+        --esp-tools-button-font-size: 0.95rem;
+      }
+
+      /* ── Footer ── */
+      .updater-footer {
+        border-top: 1px solid var(--lm-steel);
+        padding: var(--lm-space-5) var(--lm-gutter);
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-2xs);
+        letter-spacing: 0.06em;
+        color: #6B6B7A;
+        display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--lm-space-3);
+      }
+      .updater-footer a { color: inherit; }
+      .updater-footer a:hover { color: var(--lm-platinum); }
+      .updater-footer .links { display: flex; gap: var(--lm-space-4); }
+    </style>
+  </head>
+
+  <body>
+    <header class="updater-header">
+      <nav class="updater-nav">
+        <a href="../" class="updater-logo">
+          <img src="../assets/img/logo-lockup-white.png" alt="LineMaster 2.4GHz" />
+        </a>
+        <a href="https://www.linemaster24ghz.com/#tools" class="back-link">👈 Back</a>
+      </nav>
+    </header>
+
+    <main class="updater-main">
+      <div class="updater-eyebrow">Firmware updater</div>
+      <h1 class="updater-h1">Biblia updater</h1>
+      <esp-web-install-button manifest="./manifest_bible.json">
+        Launch updater
+      </esp-web-install-button>
+    </main>
+
+    <footer class="updater-footer">
+      <span>© 2025 LineMaster 2.4GHz · Biblia Updater</span>
+      <div class="links">
+        <a href="../">ToolBox</a>
+        <a href="https://linemasters-organization.gitbook.io/warranty-and-return-policy/#warranty-claim-procedure" target="_blank" rel="noopener">Warranty &amp; Return Policy</a>
+      </div>
+    </footer>
+  </body>
+</html>
