@@ -231,6 +231,35 @@
             </div>
           </a>
         </div>
+
+        <!-- CTA: full catalog on Etsy. Lives right after the product cards
+             so pilots that finish browsing have a clear shortcut to the
+             store without having to scroll all the way to the dedicated
+             Store section further down the page. -->
+        <div
+          style="
+            margin-top: var(--lm-space-6);
+            display: flex; flex-wrap: wrap; align-items: center;
+            justify-content: space-between; gap: var(--lm-space-4);
+            padding: var(--lm-space-4) var(--lm-space-5);
+            background: var(--lm-graphite);
+            border: 1px solid var(--lm-steel);
+            border-left: 3px solid var(--lm-red);
+          "
+        >
+          <p style="margin:0;color:var(--lm-platinum);font-size:var(--lm-text-sm);max-width:48ch">
+            Ready to buy? Browse the complete catalog and place your order through our Etsy store.
+          </p>
+          <a
+            href="https://www.etsy.com/shop/linemaster24ghz"
+            target="_blank"
+            rel="noopener"
+            class="lm-btn lm-btn--primary"
+            style="flex-shrink:0"
+          >
+            Explore all products on Etsy <span class="lm-btn__arrow">→</span>
+          </a>
+        </div>
       </section>
 
       <!-- ── Incoming Projects ── -->
@@ -444,6 +473,23 @@
           <button class="carousel-btn next" type="button" aria-label="Next testimonial">&#8250;</button>
         </div>
         <div class="carousel-dots" id="testimonialDots" aria-label="Carousel dots"></div>
+      </section>
+
+      <!-- ── Map ── -->
+      <section id="map" class="site-section">
+        <div class="section-label">Map</div>
+        <h2 class="section-title">On the map</h2>
+        <p class="section-subtitle">Where LineMaster 2.4GHz flies. Pilots pinned across the world.</p>
+
+        <div style="border:1px solid var(--lm-steel);background:#0a0a14;margin-top:var(--lm-space-5)">
+          <iframe
+            src="https://www.google.com/maps/d/embed?mid=1bS2vANdRDdMWamhBZhwyR8Vg6Tm9aFw&hl=en"
+            title="LineMaster 2.4GHz community map"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            style="display:block;width:100%;height:clamp(360px, 56vw, 640px);border:0"
+            allowfullscreen></iframe>
+        </div>
       </section>
 
       <!-- ── Team ── -->
