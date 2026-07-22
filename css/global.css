@@ -110,6 +110,12 @@ img { display: block; max-width: 100%; }
   background: rgba(255,255,255,0.04);
 }
 
+.nav-dropdown-divider {
+  height: 1px;
+  margin: 6px 12px;
+  background: var(--lm-steel);
+}
+
 /* Mobile toggle */
 .nav-toggle {
   display: none;
@@ -500,6 +506,106 @@ main {
   color: var(--lm-platinum);
   flex: 1;
   line-height: 1.55;
+}
+
+/* ── Resource cards (free 3D models) ─────────────── */
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 8px;
+}
+
+.resource-card {
+  background: var(--lm-graphite);
+  border: 1px solid var(--lm-steel);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.resource-card__media {
+  background: var(--lm-black);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.resource-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.resource-card__body {
+  padding: var(--lm-space-5);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lm-space-3);
+}
+
+.resource-card__tag {
+  font-family: var(--lm-font-mono);
+  font-size: var(--lm-text-2xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--lm-red);
+}
+
+.resource-card__name {
+  font-family: var(--lm-font-display);
+  font-weight: 800;
+  font-size: var(--lm-text-2xl);
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0;
+  color: var(--lm-paper);
+}
+
+.resource-card__desc {
+  margin: 0;
+  font-size: var(--lm-text-sm);
+  color: var(--lm-platinum);
+  line-height: 1.55;
+}
+
+.resource-card__print {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: var(--lm-space-3);
+  background: var(--lm-black);
+  border: 1px solid var(--lm-steel);
+  padding: var(--lm-space-3);
+}
+
+.resource-card__print img {
+  width: 88px;
+  height: 88px;
+  object-fit: cover;
+  border: 1px solid var(--lm-steel);
+  cursor: pointer;
+}
+
+.resource-card__params {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px var(--lm-space-3);
+  align-content: start;
+  font-family: var(--lm-font-mono);
+  font-size: var(--lm-text-2xs);
+  letter-spacing: 0.04em;
+}
+
+.resource-card__params span:nth-child(odd) { color: var(--lm-silver); text-transform: uppercase; }
+.resource-card__params span:nth-child(even) { color: var(--lm-paper); font-weight: 500; }
+
+.resource-card__body > .lm-btn { align-self: flex-start; margin-top: auto; }
+
+@media (max-width: 480px) {
+  .resource-card__print { grid-template-columns: 72px 1fr; }
+  .resource-card__print img { width: 72px; height: 72px; }
 }
 
 /* ── Info card (project pages) ───────────────────── */
