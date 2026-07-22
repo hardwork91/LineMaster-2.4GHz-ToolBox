@@ -19,23 +19,32 @@ If there's nothing pending (`git status` is clean and local `main` already match
 ### 2. Summarize the changes for the user
 Before touching anything, give a short human-readable list of what changed (which pages/files, and roughly why, based on the diff and recent conversation context) — not a raw `git status` dump.
 
-### 3. Stage deliberately
+### 3. Bump the cache-busting version if CSS/JS changed
+GitHub Pages doesn't let this repo set real `Cache-Control` headers, so shared assets (`css/variables.css`, `css/global.css`, `js/gallery.js`) carry a `?v=<timestamp>` query string on every page that includes them — that's the only reliable way to force browsers (and GitHub's CDN) to fetch the fresh file instead of a stale cached copy. It's what caused a "broken style until hard refresh" incident before this existed.
+
+If this publish touches `css/global.css`, `css/variables.css`, or `js/gallery.js`, run:
+```
+bash .claude/skills/publish-site/scripts/bump_cache_version.sh
+```
+This rewrites the `?v=...` on every tracked HTML page to a fresh timestamp. Run it before staging so the updated HTML files are included in the commit. Skip it if this publish doesn't touch those shared files — no need to bump a version nothing changed.
+
+### 4. Stage deliberately
 Stage the files that belong to this publish with `git add <specific paths>`. Don't reach for `git add -A` or `git add .` on autopilot — glance at what's untracked first so a stray scratch file, credential, or unrelated experiment doesn't hitch a ride into the commit.
 
-### 4. Commit
+### 5. Commit
 Write a Conventional Commit message (`feat:`, `fix:`, `chore:`, etc.) in English, focused on *why* the change was made, not a restatement of the filenames. Create a new commit — don't amend, don't use `--no-verify`.
 
-### 5. Show the push preview and get explicit confirmation
+### 6. Show the push preview and get explicit confirmation
 Before running `git push`, tell the user plainly:
 - which branch and remote (`main` → `origin`, i.e. `https://github.com/hardwork91/LineMaster-2.4GHz-ToolBox.git`)
 - the commit(s) about to go out (`git log origin/main..HEAD --oneline`)
 
 Then ask a direct yes/no question — something like "¿Confirmas el push a `main`? Esto dispara el rebuild en vivo de GitHub Pages." Wait for a clear yes. Don't infer consent from the original "publish the site" request — that request authorizes the workflow up to this checkpoint, not the push itself.
 
-### 6. Push
+### 7. Push
 Only after explicit confirmation, run `git push origin main`. Never `--force`, never push to any branch other than what the user confirmed.
 
-### 7. Close the loop
+### 8. Close the loop
 Tell the user the push succeeded and that GitHub Pages typically takes a couple of minutes to rebuild before www.linemaster24ghz.com shows the update. If they want to watch the build, point them at `https://github.com/hardwork91/LineMaster-2.4GHz-ToolBox/actions` (or the repo's Pages settings) rather than fetching it yourself.
 
 ## If something's off
