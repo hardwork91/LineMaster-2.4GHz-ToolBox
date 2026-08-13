@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="../js/blog-hidden.js?v=20260722210701"></script>
+    <script>
+      (function () {
+        var slug = location.pathname.split("/").pop();
+        var isHidden = (window.LM_HIDDEN_POSTS || []).indexOf(slug) !== -1;
+        var params = new URLSearchParams(location.search);
+        if (isHidden && params.get("hidden") !== "false") location.replace("./");
+      })();
+    </script>
+    <title>Understanding Throttle Cut: What It Is and How to Set It Up | LineMaster 2.4GHz Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="What LineMaster 2.4GHz's throttle cut button actually does and how to calibrate it for combustion and electric models." />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/ico/apple-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/ico/favicon-32x32.png" />
+    <meta name="theme-color" content="#14141A" />
+    <link rel="stylesheet" href="../css/variables.css?v=20260722210701" />
+    <link rel="stylesheet" href="../css/global.css?v=20260722210701" />
+    <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
+    <style>
+      .project-hero { background: var(--lm-black); border-bottom: 1px solid var(--lm-steel); overflow: hidden; }
+      .project-hero__inner {
+        max-width: 760px; margin: 0 auto;
+        padding: 56px var(--lm-gutter) 64px;
+      }
+      .project-hero__tag {
+        display: inline-flex; align-items: center;
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-2xs);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--lm-red);
+        border: 1px solid var(--lm-red);
+        border-radius: var(--lm-radius-pill);
+        padding: 4px 12px;
+        margin-bottom: var(--lm-space-5);
+      }
+      .project-hero__h {
+        font-family: var(--lm-font-display);
+        font-weight: 900;
+        font-size: clamp(36px, 5.5vw, 60px);
+        text-transform: uppercase;
+        line-height: 1;
+        letter-spacing: -0.01em;
+        color: var(--lm-paper);
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body class="lm-dark">
+    <header class="header">
+      <nav class="nav">
+        <a href="../" class="logo"><img src="../assets/img/logo-lockup-white.png" alt="LineMaster 2.4GHz" /></a>
+        <button class="nav-toggle" type="button" aria-label="Toggle navigation">&#9776;</button>
+        <div class="nav-links">
+          <a href="../">Home</a>
+          <div class="nav-dropdown">
+            <a href="../#products">Products &#9662;</a>
+            <div class="nav-dropdown-menu">
+              <a href="../Products/typhoon.html">Typhoon Handle</a>
+              <a href="../Products/zephyr.html">Zephyr Handle</a>
+              <a href="../Products/lm-x5.html">LM-X5 Receiver</a>
+              <a href="../Products/lm-t1.html">LM-T1 Timer</a>
+              <div class="nav-dropdown-divider"></div>
+              <a href="../resources/">Free 3D Models</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <a href="../#projects">Projects &#9662;</a>
+            <div class="nav-dropdown-menu">
+              <a href="../projects/pathfinder.html">Pathfinder</a>
+              <a href="../projects/companion.html">Companion Tool</a>
+              <a href="../projects/scheme-generator/" target="_blank" rel="noopener">Scheme Generator</a>
+            </div>
+          </div>
+          <a href="./" class="active">Blog</a>
+          <a href="../#store">Store</a>
+          <a href="../#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="project-hero">
+      <div class="project-hero__inner">
+        <div class="project-hero__tag">Handle Setup</div>
+        <h1 class="project-hero__h">Understanding Throttle Cut: What It Is and How to Set It Up</h1>
+      </div>
+    </section>
+
+    <div class="product-section">
+      <article class="blog-article">
+        <img class="blog-article__cover" src="../assets/img/blog/throttle-cut/cover.jpg" alt="Understanding the LineMaster 2.4GHz throttle cut feature" loading="lazy" />
+
+        <p>Throttle cut is one of those buttons you use all the time without thinking much about it — until you have to set it up from scratch. It's worth understanding exactly what it does, because a poorly configured throttle cut can cost you a rough landing, or worse, an engine that won't shut off when you need it to.</p>
+
+        <p>It's a dedicated push button on both the Zephyr and Typhoon, and it works exactly the same way on both: it lets you move the throttle to a position you define in the model's settings, ideal for shutting down the engine or bringing it to a safe position remotely.</p>
+
+        <p>What does change is how this feature behaves depending on your propulsion type — electric or combustion — so let's go through both.</p>
+
+        <figure>
+          <img src="../assets/img/blog/throttle-cut/button.jpg" alt="Throttle cut push button on the handle" loading="lazy" />
+          <figcaption>The throttle cut button</figcaption>
+        </figure>
+
+        <h2>Setting Up Throttle Cut for Combustion</h2>
+
+        <p>For combustion engines, this feature goes hand in hand with properly setting up the carburetor servo's travel, so it's worth taking your time the first go-around. Here's the process:</p>
+
+        <ol>
+          <li>Set the direction of the servo that controls the carburetor so it matches the trigger: squeezing the trigger should open the carburetor.</li>
+          <li>With the trigger released and the pushrod disconnected (so you don't force the servo), adjust the servo's minimum position in the model setup until the carburetor sits at a partially-open position — a bit more open than idle; you'll fine-tune this later.</li>
+          <li>Adjust the maximum travel: a full trigger squeeze should move the servo to fully open the carburetor, without forcing it.</li>
+          <li>Connect the pushrod to the carburetor arm and fine-tune these values, making sure the servo never binds at either end of its travel.</li>
+        </ol>
+
+        <figure>
+          <img src="../assets/img/blog/throttle-cut/carburetor-linkage.jpg" alt="Servo pushrod connected to the carburetor arm" loading="lazy" />
+          <figcaption>Pushrod connected to the carburetor arm</figcaption>
+        </figure>
+
+        <ol start="5">
+          <li>Set the throttle cut position: this should move the servo to fully close the carburetor, without forcing or mechanically limiting the movement.</li>
+          <li>With this initial setup in place, start the engine and confirm it shuts off correctly when you hold the throttle cut button.</li>
+          <li>With the engine running, dial in the minimum throttle (idle): release the trigger, select this option from the menu, and adjust the value until you find the minimum opening that keeps the engine idling steadily.</li>
+          <li>Test accelerating and decelerating to confirm everything behaves as expected.</li>
+        </ol>
+
+        <p>With that, both throttle control and throttle cut are properly calibrated.</p>
+
+        <h2>Setting Up Throttle Cut for Electric</h2>
+
+        <p>For electric models, the process is much simpler. The throttle channel works on a -100 to 100 range, which maps to 0-100% throttle for the ESC.</p>
+
+        <p>One thing worth clarifying: reversing this channel does <strong>not</strong> reverse the motor's spin direction. What it does is flip the relationship between the trigger and the throttle — the motor would sit at 100% with the trigger released, and 0% with the trigger squeezed. This isn't a recommended setup unless you know exactly what you're doing.</p>
+
+        <p>If what you actually want is to reverse the motor's spin direction, the correct way is physical: swap two of the three wires between the motor and the ESC.</p>
+
+        <figure>
+          <img src="../assets/img/blog/throttle-cut/motor-wire-swap.jpg" alt="Diagram showing two motor wires swapped to reverse spin direction" loading="lazy" />
+          <figcaption>Swap two of the three motor wires to reverse rotation</figcaption>
+        </figure>
+
+        <p>For electric setups, motor cut corresponds to a value of -100, which is equivalent to 0% throttle.</p>
+
+        <h2>How Throttle Cut Locks the Throttle</h2>
+
+        <p>Holding down the throttle cut button locks the throttle and moves it to the position you defined in the model's settings. That lock stays in place even after you release the button: the trigger stops responding, and a padlock icon appears on screen right next to the model name to let you know the throttle is still locked.</p>
+
+        <p>To get control back, hold down the throttle cut button again — this unlocks the throttle and control returns to the trigger immediately.</p>
+
+        <figure>
+          <img src="../assets/img/blog/throttle-cut/lock-icon.jpg" alt="Handle screen showing the throttle lock icon next to the model name" loading="lazy" />
+          <figcaption>The lock icon next to the model name</figcaption>
+        </figure>
+
+        <p>Whatever your setup, always test throttle cut on the ground after any adjustment before trusting it in flight.</p>
+      </article>
+    </div>
+
+    <div class="product-section">
+      <div class="links-grid">
+        <div class="link-card">
+          <h3>All Posts</h3>
+          <p>Back to the full list of blog posts.</p>
+          <a href="./" class="lm-btn lm-btn--primary lm-btn--sm">View Blog <span class="lm-btn__arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <span>© 2025 LineMaster 2.4GHz · Miami, FL</span>
+      <div class="links">
+        <a href="../">Home</a>
+        <a href="../#products">Products</a>
+        <a href="../#store">Store</a>
+        <a href="../#contact">Contact</a>
+        <a href="https://linemasters-organization.gitbook.io/warranty-and-return-policy/#warranty-claim-procedure" target="_blank" rel="noopener">Warranty &amp; Returns</a>
+      </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">&#8593;</button>
+
+    <script>
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      document.querySelector(".nav-toggle")?.addEventListener("click", () => { document.querySelector(".nav-links")?.classList.toggle("open"); });
+      if (window.innerWidth <= 768) { document.querySelectorAll(".nav-dropdown > a").forEach(a => { a.addEventListener("click", e => { e.preventDefault(); a.parentElement.classList.toggle("open"); }); }); }
+      const b = document.getElementById("backToTop");
+      window.addEventListener("scroll", () => { b?.classList.toggle("is-visible", (window.scrollY || 0) > 300); }, { passive: true });
+      b?.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: "smooth" }); });
+    </script>
+  </body>
+</html>

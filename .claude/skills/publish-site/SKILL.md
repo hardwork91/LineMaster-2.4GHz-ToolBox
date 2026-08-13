@@ -20,9 +20,9 @@ If there's nothing pending (`git status` is clean and local `main` already match
 Before touching anything, give a short human-readable list of what changed (which pages/files, and roughly why, based on the diff and recent conversation context) — not a raw `git status` dump.
 
 ### 3. Bump the cache-busting version if CSS/JS changed
-GitHub Pages doesn't let this repo set real `Cache-Control` headers, so shared assets (`css/variables.css`, `css/global.css`, `js/gallery.js`) carry a `?v=<timestamp>` query string on every page that includes them — that's the only reliable way to force browsers (and GitHub's CDN) to fetch the fresh file instead of a stale cached copy. It's what caused a "broken style until hard refresh" incident before this existed.
+GitHub Pages doesn't let this repo set real `Cache-Control` headers, so shared assets (`css/variables.css`, `css/global.css`, `js/gallery.js`, `js/blog-hidden.js`) carry a `?v=<timestamp>` query string on every page that includes them — that's the only reliable way to force browsers (and GitHub's CDN) to fetch the fresh file instead of a stale cached copy. It's what caused a "broken style until hard refresh" incident before this existed.
 
-If this publish touches `css/global.css`, `css/variables.css`, or `js/gallery.js`, run:
+If this publish touches `css/global.css`, `css/variables.css`, `js/gallery.js`, or `js/blog-hidden.js`, run:
 ```
 bash .claude/skills/publish-site/scripts/bump_cache_version.sh
 ```

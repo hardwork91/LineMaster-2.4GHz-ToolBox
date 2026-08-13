@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="../js/blog-hidden.js?v=20260722210701"></script>
+    <script>
+      (function () {
+        var slug = location.pathname.split("/").pop();
+        var isHidden = (window.LM_HIDDEN_POSTS || []).indexOf(slug) !== -1;
+        var params = new URLSearchParams(location.search);
+        if (isHidden && params.get("hidden") !== "false") location.replace("./");
+      })();
+    </script>
+    <title>Redesigning the Slide &amp; Lock: What Happened, Why, and How We Fixed It | LineMaster 2.4GHz Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="The full story behind the Slide & Lock plate failures, the redesigned locking mechanism, how it was validated, and how to upgrade an existing LineMaster 2.4GHz handle." />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/ico/apple-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/ico/favicon-32x32.png" />
+    <meta name="theme-color" content="#14141A" />
+    <link rel="stylesheet" href="../css/variables.css?v=20260722210701" />
+    <link rel="stylesheet" href="../css/global.css?v=20260722210701" />
+    <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
+    <style>
+      .project-hero { background: var(--lm-black); border-bottom: 1px solid var(--lm-steel); overflow: hidden; }
+      .project-hero__inner {
+        max-width: 760px; margin: 0 auto;
+        padding: 56px var(--lm-gutter) 64px;
+      }
+      .project-hero__tag {
+        display: inline-flex; align-items: center;
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-2xs);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--lm-red);
+        border: 1px solid var(--lm-red);
+        border-radius: var(--lm-radius-pill);
+        padding: 4px 12px;
+        margin-bottom: var(--lm-space-5);
+      }
+      .project-hero__h {
+        font-family: var(--lm-font-display);
+        font-weight: 900;
+        font-size: clamp(36px, 5.5vw, 60px);
+        text-transform: uppercase;
+        line-height: 1;
+        letter-spacing: -0.01em;
+        color: var(--lm-paper);
+        margin: 0;
+      }
+      .blog-signature {
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-sm);
+        letter-spacing: 0.08em;
+        color: var(--lm-silver);
+        margin-top: var(--lm-space-6);
+      }
+    </style>
+  </head>
+
+  <body class="lm-dark">
+    <header class="header">
+      <nav class="nav">
+        <a href="../" class="logo"><img src="../assets/img/logo-lockup-white.png" alt="LineMaster 2.4GHz" /></a>
+        <button class="nav-toggle" type="button" aria-label="Toggle navigation">&#9776;</button>
+        <div class="nav-links">
+          <a href="../">Home</a>
+          <div class="nav-dropdown">
+            <a href="../#products">Products &#9662;</a>
+            <div class="nav-dropdown-menu">
+              <a href="../Products/typhoon.html">Typhoon Handle</a>
+              <a href="../Products/zephyr.html">Zephyr Handle</a>
+              <a href="../Products/lm-x5.html">LM-X5 Receiver</a>
+              <a href="../Products/lm-t1.html">LM-T1 Timer</a>
+              <div class="nav-dropdown-divider"></div>
+              <a href="../resources/">Free 3D Models</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <a href="../#projects">Projects &#9662;</a>
+            <div class="nav-dropdown-menu">
+              <a href="../projects/pathfinder.html">Pathfinder</a>
+              <a href="../projects/companion.html">Companion Tool</a>
+              <a href="../projects/scheme-generator/" target="_blank" rel="noopener">Scheme Generator</a>
+            </div>
+          </div>
+          <a href="./" class="active">Blog</a>
+          <a href="../#store">Store</a>
+          <a href="../#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="project-hero">
+      <div class="project-hero__inner">
+        <div class="project-hero__tag">Safety &amp; Redesign</div>
+        <h1 class="project-hero__h">Redesigning the Slide &amp; Lock: What Happened, Why, and How We Fixed It</h1>
+      </div>
+    </section>
+
+    <div class="product-section">
+      <article class="blog-article">
+        <img class="blog-article__cover" src="../assets/img/blog/slide-lock-redesign/cover.jpg" alt="The redesigned Slide & Lock mechanism" loading="lazy" />
+
+        <h2>What Happened</h2>
+
+        <p>A few months ago I received the first report of a situation where, during an abrupt maneuver to try to recover a model that had lost line tension, the Slide &amp; Lock plate came out of the handle. At the time, I worked on reinforcing the mechanism, considering it a very uncommon condition.</p>
+
+        <p>Not long after, I received two more reports of similar situations. In every case, the models suffered significant damage — and those of us who are part of this hobby know exactly what that means. It is not only the cost of an airplane, but also the many hours of building, adjusting, testing, and dedication that go into each one.</p>
+
+        <p>For that reason, I decided to temporarily stop selling LineMaster 2.4GHz handles. I did not want to keep putting models at risk while I worked on a permanent solution.</p>
+
+        <p>This post is that permanent solution: what I found, how I redesigned the system, and how you can upgrade your handle if you already own one.</p>
+
+        <h2>Why It Was Happening</h2>
+
+        <p>The original Slide &amp; Lock system did have a retention mechanism, but that mechanism was not secure enough when an excessive force was applied suddenly in the direction the plate slides out, or close to it. That is exactly what happens when you try to abruptly recover a model that has lost line tension: the force of the pull ends up aligned with that critical direction, and the plate can release from the handle. The result is a complete loss of control of the model.</p>
+
+        <h2>The Redesign: A More Secure Lock</h2>
+
+        <p>The solution could not simply be to "tighten up" the existing retention mechanism — that eventually fails again under the right load, in the right direction. What I needed was a second stage of retention, independent of the first, that mechanically locks the plate in place — and all of this without sacrificing the convenience of the Slide &amp; Lock system (that's what I call it): slide the plate in to lock it, press a button or lever to release it, exactly like the previous system worked. I also didn't want to add external accessories you'd have to keep attaching and removing from the handle.</p>
+
+        <p>The new plate has two flexible legs that compress together to enter and exit the handle's slot — that keeps the same ease of use as the original system, quick to install and remove. The difference is what happens after: inside the handle there is a pivoting piece mounted on a spring, which by default is always pushed toward the locked position, right between the two legs. As long as that piece is there, the legs cannot compress, so the plate cannot come out — regardless of the force or the angle of the pull.</p>
+
+        <p>To remove the plate intentionally, you press that piece against the spring, which moves it out of the space between the legs; only then are the legs free to flex and the plate can be pulled out. When you let go, the spring returns the piece to its locked position automatically. The system is locked by default — it doesn't depend on the pilot remembering to engage a safety, because the safety is always engaged unless it's deliberately pressed.</p>
+
+        <figure>
+          <img src="../assets/img/blog/slide-lock-redesign/mechanism.jpg" alt="The new plate with its two flexible legs inserted in the handle" loading="lazy" />
+          <figcaption>The new plate locked in the handle</figcaption>
+        </figure>
+
+        <figure>
+          <img src="../assets/img/blog/slide-lock-redesign/pivot-spring.jpg" alt="The spring-loaded pivoting piece inside the handle" loading="lazy" />
+          <figcaption>The spring-loaded pivoting piece</figcaption>
+        </figure>
+
+        <h2>Another Improvement: Line Spacing Without Relying on Friction</h2>
+
+        <p>While I was at it, I also solved a problem no pilot has reported to me, but that we understand could become one under severe loads — so we decided to adopt this solution preventively.</p>
+
+        <p>The previous system for adjusting the spacing between the two lines used a continuous channel with a hollow bolt sliding along it, secured with a hex nut. To keep that bolt from shifting along the channel under line tension — especially on heavier models — the nut had to be tightened down hard. That excessive tightening ended up marking or damaging the plastic around the channel, even in PETG printed at 100% infill.</p>
+
+        <p>The new plate replaces that continuous channel with a series of connected hexagonal pockets, turning each channel into a set of 6 fixed positions. Since the bolt head is hexagonal, it seats exactly into one of those pockets — the flat faces of the hex lock against the pocket walls, so it cannot slide under any load, no matter how much force is applied. It no longer relies on friction to stay put, but on a geometric fit. That means the nut no longer needs to be cranked down — just snug enough to hold everything together is plenty, and the plastic stops taking the clamping load that used to damage it.</p>
+
+        <figure>
+          <img src="../assets/img/blog/slide-lock-redesign/hex-slots.jpg" alt="The new plate with hexagonal pockets replacing the continuous channel" loading="lazy" />
+          <figcaption>Hexagonal pockets: 6 fixed positions per channel</figcaption>
+        </figure>
+
+        <h2>How We Validated It</h2>
+
+        <p>First I ran the standard pull test required by regulation for all competition handles: line tension in a normal position and normal operation. I hung my own body weight from a scale connected to the system. At 170 lbs, what failed was the test cable — not the plate, not the handle. This test confirms the system handles normal flight tension with margin to spare, but it isn't the one that specifically validates the new locking mechanism — for that I ran two additional tests.</p>
+
+        <p>To validate that the plate cannot slide out with the new system, I designed two specific tests. In both, I fix the handle to an immovable surface and tie a cord to the sliding plate:</p>
+
+        <ol>
+          <li><strong>Static test:</strong> I add weight to the cord progressively, trying to force the mechanism until it fails. This simulates the progressive load buildup during aerobatics.</li>
+          <li><strong>Dynamic test:</strong> instead of adding weight gradually, I drop a weight onto the same cord so the plate takes the force suddenly rather than progressively. This simulates exactly what can be experienced in certain emergency situations.</li>
+        </ol>
+
+        <h2>Upgrading Existing Handles</h2>
+
+        <p>If you already own a LineMaster 2.4GHz handle, you can upgrade it to this version with the safety lock. The change requires reprinting the handle body entirely, so it isn't something I can send you as a simple parts kit — I need the physical handle to make the change.</p>
+
+        <p>If you're in the United States: email me first so I can confirm the shipping address correctly. You send me the handle (and any plates you have) by post — that initial shipment is on you. I take care of reprinting the body, installing the updated system, and shipping the handle back to you. I cover all other costs.</p>
+
+        <p>If you're outside the United States: round-trip international shipping makes the process much more expensive, so in your case I'd recommend finding a local 3D printing service. I can send you the print-ready models along with the printing details so they can be made locally. I'm looking into whether I can cover the cost of that local printing service — most likely as a refund to the same payment method you bought your handle with — but I can't confirm it yet; it depends on whether Etsy allows refunds on orders more than a year old. As soon as I know, I'll clarify it here.</p>
+
+        <p>My recommendation for every pilot with a current handle is to upgrade to this safety version as soon as possible to avoid potential incidents.</p>
+
+        <h2>Closing</h2>
+
+        <p>With this mechanism validated, I'm also reopening production of LineMaster 2.4GHz handles. From now on, every handle in the new generation will ship with this locking system by default — it isn't an optional extra, it's how the Slide &amp; Lock is built from here on out.</p>
+
+        <p>One of the main goals of LineMaster 2.4GHz has always been to help keep the control-line community alive and growing. I believe that also means being honest, listening to pilots, and improving the product whenever we find something that can be made better.</p>
+
+        <p>A special thank you to those who took the time to contact me and explain what happened. I am truly sorry for the losses that occurred, and I know very well how much time, effort, and dedication goes into every model. That is why I took this issue very seriously and worked on a permanent solution.</p>
+
+        <div class="blog-signature">— Carlos Díaz</div>
+      </article>
+    </div>
+
+    <div class="product-section">
+      <div class="links-grid">
+        <div class="link-card">
+          <h3>All Posts</h3>
+          <p>Back to the full list of blog posts.</p>
+          <a href="./" class="lm-btn lm-btn--primary lm-btn--sm">View Blog <span class="lm-btn__arrow">→</span></a>
+        </div>
+        <div class="link-card">
+          <h3>Contact</h3>
+          <p>Get in touch about upgrading your handle.</p>
+          <a href="../#contact" class="lm-btn lm-btn--primary lm-btn--sm">Contact Us <span class="lm-btn__arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <span>© 2025 LineMaster 2.4GHz · Miami, FL</span>
+      <div class="links">
+        <a href="../">Home</a>
+        <a href="../#products">Products</a>
+        <a href="../#store">Store</a>
+        <a href="../#contact">Contact</a>
+        <a href="https://linemasters-organization.gitbook.io/warranty-and-return-policy/#warranty-claim-procedure" target="_blank" rel="noopener">Warranty &amp; Returns</a>
+      </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">&#8593;</button>
+
+    <script>
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      document.querySelector(".nav-toggle")?.addEventListener("click", () => { document.querySelector(".nav-links")?.classList.toggle("open"); });
+      if (window.innerWidth <= 768) { document.querySelectorAll(".nav-dropdown > a").forEach(a => { a.addEventListener("click", e => { e.preventDefault(); a.parentElement.classList.toggle("open"); }); }); }
+      const b = document.getElementById("backToTop");
+      window.addEventListener("scroll", () => { b?.classList.toggle("is-visible", (window.scrollY || 0) > 300); }, { passive: true });
+      b?.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: "smooth" }); });
+    </script>
+  </body>
+</html>

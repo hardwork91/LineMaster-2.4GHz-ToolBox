@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Stamps a fresh cache-busting ?v=<timestamp> query string onto the shared
-# CSS/JS includes (css/variables.css, css/global.css, js/gallery.js) across
-# every tracked HTML page, so browsers (and GitHub Pages' CDN) fetch the new
-# file instead of serving a stale cached copy after a publish.
+# CSS/JS includes (css/variables.css, css/global.css, js/gallery.js,
+# js/blog-hidden.js) across every tracked HTML page, so browsers (and GitHub
+# Pages' CDN) fetch the new file instead of serving a stale cached copy after
+# a publish.
 #
 # Safe to run repeatedly: it replaces any existing ?v=... with the new one
 # rather than stacking query strings.
@@ -20,6 +21,7 @@ for f in $FILES; do
     -e "s#(css/variables\.css)(\?v=[A-Za-z0-9]*)?\"#\1?v=${VERSION}\"#g" \
     -e "s#(css/global\.css)(\?v=[A-Za-z0-9]*)?\"#\1?v=${VERSION}\"#g" \
     -e "s#(js/gallery\.js)(\?v=[A-Za-z0-9]*)?\"#\1?v=${VERSION}\"#g" \
+    -e "s#(js/blog-hidden\.js)(\?v=[A-Za-z0-9]*)?\"#\1?v=${VERSION}\"#g" \
     "$f"
 done
 

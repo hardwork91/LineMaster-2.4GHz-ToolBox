@@ -608,6 +608,146 @@ main {
   .resource-card__print img { width: 72px; height: 72px; }
 }
 
+/* ── Tutorial steps ───────────────────────────────── */
+.tutorial-steps {
+  list-style: none;
+  margin: 0 0 var(--lm-space-6);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tutorial-step {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--lm-space-5);
+  background: var(--lm-graphite);
+  border: 1px solid var(--lm-steel);
+  padding: var(--lm-space-5);
+  align-items: center;
+}
+
+.tutorial-step__media {
+  background: var(--lm-black);
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--lm-steel);
+}
+
+.tutorial-step__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.tutorial-step__num {
+  font-family: var(--lm-font-mono);
+  font-size: var(--lm-text-2xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--lm-red);
+  margin-bottom: var(--lm-space-2);
+}
+
+.tutorial-step__body h3 {
+  font-family: var(--lm-font-display);
+  font-size: var(--lm-text-xl);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--lm-paper);
+  margin: 0 0 var(--lm-space-2);
+}
+
+.tutorial-step__body p {
+  margin: 0;
+  font-size: var(--lm-text-sm);
+  color: var(--lm-platinum);
+  line-height: 1.55;
+}
+
+@media (max-width: 640px) {
+  .tutorial-step { grid-template-columns: 1fr; }
+}
+
+/* ── Blog article ─────────────────────────────────── */
+.blog-article {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.blog-article__cover {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--lm-black);
+  border: 1px solid var(--lm-steel);
+  margin-bottom: var(--lm-space-6);
+}
+
+.blog-article p {
+  font-size: var(--lm-text-md);
+  color: var(--lm-platinum);
+  line-height: 1.7;
+  margin: 0 0 var(--lm-space-5);
+}
+
+.blog-article h2 {
+  font-family: var(--lm-font-display);
+  font-size: var(--lm-text-2xl);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--lm-paper);
+  margin: var(--lm-space-7) 0 var(--lm-space-5);
+}
+
+.blog-article figure {
+  margin: 0 0 var(--lm-space-6);
+}
+
+.blog-article figure img {
+  width: 100%;
+  display: block;
+  background: var(--lm-black);
+  border: 1px solid var(--lm-steel);
+}
+
+.blog-article figure figcaption {
+  margin-top: var(--lm-space-2);
+  font-family: var(--lm-font-mono);
+  font-size: var(--lm-text-2xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lm-silver);
+  text-align: center;
+}
+
+.blog-article a { color: var(--lm-red); text-decoration: underline; text-underline-offset: 2px; }
+.blog-article a:hover { color: var(--lm-paper); }
+
+.blog-article ol {
+  margin: 0 0 var(--lm-space-6);
+  padding-left: 1.4em;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lm-space-3);
+}
+
+.blog-article ol li {
+  font-size: var(--lm-text-md);
+  color: var(--lm-platinum);
+  line-height: 1.7;
+}
+
+.blog-article ol li::marker {
+  color: var(--lm-red);
+  font-family: var(--lm-font-mono);
+  font-weight: 700;
+}
+
 /* ── Info card (project pages) ───────────────────── */
 .info-card {
   background: var(--lm-graphite);

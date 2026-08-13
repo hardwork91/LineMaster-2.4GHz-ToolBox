@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="../js/blog-hidden.js?v=20260722210701"></script>
+    <script>
+      (function () {
+        var slug = location.pathname.split("/").pop();
+        var isHidden = (window.LM_HIDDEN_POSTS || []).indexOf(slug) !== -1;
+        var params = new URLSearchParams(location.search);
+        if (isHidden && params.get("hidden") !== "false") location.replace("./");
+      })();
+    </script>
+    <title>Electric or Combustion? Wiring Your LineMaster 2.4GHz Correctly | LineMaster 2.4GHz Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="How to power and wire your LineMaster 2.4GHz receiver correctly, whether you're flying electric or combustion — plus how to choose between the Zephyr and Typhoon handles." />
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/ico/apple-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/ico/favicon-32x32.png" />
+    <meta name="theme-color" content="#14141A" />
+    <link rel="stylesheet" href="../css/variables.css?v=20260722210701" />
+    <link rel="stylesheet" href="../css/global.css?v=20260722210701" />
+    <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
+    <style>
+      .project-hero { background: var(--lm-black); border-bottom: 1px solid var(--lm-steel); overflow: hidden; }
+      .project-hero__inner {
+        max-width: 760px; margin: 0 auto;
+        padding: 56px var(--lm-gutter) 64px;
+      }
+      .project-hero__tag {
+        display: inline-flex; align-items: center;
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-2xs);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--lm-red);
+        border: 1px solid var(--lm-red);
+        border-radius: var(--lm-radius-pill);
+        padding: 4px 12px;
+        margin-bottom: var(--lm-space-5);
+      }
+      .project-hero__h {
+        font-family: var(--lm-font-display);
+        font-weight: 900;
+        font-size: clamp(36px, 5.5vw, 60px);
+        text-transform: uppercase;
+        line-height: 1;
+        letter-spacing: -0.01em;
+        color: var(--lm-paper);
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body class="lm-dark">
+    <header class="header">
+      <nav class="nav">
+        <a href="../" class="logo"><img src="../assets/img/logo-lockup-white.png" alt="LineMaster 2.4GHz" /></a>
+        <button class="nav-toggle" type="button" aria-label="Toggle navigation">&#9776;</button>
+        <div class="nav-links">
+          <a href="../">Home</a>
+          <div class="nav-dropdown">
+            <a href="../#products">Products &#9662;</a>
+            <div class="nav-dropdown-menu">
+              <a href="../Products/typhoon.html">Typhoon Handle</a>
+              <a href="../Products/zephyr.html">Zephyr Handle</a>
+              <a href="../Products/lm-x5.html">LM-X5 Receiver</a>
+              <a href="../Products/lm-t1.html">LM-T1 Timer</a>
+              <div class="nav-dropdown-divider"></div>
+              <a href="../resources/">Free 3D Models</a>
+            </div>
+          </div>
+          <div class="nav-dropdown">
+            <a href="../#projects">Projects &#9662;</a>
+            <div class="nav-dropdown-menu">
+              <a href="../projects/pathfinder.html">Pathfinder</a>
+              <a href="../projects/companion.html">Companion Tool</a>
+              <a href="../projects/scheme-generator/" target="_blank" rel="noopener">Scheme Generator</a>
+            </div>
+          </div>
+          <a href="./" class="active">Blog</a>
+          <a href="../#store">Store</a>
+          <a href="../#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="project-hero">
+      <div class="project-hero__inner">
+        <div class="project-hero__tag">Setup &amp; Wiring</div>
+        <h1 class="project-hero__h">Electric or Combustion? Wiring Your LineMaster 2.4GHz Correctly</h1>
+      </div>
+    </section>
+
+    <div class="product-section">
+      <article class="blog-article">
+        <img class="blog-article__cover" src="../assets/img/blog/electric-vs-combustion/cover.jpg" alt="Electric or Combustion? Wiring Your LineMaster 2.4GHz" loading="lazy" />
+
+        <p>Before we get into wiring, let's talk about which handle is actually right for you — because that decision matters more than people think.</p>
+
+        <p>If you just want to fly sport, and you like having control over the throttle to manage takeoff, landing, and how fast you're going — the <a href="../Products/zephyr.html">LineMaster 2.4GHz Zephyr</a>, our single-channel handle, is really all you need. The same goes if you're a carrier pilot used to flying with a single throttle channel; there's no reason to carry the extra complexity of more channels you won't use.</p>
+
+        <figure>
+          <img src="../assets/img/products/zephyr.jpg" alt="LineMaster 2.4GHz Zephyr handle" loading="lazy" />
+        </figure>
+
+        <p>On the other hand, if you're into carrier and you're used to more than one channel — say, a servo to release the arrestor hook, or a servo to slide the line guide back — or if you're flying scale, where the model usually needs several channels besides the throttle, that's when the <a href="../Products/typhoon.html">LineMaster 2.4GHz Typhoon</a> (up to 5 channels) is the right call.</p>
+
+        <figure>
+          <img src="../assets/img/products/typhoon.jpg" alt="LineMaster 2.4GHz Typhoon handle" loading="lazy" />
+        </figure>
+
+        <p>What actually changes depending on your setup is how you power and wire the receiver, and that depends on one thing: are you flying electric or combustion?</p>
+
+        <h2>Electric Models</h2>
+
+        <p>LineMaster 2.4GHz receivers — the LM-X5, LM-X2 and LM-X1 — are all designed to work the same way, in a 4 to 6V range. The most common — and easiest — way to get there is through the BEC (Battery Eliminator Circuit, the circuit that removes the need for a separate battery) built into your ESC (Electronic Speed Controller, the electronic controller that regulates your motor's speed). The ESC plugs into the throttle channel, and that same connection is what feeds power to the receiver and every other servo on board.</p>
+
+        <figure>
+          <img src="../assets/img/blog/electric-vs-combustion/diagram-electric-single.jpg" alt="Wiring diagram for a single-motor electric setup" loading="lazy" />
+          <figcaption>Single-motor electric wiring</figcaption>
+        </figure>
+
+        <p>If you're flying a multi-motor model with two or more ESCs, you'll be using Y-harnesses to combine them — but here's the part to be careful about: only connect the positive (power) wire from ONE of the ESCs. The positive wires from the others should not be connected. Only one ESC should ever be powering the receiver and servos at the same time — never let more than one BEC try to feed the same rail.</p>
+
+        <figure>
+          <img src="../assets/img/blog/electric-vs-combustion/diagram-electric-multi.jpg" alt="Wiring diagram for a multi-motor electric setup" loading="lazy" />
+          <figcaption>Multi-motor electric wiring</figcaption>
+        </figure>
+
+        <p>One more thing worth checking: how much current your setup actually draws. That depends on how many servos you have connected and how much each one pulls (check your servo's datasheet for that). Whatever the total comes out to, your ESC's BEC needs to be rated to deliver that current with some headroom to spare — don't run it right at the edge of its rating.</p>
+
+        <h2>Combustion Models</h2>
+
+        <p>For a combustion engine, controlling the throttle means using an RC carburetor, actuated by a servo wired into the throttle channel. The catch is that there's no ESC in this picture — so the receiver needs to get its power from somewhere else.</p>
+
+        <p>The most common (and the setup we'd recommend) is a dedicated UBEC — an independent BEC that doesn't depend on any ESC — putting out 4 to 6V (most are 5V), powered by a 2S to 6S battery. Just like with electric setups, add up what your servos draw (datasheet again) and make sure the UBEC you pick can comfortably supply that current.</p>
+
+        <figure>
+          <img src="../assets/img/blog/electric-vs-combustion/diagram-ubec.jpg" alt="Wiring diagram for a UBEC-powered combustion setup" loading="lazy" />
+          <figcaption>UBEC wiring for combustion models</figcaption>
+        </figure>
+
+        <p>You can technically use an ESC just for its BEC function here too, but honestly, it's unnecessary dead weight — today's dedicated UBECs are cheap and light, so there's no real reason to carry an ESC you're not using for anything else. In most cases, powering the UBEC with a small 2S 250mAh battery would be more than enough for several flight sessions, at a weight of roughly 20-25 grams.</p>
+
+        <p>There's a third option, and we want to be upfront about it: powering the receiver directly from a 1S battery, with no BEC at all. In practice, this works — a fully charged 1S sits at 4.2V, which is enough to power the receiver. But the servo controlling your carburetor also has to be rated for that voltage range; most small 9g servos handle 4-6V fine, but check the datasheet to be sure. The real issue shows up as the battery discharges: once it drops below 4V, you're pushing your luck, and the receiver can start to misbehave.</p>
+
+        <figure>
+          <img src="../assets/img/blog/electric-vs-combustion/diagram-no-bec.jpg" alt="Wiring diagram for a direct 1S battery setup with no BEC" loading="lazy" />
+          <figcaption>Direct 1S battery, no BEC</figcaption>
+        </figure>
+
+        <p>A quick, honest disclaimer: we've run this setup at our own flying field without issues — but only on models with a single servo controlling the throttle, since a carburetor offers basically no mechanical resistance and the servo barely draws anything. Even so, we don't recommend this method. It works, but it's cutting it close, and we'd especially steer you away from it on any model with more than one channel.</p>
+
+        <h2>A Final Note on Batteries</h2>
+
+        <p>Whatever your setup, it never hurts to remember that in every case here, we're working with lithium batteries — LiPo or Li-Ion, single-cell or multi-cell. Always charge them with a balance charger, check them before every flight, and never leave them unattended while charging. A good power system starts with respecting the chemistry of the battery behind it.</p>
+      </article>
+    </div>
+
+    <div class="product-section">
+      <div class="links-grid">
+        <div class="link-card">
+          <h3>All Posts</h3>
+          <p>Back to the full list of blog posts.</p>
+          <a href="./" class="lm-btn lm-btn--primary lm-btn--sm">View Blog <span class="lm-btn__arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <span>© 2025 LineMaster 2.4GHz · Miami, FL</span>
+      <div class="links">
+        <a href="../">Home</a>
+        <a href="../#products">Products</a>
+        <a href="../#store">Store</a>
+        <a href="../#contact">Contact</a>
+        <a href="https://linemasters-organization.gitbook.io/warranty-and-return-policy/#warranty-claim-procedure" target="_blank" rel="noopener">Warranty &amp; Returns</a>
+      </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top" type="button" aria-label="Back to top">&#8593;</button>
+
+    <script>
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      document.querySelector(".nav-toggle")?.addEventListener("click", () => { document.querySelector(".nav-links")?.classList.toggle("open"); });
+      if (window.innerWidth <= 768) { document.querySelectorAll(".nav-dropdown > a").forEach(a => { a.addEventListener("click", e => { e.preventDefault(); a.parentElement.classList.toggle("open"); }); }); }
+      const b = document.getElementById("backToTop");
+      window.addEventListener("scroll", () => { b?.classList.toggle("is-visible", (window.scrollY || 0) > 300); }, { passive: true });
+      b?.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: "smooth" }); });
+    </script>
+  </body>
+</html>
