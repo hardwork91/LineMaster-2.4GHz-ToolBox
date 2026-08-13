@@ -149,6 +149,18 @@ html:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
 html[data-theme="light"] .logo img { filter: invert(1); }
 html[data-theme="light"] .pcard:hover { background: #F4F4EF; }
 
+/* Light mode: thin mono type and brand red wash out on light surfaces —
+   add weight so nav links, red labels and their divider dashes stay legible */
+html[data-theme="light"] .nav-links { font-weight: 700; }
+html[data-theme="light"] .section-label,
+html[data-theme="light"] .pcard__sku,
+html[data-theme="light"] .resource-card__tag,
+html[data-theme="light"] .product-hero__tag,
+html[data-theme="light"] .project-hero__tag { font-weight: 700; }
+html[data-theme="light"] .section-label::before,
+html[data-theme="light"] .product-hero__tag::before { height: 2px; }
+html[data-theme="light"] .carousel-btn { background: rgba(250,250,246,.85); }
+
 /* Mobile toggle */
 .nav-toggle {
   display: none;
