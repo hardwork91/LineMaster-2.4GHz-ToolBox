@@ -101,6 +101,39 @@
 }
 
 /* ============================================================
+   LIGHT THEME
+   The whole site is authored against the dark neutral ramp
+   (--lm-black darkest surface → --lm-paper lightest text).
+   Light mode simply remaps that ramp: surfaces become light,
+   text becomes dark. Brand red and telemetry colors stay put.
+   Toggled via data-theme="light" on <html> (see js/theme.js).
+   ============================================================ */
+
+html[data-theme="light"] {
+  color-scheme: light;
+
+  --lm-black:     #E9E9E4;
+  --lm-ink:       #FAFAF6;
+  --lm-graphite:  #FFFFFF;
+  --lm-steel:     #D9D9DF;
+  --lm-gunmetal:  #B4B4BE;
+  --lm-silver:    #6E6E7A;
+  --lm-platinum:  #3C3C46;
+  --lm-bone:      #1C1C22;
+  --lm-paper:     #14141A;
+
+  --lm-red-tint:  #FBEAE9;
+
+  --lm-shadow-sm: 0 1px 2px rgba(20,20,26,.10);
+  --lm-shadow-md: 0 8px 24px rgba(20,20,26,.12);
+  --lm-shadow-lg: 0 24px 60px rgba(20,20,26,.18);
+}
+
+/* Primary buttons always sit on the brand red — keep their text light
+   regardless of theme (in light mode --lm-paper flips to near-black). */
+html[data-theme="light"] .lm-btn--primary { color: #FAFAF6; }
+
+/* ============================================================
    TYPE PRIMITIVES
    ============================================================ */
 
