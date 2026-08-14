@@ -12,10 +12,11 @@
     <link rel="manifest" href="./assets/ico/manifest.json" />
     <meta name="theme-color" content="#14141A" />
 
-    <link rel="stylesheet" href="./css/variables.css?v=20260813183427" />
-    <link rel="stylesheet" href="./css/global.css?v=20260813183427" />
+    <link rel="stylesheet" href="./css/variables.css?v=20260813184554" />
+    <link rel="stylesheet" href="./css/global.css?v=20260813184554" />
 
-    <script src="./js/theme.js?v=20260813183427"></script>
+    <script src="./js/theme.js?v=20260813184554"></script>
+    <script src="./js/blog-hidden.js?v=20260813184554"></script>
     <style>
       html { scroll-behavior: smooth; }
 
@@ -117,6 +118,52 @@
         .site-hero::before { background: rgba(10,10,11,0.88); }
       }
 
+      /* ── Safety notice ────────────────────────── */
+      .notice-card {
+        background: var(--lm-graphite);
+        border: 1px solid var(--lm-steel);
+        border-left: 3px solid var(--lm-red);
+        padding: var(--lm-space-6);
+        max-width: 860px;
+      }
+
+      .notice-card__tag {
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-2xs);
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--lm-red);
+        margin-bottom: var(--lm-space-4);
+      }
+
+      html[data-theme="light"] .notice-card__tag { font-weight: 700; }
+
+      .notice-card h2 {
+        font-family: var(--lm-font-display);
+        font-size: var(--lm-text-2xl);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: -0.01em;
+        color: var(--lm-paper);
+        margin: 0 0 var(--lm-space-5);
+      }
+
+      .notice-card p {
+        font-size: var(--lm-text-md);
+        color: var(--lm-platinum);
+        line-height: 1.65;
+        margin: 0 0 var(--lm-space-4);
+      }
+
+      .notice-card__sign {
+        margin-top: var(--lm-space-5);
+        font-family: var(--lm-font-mono);
+        font-size: var(--lm-text-2xs);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--lm-silver);
+      }
+
       /* The hero keeps its dark photograph in light mode, so its copy
          must stay light instead of following the flipped tokens. */
       html[data-theme="light"] .site-hero__h,
@@ -190,6 +237,24 @@
 
     <!-- ═══ MAIN ═══ -->
     <main>
+      <!-- ── Safety Notice ── -->
+      <section id="notice" class="site-section">
+        <div class="notice-card">
+          <div class="notice-card__tag">Important Notice</div>
+          <h2>An update for all LineMaster 2.4GHz pilots</h2>
+          <p>I want to share an important update with all pilots who use LineMaster 2.4GHz.</p>
+          <p>Some time ago, I received the first report of a situation where, during an abrupt maneuver to try to recover a model that had lost line tension, the Slide &amp; Lock plate came out of the handle. At that time, I worked on reinforcing the mechanism, considering it a very uncommon condition.</p>
+          <p>Recently, I received two more reports of similar situations. In every case, the models suffered significant damage, and those of us who are part of this hobby know exactly what that means. It is not only the cost of an airplane, but also the many hours of building, adjusting, testing, and dedication that go into each one.</p>
+          <p>For that reason, I have decided to temporarily stop selling LineMaster 2.4GHz handles. I do not want to continue putting models at risk while I work on a permanent solution.</p>
+          <p>In the meantime, there is a simple safety measure for current handles: install a safety zip tie around the plate and the handle. This zip tie prevents the plate from sliding out of the handle. To change plates, the zip tie will need to be cut and replaced with a new one, so for now we lose some of the convenience of the Slide &amp; Lock system, but we gain a much more secure secondary retention method.</p>
+          <p><strong>I recommend not using current handles without this safety zip tie installed.</strong></p>
+          <p>I will be working on a permanent solution that keeps the functionality of the Slide &amp; Lock system while adding an additional safety mechanism. Once it is ready and properly tested, I will publish all the details, along with the procedure for pilots who already own current versions of LineMaster 2.4GHz to receive this upgrade for their handles.</p>
+          <p>One of the main goals of LineMaster 2.4GHz has always been to help keep the control-line community alive and growing. I believe that also means being honest, listening to pilots, and improving the product whenever we find something that can be made better.</p>
+          <p>A special thank you to those who took the time to contact me and explain what happened. I am truly sorry for the losses that occurred, and I know very well how much time, effort, and dedication goes into every model. That is why I am taking this issue very seriously and working on a permanent solution.</p>
+          <div class="notice-card__sign">Carlos Diaz,<br />Founder and developer of LineMaster 2.4GHz</div>
+        </div>
+      </section>
+
       <!-- ── Products ── -->
       <section id="products" class="site-section">
         <div class="section-label">Products</div>
