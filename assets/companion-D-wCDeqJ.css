@@ -1,0 +1,1 @@
+html,body{height:100%;overflow-x:clip}#root{min-height:100%}*::-webkit-scrollbar{width:10px;height:10px}*::-webkit-scrollbar-track{background:transparent}*::-webkit-scrollbar-thumb{background:var(--lm-palette-divider);border:2px solid var(--lm-palette-background-default);border-radius:6px}*::-webkit-scrollbar-thumb:hover{background:var(--lm-palette-text-disabled)}

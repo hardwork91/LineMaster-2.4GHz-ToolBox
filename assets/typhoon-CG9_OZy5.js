@@ -1,0 +1,1 @@
+import{m as o,j as t}from"./SiteHeader-DIv35kUZ.js";import{P as m,a as r}from"./products-Dxs0RW2o.js";import"./index-CHCgEnST.js";import"./ProjectHero-CH-SpLx7.js";import"./ChevronRight-XE4CnAlC.js";o(t.jsx(m,{product:r.typhoon}));

@@ -1,0 +1,15 @@
+{
+  "name": "Biblia firmware",
+  "version": "1.0.0",
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        {
+          "path": "../firmwares/bible.bin",
+          "offset": 0
+        }
+      ]
+    }
+  ]
+}
